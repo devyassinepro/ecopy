@@ -24,45 +24,7 @@
                                         <span class="nk-menu-text">{{ __('Dashboard') }}</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link nk-menu-toggle">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-crosshair"></em></span>
-                                        <span class="nk-menu-text">Sales Tracker</span>
-                                    </a>
-                                    <ul class="nk-menu-sub">
-                                        <li class="nk-menu-item">
-                                                <a href="{{ route('account.storesearch.index') }}" class="nk-menu-link {{ return_if(on_page('account.stores.index') OR on_page('account.stores.create') OR on_page('account.stores.edit'), ' active') }}" wire:navigate>
-                                                <span class="nk-menu-icon"><em class="icon ni ni-bag-fill"></em></span>
-                                                <span class="nk-menu-text">{{ __('Stores') }}</span>
-                                                </a>
-                                        </li>
-                                      <li class="nk-menu-item">
-                                            <a href="{{ route('account.productsearch.index') }}" class="nk-menu-link {{ return_if(on_page('account.productsearch.index') OR on_page('account.productsearch.create') OR on_page('account.productsearch.edit'), ' active') }}" wire:navigate>
-                                                <span class="nk-menu-icon"><em class="icon ni ni-package-fill"></em></span>
-                                                <span class="nk-menu-text">{{ __('Products') }}</span>
-                                            </a>
-                                      </li>
-                                      <li class="nk-menu-item">
-                                            <a href="{{ route('account.nichesaffiche.index') }}" class="nk-menu-link {{ return_if(on_page('account.nichesaffiche.index') OR on_page('account.nichesaffiche.create') OR on_page('account.nichesaffiche.edit'), ' active') }}" wire:navigate >
-                                            <span class="nk-menu-icon"><em class="icon ni ni-tag-fill"></em></span>
-                                            <span class="nk-menu-text">{{ __('Niches') }}</span>
-                                            </a>                                        
-                                        </li>
-                                    </ul><!-- .nk-menu-sub -->
-                                </li><!-- .nk-menu-item -->
-                                <!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="{{ route('account.currenttrends.index') }}" wire:navigate class="nk-menu-link {{ return_if(on_page('account.trends.index') OR on_page('account.currenttrends.create') OR on_page('account.trends.edit'), ' active') }}">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-growth-fill"></em></span>
-                                        <span class="nk-menu-text">{{ __('Current Trends') }} <span class="badge badge-dim bg-primary rounded-pill">New</span></span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
-                                <li class="nk-menu-item">
-                                    <a href="{{ route('account.researchproduct.index') }}" wire:navigate class="nk-menu-link {{ return_if(on_page('account.researchproduct.index'), ' active') }}">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-search"></em></span>
-                                        <span class="nk-menu-text">{{ __('Product Research') }}</span>
-                                    </a>
-                                </li><!-- .nk-menu-item -->
+                              
                                 <li class="nk-menu-item">
                                     <a href="{{ route('account.homeshopify.index') }}" wire:navigate class="nk-menu-link {{ return_if(on_page('account.homeshopify.index'), ' active') }}">
                                         <span class="nk-menu-icon"><em class="icon ni ni-copy"></em></span>

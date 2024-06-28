@@ -27,7 +27,6 @@
                              </div>
 
                                 <div class="nk-block">
-                                     <livewire:account.revenuedashboard lazy />
 
                                 </div><!-- .nk-block -->
 
@@ -61,7 +60,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="actions">
-                                                    <a href="{{ route('account.storesearch.index') }}" wire:navigate class="btn btn-primary">Sales tracking</a>
                                                 </div>
                                             </div><!-- .sp-pdl-item -->
                                         </div><!-- .col -->
@@ -82,7 +80,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="actions">
-                                                    <a href="{{ route('account.currenttrends.index') }}" wire:navigate class="btn btn-primary">Current Trends</a>
                                                 </div>
                                             </div><!-- .sp-pdl-item -->
                                         </div><!-- .col -->
@@ -103,7 +100,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="actions">
-                                                    <a href="{{ route('account.researchproduct.index') }}" wire:navigate class="btn btn-primary">Competitors Research</a>
                                                 </div>
                                             </div><!-- .sp-pdl-item -->
                                         </div><!-- .col -->
@@ -128,7 +124,6 @@
                                                                 <img src="{{ $product->imageproduct }}" alt="">
                                                             </div>
                                                             <div class="info">
-                                                                <div class="title"><a href="{{ route('account.productdata.show',['id' =>$product->id]) }}" wire:navigate>{{ $product->title }}</a></div>
                                                                 <div class="price">${{ $product->prix }}</div>
                                                             </div>
                                                             <div class="total">

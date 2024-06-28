@@ -40,26 +40,9 @@ use App\Http\Controllers\Account\Subscriptions\SubscriptionCouponController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionResumeController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionInvoiceController;
 use Carbon\Carbon;
-use App\Livewire\Account\research\ProductResearch;
-use App\Livewire\Account\trends\CurrentTrends;
-use App\Livewire\Account\products\ProductSearch;
-use App\Livewire\Account\stores\StoreSearch;
+
 use App\Livewire\Account\Dashboard;
-use App\Livewire\Account\Niches\Niches;
-use App\Livewire\Account\Niches\NicheAdd;
-use App\Livewire\Account\stores\AddStore;
-use App\Livewire\Account\stores\ShowStore;
-use App\Livewire\Account\stores\ListAllProducts;
-use App\Livewire\Account\products\ShowProduct;
-use App\Livewire\Account\trends\ShowTrends;
-use App\Livewire\Account\research\ShowResearch;
 use App\Livewire\Account\Tuto\Tuto;
-use App\Livewire\Account\research\ListProductResearch;
-use App\Livewire\Account\trends\Compcurrenttrends;
-use App\Livewire\Account\research\Listproducts;
-use App\Livewire\Account\products\ListProductSearch;
-use App\Livewire\Account\stores\Homestores;
-use App\Livewire\Account\stores\Top10products;
 use App\Livewire\Account\Shopify\Home;
 use App\Livewire\Account\Shopify\SingleProduct;
 use App\Livewire\Account\Shopify\MultipleProducts;
@@ -157,32 +140,7 @@ Route::group(['middleware' => 'language'], function () {
         // Livewires 3
         Route::get('/Dashboard', Dashboard::class)->name('Dashboard.index');
         //
-        Route::get('/StoresTracker', Homestores::class)->name('storesearch.index');
-        Route::get('/skeletonpStores', StoreSearch::class)->name('skeletonpstore.index');
-
-        Route::get('/Add-Store', AddStore::class)->name('AddStore.index');
-        Route::get('/liststore/{id}', ListAllProducts::class)->name('liststore.show');
-        Route::get('/showstore/{id}', ShowStore::class)->name('storedata.show');
-        Route::get('/topproducts', Top10products::class)->name('topproducts.show');
-
-        //
-        Route::get('/ProductsTracker', ProductSearch::class)->name('productsearch.index');
-        Route::get('/showproduct/{id}', ShowProduct::class)->name('productdata.show');
-        Route::get('/skeletonproducts', ListProductSearch::class)->name('skeletondirect.index');
-
-        //
-        Route::get('/Niches', Niches::class)->name('nichesaffiche.index');
-        Route::get('/Add-Niches', NicheAdd::class)->name('AddNiches.index');
-        //
-        Route::get('/Trending', CurrentTrends::class)->name('currenttrends.index');
-        Route::get('/trendshow/{id}', ShowTrends::class)->name('trenddata.show');
-        Route::get('/skeletontrends', Compcurrenttrends::class)->name('skeletonrends.index');
-
-        //
-        Route::get('/Research', ProductResearch::class)->name('researchproduct.index');
-        Route::get('/skeletonResearch', Listproducts::class)->name('researchdirect.index');
-        Route::get('/researchshow/{id}', ShowResearch::class)->name('researchdata.show');
-
+      
         Route::get('/Shopify', Home::class)->name('homeshopify.index');
         Route::get('/Singleproduct', SingleProduct::class)->name('singleproduct.index');
         Route::get('/multipleproduct', MultipleProducts::class)->name('multipleproduct.index');
