@@ -24,14 +24,14 @@ use App\Http\Controllers\Admin\DownloadBackupController;
 use App\Http\Controllers\Admin\PlanController as StripePlan;
 use JoelButcher\Socialstream\Http\Controllers\OAuthController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionController;
-use App\Http\Controllers\Account\NicheController as AccountNicheController;
-use App\Http\Controllers\Account\ProductController as AccountProductController;
-use App\Http\Controllers\Account\TutoController as AccountTutoController;
-use App\Http\Controllers\Account\TopstoresController as AccountopstoresController;
-use App\Http\Controllers\Account\StoresController as AccountStoresController;
-use App\Http\Controllers\Account\ProductResearchController as AccountResearchController;
-use App\Http\Controllers\Account\TrendsController as AccountTrendsController;
-use App\Http\Controllers\Account\DashboardController as AccountDashboardController;
+// use App\Http\Controllers\Account\NicheController as AccountNicheController;
+// use App\Http\Controllers\Account\ProductController as AccountProductController;
+// use App\Http\Controllers\Account\TutoController as AccountTutoController;
+// use App\Http\Controllers\Account\TopstoresController as AccountopstoresController;
+// use App\Http\Controllers\Account\StoresController as AccountStoresController;
+// use App\Http\Controllers\Account\ProductResearchController as AccountResearchController;
+// use App\Http\Controllers\Account\TrendsController as AccountTrendsController;
+// use App\Http\Controllers\Account\DashboardController as AccountDashboardController;
 use JoelButcher\Socialstream\Http\Controllers\Inertia\PasswordController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionCardController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionSwapController;
@@ -129,13 +129,13 @@ Route::group(['middleware' => 'language'], function () {
         })->name('plan');
 
         // controllers
-        Route::resource('/product', AccountProductController::class);
-        Route::resource('/stores', AccountStoresController::class);
-        Route::resource('/niches', AccountNicheController::class);
-        Route::resource('/tuto', AccountTutoController::class);
-        Route::resource('/topstores', AccountopstoresController::class);
-        Route::resource('/researchproduct', AccountResearchController::class);
-        Route::resource('/trends', AccountTrendsController::class);
+        // Route::resource('/product', AccountProductController::class);
+        // Route::resource('/stores', AccountStoresController::class);
+        // Route::resource('/niches', AccountNicheController::class);
+        // Route::resource('/tuto', AccountTutoController::class);
+        // Route::resource('/topstores', AccountopstoresController::class);
+        // Route::resource('/researchproduct', AccountResearchController::class);
+        // Route::resource('/trends', AccountTrendsController::class);
 
         // Livewires 3
         Route::get('/Dashboard', Dashboard::class)->name('Dashboard.index');

@@ -28,15 +28,11 @@ class Dashboard extends Component
         $user_id = Auth::user()->id;
         $storelimit = check_store_limit();
         // get user's stores
-        $totalstores = Storeuser::where('user_id', $user_id)->pluck('store_id');
-
-            $products = Product::whereIn('stores_id', $totalstores)
-            ->select('products.*', DB::raw('COALESCE(todaysales, 0) AS calculated_todaysales'))
-            ->orderBy('calculated_todaysales', 'desc')
-            ->take(5)->get();
+        // $totalstores = Storeuser::where('user_id', $user_id)->pluck('store_id');
 
 
 
-        return view('livewire.account.dashboard', compact('products'));
+
+        return view('livewire.account.dashboard');
     }
 }
