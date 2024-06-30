@@ -26,23 +26,24 @@
                                             <a href="#" 
                                             class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white" 
                                             data-bs-toggle="dropdown">
-                                            {{ $changestore ? $changestore : 'Change Store' }}
+                                            <?php echo e($changestore ? $changestore : 'Change Store'); ?>
+
                                             </a>
                                             
                                             <!-- Dropdown menu -->
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <!-- Loop through each store and create a dropdown item -->
-                                                    @foreach($stores as $store)
+                                                    <!-- __BLOCK__ --><?php $__currentLoopData = $stores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $store): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <li>
                                                             <a href="#" 
-                                                            wire:click.prevent="changeStore('{{ $store->store_id }}')" 
+                                                            wire:click.prevent="changeStore('<?php echo e($store->store_id); ?>')" 
                                                             wire:model.live="changestore" 
-                                                            class="{{ $store->store_id == $activeStore ? 'active' : '' }}">
-                                                            <span>{{ $store->name }} - {{ $store->myshopify_domain }}</span>
+                                                            class="<?php echo e($store->store_id == $activeStore ? 'active' : ''); ?>">
+                                                            <span><?php echo e($store->name); ?> - <?php echo e($store->myshopify_domain); ?></span>
                                                             </a>
                                                         </li>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
                                                 </ul>
                                             </div>
                                         </div>
@@ -148,10 +149,40 @@
              
             <div class="tab-pane active" id="tabItem9">
             <form> </form>
-                    <livewire:account.shopify.single-product/>
+                    <?php
+$__split = function ($name, $params = []) {
+    return [$name, $params];
+};
+[$__name, $__params] = $__split('account.shopify.single-product', []);
+
+$__html = app('livewire')->mount($__name, $__params, 'ahjuuu4', $__slots ?? [], get_defined_vars());
+
+echo $__html;
+
+unset($__html);
+unset($__name);
+unset($__params);
+unset($__split);
+if (isset($__slots)) unset($__slots);
+?>
             </div>
             <div class="tab-pane" id="tabItem6">
-                    <livewire:account.shopify.multiple-products/>
+                    <?php
+$__split = function ($name, $params = []) {
+    return [$name, $params];
+};
+[$__name, $__params] = $__split('account.shopify.multiple-products', []);
+
+$__html = app('livewire')->mount($__name, $__params, 'n6KTvoi', $__slots ?? [], get_defined_vars());
+
+echo $__html;
+
+unset($__html);
+unset($__name);
+unset($__params);
+unset($__split);
+if (isset($__slots)) unset($__slots);
+?>
             </div>
             <div class="tab-pane" id="tabItem7">
                
@@ -174,16 +205,16 @@
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach ($stores as $store)
+                      <!-- __BLOCK__ --><?php $__currentLoopData = $stores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $store): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
 
-                        <td style="font-size: 18px; font-weight: bold;">{{ $store->myshopify_domain }}</td>
-                        <td style="font-size: 18px; font-weight: bold;">{{ $store->email }}</td>
-                        <td style="font-size: 18px; font-weight: bold;">{{ $store->name }}</td>
-                        <td style="font-size: 18px; font-weight: bold;">{{ $store->status }}</td>
+                        <td style="font-size: 18px; font-weight: bold;"><?php echo e($store->myshopify_domain); ?></td>
+                        <td style="font-size: 18px; font-weight: bold;"><?php echo e($store->email); ?></td>
+                        <td style="font-size: 18px; font-weight: bold;"><?php echo e($store->name); ?></td>
+                        <td style="font-size: 18px; font-weight: bold;"><?php echo e($store->status); ?></td>
      
                         </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
                       </tbody>
                     </table>
                   </div>
@@ -200,3 +231,4 @@
 </div>
 
 </div>
+<?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/livewire/account/shopify/home.blade.php ENDPATH**/ ?>

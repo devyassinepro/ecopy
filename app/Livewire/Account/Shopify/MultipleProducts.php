@@ -56,9 +56,23 @@ class MultipleProducts extends Component
     }
     private function fetchShopifyProducts($url)
     {
+
+
+        //if domaine with url ;;; 
+        $parsedUrl = parse_url($url);
+
+        if (isset($parsedUrl['host'])) {
+            $domain = $parsedUrl['scheme'] . '://' . $parsedUrl['host']. '/' ;
+
+        } else {
+            $this->alert('warning', __('This Store not Supported by Weenify !'));
+
+            // return redirect()->route('account.storesearch.index');
+        }
+       
         $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
         $context = stream_context_create($opts);
-        $html = file_get_contents($url . 'products.json?page=1&limit=250', false, $context);
+        $html = file_get_contents($domain . 'products.json?page=1&limit=250', false, $context);
         $response = json_decode($html);
 
         if (isset($response->products)) {
@@ -80,7 +94,7 @@ class MultipleProducts extends Component
                 $product = $this->findProductById($productId);
                 if ($product) {
                     $productArray = json_decode(json_encode($product), true);
-                    Log::info('Product:', ['product' => $productArray]);
+                    // Log::info('Product:', ['product' => $productArray]);
     
                     $this->createShopifyProduct($productArray, $store);
                 }
@@ -89,7 +103,7 @@ class MultipleProducts extends Component
             $this->alert('success', __('Products imported successfully'));
     
         } catch (Exception $e) {
-            Log::error('Error importing products:', ['message' => $e->getMessage()]);
+            // Log::error('Error importing products:', ['message' => $e->getMessage()]);
             $this->alert('error', __('Product import failed: ') . $e->getMessage());
         }
     }
@@ -140,17 +154,17 @@ class MultipleProducts extends Component
             }
             userErrors { field message }
         }';
-        Log::info("Json file " . $productCreateMutation);
+        // Log::info("Json file " . $productCreateMutation);
 
         $mutation = 'mutation { ' . $productCreateMutation . ' }';
         $endpoint = $this->getShopifyURLForStore('graphql.json', $store);
-        Log::info('Shopify endpoint:'.$endpoint);
+        // Log::info('Shopify endpoint:'.$endpoint);
 
         $headers = $this->getShopifyHeadersForStore($store);
         $payload = ['query' => $mutation];
 
         $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-        Log::info('Shopify API Response:', ['response' => $response]);
+        // Log::info('Shopify API Response:', ['response' => $response]);
 
         if (isset($response['statusCode']) && $response['statusCode'] == 200) {
             if (isset($response['body']['data']['productCreate']['userErrors']) && !empty($response['body']['data']['productCreate']['userErrors'])) {
@@ -166,7 +180,7 @@ class MultipleProducts extends Component
             throw new Exception('Product creation failed!');
         }
     } catch (Exception $e) {
-        Log::error('Error in publishProductUrl:', ['message' => $e->getMessage()]);
+        // Log::error('Error in publishProductUrl:', ['message' => $e->getMessage()]);
         throw $e;
     }
 }

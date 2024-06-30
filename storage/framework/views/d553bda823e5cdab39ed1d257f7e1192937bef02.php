@@ -1,6 +1,6 @@
 <div>
 <form wire:submit.prevent="fetchProducts">
-                                        @csrf
+                                        <?php echo csrf_field(); ?>
                                         <div class="row g-3 align-center">
                                             <div class="col-lg-3">
                                                 <div class="form-group">
@@ -11,7 +11,14 @@
                                                 <div class="form-group">
                                                     <div class="form-control-wrap">
                                                         <input type="text" id="url-store" wire:model="url" class="form-control" placeholder="Url Store">
-                                                        <div>@error('url') {{ $message }} @enderror</div>
+                                                        <div><?php $__errorArgs = ['url'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -35,7 +42,7 @@
     <!-- Input for store URL and fetch button -->
 
     <!-- Display fetched products with checkboxes for selection -->
-    @if($products)
+    <!-- __BLOCK__ --><?php if($products): ?>
         <div>
         <div class="nk-content-body">
                     <div class="nk-block-head nk-block-head-sm">
@@ -87,20 +94,20 @@
                                             <!-- <div class="nk-tb-col" style="font-size: 16px; font-weight: bold;"><span>Expand</span></div> -->
                                         </div><!-- .nk-tb-item -->
 
-                                         @foreach($products as $product)
+                                         <!-- __BLOCK__ --><?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="nk-tb-item">
                                                     <div class="nk-tb-col">
-                                                    <input type="checkbox" wire:model="selectedProducts" value="{{ $product->id }}"> </div>
-                                                    <div class="nk-tb-col">  @if(isset($product->images) && count($product->images) > 0)
-                                                        <img src="{{ $product->images[0]->src }}" alt="{{ $product->title }}" style="width: 50px; height: auto;">
-                                                    @else
+                                                    <input type="checkbox" wire:model="selectedProducts" value="<?php echo e($product->id); ?>"> </div>
+                                                    <div class="nk-tb-col">  <!-- __BLOCK__ --><?php if(isset($product->images) && count($product->images) > 0): ?>
+                                                        <img src="<?php echo e($product->images[0]->src); ?>" alt="<?php echo e($product->title); ?>" style="width: 50px; height: auto;">
+                                                    <?php else: ?>
                                                         <img src="path/to/default-image.jpg" alt="No Image" style="width: 50px; height: auto;">
-                                                    @endif
-                                                    {{ $product->title }}</div>
-                                                    <div class="nk-tb-col tb-col-sm"> <h6 style="font-size: 16px; font-weight: bold;">$ {{ $product->variants[0]->price  }}</h6> 
+                                                    <?php endif; ?> <!-- __ENDBLOCK__ -->
+                                                    <?php echo e($product->title); ?></div>
+                                                    <div class="nk-tb-col tb-col-sm"> <h6 style="font-size: 16px; font-weight: bold;">$ <?php echo e($product->variants[0]->price); ?></h6> 
                                                     </div>
                                                 </div><!-- .nk-tb-item -->
-                                          @endforeach
+                                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
                                             </div><!-- .nk-tb-list -->
                                                     <!-- .pagination Start -->
 
@@ -174,11 +181,12 @@
                                                 </div>
                                             </div> -->
         <!-- <button wire:click="addSelectedProducts">Add Selected Products to Shopify</button> -->
-    @endif
+    <?php endif; ?> <!-- __ENDBLOCK__ -->
 
     <!-- Display messages -->
-    @if (session()->has('message'))
-        <div>{{ session('message') }}</div>
-    @endif
+    <!-- __BLOCK__ --><?php if(session()->has('message')): ?>
+        <div><?php echo e(session('message')); ?></div>
+    <?php endif; ?> <!-- __ENDBLOCK__ -->
 </div>
 </div>
+<?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/livewire/account/shopify/multiple-products.blade.php ENDPATH**/ ?>

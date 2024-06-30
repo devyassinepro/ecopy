@@ -1,6 +1,6 @@
 <div>
     <form wire:submit.prevent="importsingleproduct">
-        @csrf
+        <?php echo csrf_field(); ?>
         <div class="row g-3 align-center">
             <div class="col-lg-3">
                 <div class="form-group">
@@ -12,7 +12,14 @@
                 <div class="form-group">
                     <div class="form-control-wrap">
                         <input type="text" id="url-single-product" wire:model="urlsingle" class="form-control" placeholder="URL Product">
-                        <div>@error('urlsingle') {{ $message }} @enderror</div>
+                        <div><?php $__errorArgs = ['urlsingle'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> <?php echo e($message); ?> <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></div>
                     </div>
                 </div>
             </div>
@@ -34,3 +41,4 @@
 </div>
 
 
+<?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/livewire/account/shopify/single-product.blade.php ENDPATH**/ ?>

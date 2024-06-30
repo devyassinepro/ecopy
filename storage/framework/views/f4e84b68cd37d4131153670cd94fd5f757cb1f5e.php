@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <!-- Title -->
-  <title>{{ config('app.name', 'Weenify') }} - Winning Products For Dropshipping</title>
+  <title><?php echo e(config('app.name', 'Weenify')); ?> - Winning Products For Dropshipping</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('saas/img/favicon.png') }}">
-  <link rel="stylesheet" href="{{ asset('assets/vendor/nucleo/css/nucleo.css') }}" type="text/css">
+  <link rel="shortcut icon" href="<?php echo e(asset('saas/img/favicon.png')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('assets/vendor/nucleo/css/nucleo.css')); ?>" type="text/css">
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&amp;display=swap" rel="stylesheet">
   <!-- Styles -->
    <!-- CSS font-awesome Plugins -->
-   <link rel="stylesheet" href="{{ asset('saas/admin/vendor/font-awesome/css/all.min.css')}}">
-   <link rel="stylesheet" href="{{ asset('saas/vendor/select2/dist/css/select2.min.css') }}">
+   <link rel="stylesheet" href="<?php echo e(asset('saas/admin/vendor/font-awesome/css/all.min.css')); ?>">
+   <link rel="stylesheet" href="<?php echo e(asset('saas/vendor/select2/dist/css/select2.min.css')); ?>">
 
   <!-- CSS Front Template -->
-  <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.2.0') }}" type="text/css">
+  <link rel="stylesheet" href="<?php echo e(asset('assets/css/dashlite.css?ver=3.2.0')); ?>" type="text/css">
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -76,24 +76,25 @@
 }
 
 </style>
-  @vite(['resources/css/app.css','resources/js/app.js'])
+  <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
 
 <!-- Scripts -->
 
-  @stack('styles')
-  @livewireStyles
+  <?php echo $__env->yieldPushContent('styles'); ?>
+  <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
+
 </head>
 
 <body>
 
-@if(Route::is('subscriptions'))
+<?php if(Route::is('subscriptions')): ?>
 
 <!-- Sidenav -->
 
 <nav class="navbar navbar-expand-md">
 <div class="container-fluid">
   <a class="navbar-brand d-md-none" href="#">
-  <img  src="{{ asset('images/logo-dark.png') }}" >
+  <img  src="<?php echo e(asset('images/logo-dark.png')); ?>" >
   </a>
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -102,7 +103,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mx-auto">
       <a class="navbar-brand d-none d-md-block" href="#">
-      <img  src="{{ asset('images/logo-dark.png') }}" >
+      <img  src="<?php echo e(asset('images/logo-dark.png')); ?>" >
       
       </a>
     </ul>
@@ -120,7 +121,8 @@
               <!-- main header @s -->
               <!-- main header @e -->
                  <!-- Page content -->
-                 {{ $slot }}
+                 <?php echo e($slot); ?>
+
 
               <!-- footer @s -->
               <!-- footer @e -->
@@ -129,25 +131,41 @@
       </div>
       <!-- main @e -->
 
-@else 
+<?php else: ?> 
 
   <!-- Sidenav -->
-  @include('partials.read-only')
-  @include('partials.account.login_as')
+  <?php echo $__env->make('partials.read-only', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+  <?php echo $__env->make('partials.account.login_as', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
   
   <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
-        <livewire:account.navigator />
+        <?php
+$__split = function ($name, $params = []) {
+    return [$name, $params];
+};
+[$__name, $__params] = $__split('account.navigator', []);
+
+$__html = app('livewire')->mount($__name, $__params, 'uMiAFOj', $__slots ?? [], get_defined_vars());
+
+echo $__html;
+
+unset($__html);
+unset($__name);
+unset($__params);
+unset($__split);
+if (isset($__slots)) unset($__slots);
+?>
             <!-- wrap @s -->
             <div class="nk-wrap ">
                 <!-- main header @s -->
-                @include('partials.account.topnav')
+                <?php echo $__env->make('partials.account.topnav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- main header @e -->
                    <!-- Page content -->
 
                    <br> <br>
-                   {{ $slot }}
+                   <?php echo e($slot); ?>
+
 
 
               <script>
@@ -174,22 +192,37 @@
         </div>
         <!-- main @e -->
 
-        @endif
+        <?php endif; ?>
     </div>
-    @livewireScripts
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
+
           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-          <x-livewire-alert::scripts />
-          <script src="{{ asset('assets/vendor/js-cookie/js.cookie.js') }}"></script>
-            <script src="{{ asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js') }}"></script>
-            <script src="{{ asset('assets/vendor/lavalamp/js/jquery.lavalamp.min.js') }}"></script>
-            <script src="{{ asset('assets/js/argon.mine209.js?v=1.0.0') }}"></script>
+          <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'livewire-alert::components.scripts','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('livewire-alert::scripts'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
+<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
+<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
+<?php endif; ?>
+          <script src="<?php echo e(asset('assets/vendor/js-cookie/js.cookie.js')); ?>"></script>
+            <script src="<?php echo e(asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')); ?>"></script>
+            <script src="<?php echo e(asset('assets/vendor/lavalamp/js/jquery.lavalamp.min.js')); ?>"></script>
+            <script src="<?php echo e(asset('assets/js/argon.mine209.js?v=1.0.0')); ?>"></script>
              <!-- Optional JS -->
              <!-- Argon JS -->
              <!--Start of Tawk.to Script-->
 
-                @stack('scripts')
+                <?php echo $__env->yieldPushContent('scripts'); ?>
               <!--Start of Tawk.to Script-->
-            @if (config('saas.demo_mode'))
+            <?php if(config('saas.demo_mode')): ?>
             <script type="text/javascript">
               var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
               (function(){
@@ -201,10 +234,10 @@
               s0.parentNode.insertBefore(s1,s0);
               })();
               </script>
-              @endif
+              <?php endif; ?>
              <!--End of Tawk.to Script-->
-            <script src="{{ asset('assets/js/bundle.js?ver=3.2.0') }}"></script>
-            <script src="{{ asset('assets/js/scripts.js?ver=3.2.0') }}"></script>
+            <script src="<?php echo e(asset('assets/js/bundle.js?ver=3.2.0')); ?>"></script>
+            <script src="<?php echo e(asset('assets/js/scripts.js?ver=3.2.0')); ?>"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
                     <!-- sweet alert  -->
             <script>
@@ -238,3 +271,4 @@
 
 </body>
 </html>
+<?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/layouts/account.blade.php ENDPATH**/ ?>
