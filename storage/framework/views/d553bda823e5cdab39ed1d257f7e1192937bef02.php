@@ -61,19 +61,13 @@ unset($__errorArgs, $__bag); ?></div>
                                                     <li>
                                                     <div class="form-control-wrap">
                                                         <button wire:click="addSelectedProducts" class="btn btn-lg btn-primary" wire:loading.remove>Add Selected Products</button>
-                                                        <button class="btn btn-lg btn-primary" type="button" disabled wire:loading.delay>
-                                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                            <span>Loading...</span>
-                                                        </button>
+                                                       
                                                     </div>                                                   
                                                      </li>
                                                     <li>
                                                     <div class="form-control-wrap">
                                                         <button wire:click="selectAllProducts" class="btn btn-lg btn-primary" wire:loading.remove>Add All Products</button>
-                                                        <button class="btn btn-lg btn-primary" type="button" disabled wire:loading.delay>
-                                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                                            <span>Loading...</span>
-                                                        </button>
+                                                      
                                                     </div>                                                   
                                                      </li>
                                                 </ul>
