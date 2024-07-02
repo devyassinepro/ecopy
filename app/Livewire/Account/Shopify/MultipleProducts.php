@@ -38,7 +38,7 @@ class MultipleProducts extends Component
 
             $this->products = $this->fetchShopifyProducts($this->url);
           
-            Log::info('All Products Json:', ['product' => $this->products]);
+            // Log::info('All Products Json:', ['product' => $this->products]);
 
             $this->alert('success', __('Products fetched successfully'));
 
@@ -108,7 +108,8 @@ class MultipleProducts extends Component
             }
     
             $this->alert('success', __('Products imported successfully'));
-    
+            return redirect()->route('account.homeshopify.index');
+
         } catch (Exception $e) {
             // Log::error('Error importing products:', ['message' => $e->getMessage()]);
             $this->alert('error', __('Product import failed: ') . $e->getMessage());
