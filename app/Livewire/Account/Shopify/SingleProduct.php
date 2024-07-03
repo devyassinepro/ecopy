@@ -69,13 +69,13 @@ class SingleProduct extends Component
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
             
             $endpoint = getShopifyURLForStore('graphql.json', $store);
-            // Log::info('Shopify endpoint:'.$endpoint);
+            Log::info('Shopify endpoint:'.$endpoint);
 
             $headers = getShopifyHeadersForStore($store);
             $payload = ['query' => $mutation];
             
             $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-            // Log::info('Shopify API Response:', ['response' => $response]);
+             Log::info('Shopify API Response:', ['response' => $response]);
             
             // Check the response
             if (isset($response['statusCode']) && $response['statusCode'] == 200) {

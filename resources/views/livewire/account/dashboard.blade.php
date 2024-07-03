@@ -37,82 +37,61 @@
                                 <div class="nk-block-head nk-block-head-sm">
                                     <div class="nk-block-between">
                                         <div class="nk-block-head-content">
-                                            <h4 class="nk-block-title page-title">Browse our tools</h4>
+                                            <h4 class="nk-block-title page-title">Stores : {{ $totalstores }} / {{ $storelimit }}</h4>
                                         </div><!-- .nk-block-head-content -->
+
+                                        <a href="{{ route('account.wizard.index') }}" wire:navigate class="toggle btn btn-primary"><em class="icon ni ni-plus"></em><span>Connect Shopify Store</span></a>
+
                                     </div><!-- .nk-block-between -->
+                                    <br> </br>
                                 </div><!-- .nk-block-head -->
                                 <div class="nk-block">
                                     <div class="row g-gs">
-                                        <div class="col-xxl-6">
-                                            <div class="nk-download">
-                                                <div class="data">
-                                                    <div class="thumb"><img src="./images/icons/product-pp.svg" alt=""></div>
-                                                    <div class="info">
-                                                        <h6 class="title"><span class="name">Sales tracking</span></h6>
-                                                        <div class="meta">
-                                                            <span class="version">
-                                                                <span class="text-soft">Version: </span> <span>1.3.1</span>
-                                                            </span>
-                                                            <span class="release">
-                                                                <span class="text-soft">Status: </span> <span>Active</span>
-                                                            </span>
+                             
+                                                        <div class="row">
+                                                    <div class="col-md-12 grid-margin stretch-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                        
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                <th style="font-size: 18px; font-weight: bold;">Myshopify</th>
+                                                                <th style="font-size: 18px; font-weight: bold;">Email</th>
+                                                                <th style="font-size: 18px; font-weight: bold;">Name</th>
+                                                                <th style="font-size: 18px; font-weight: bold;">Status</th>
+                                                                <th style="font-size: 18px; font-weight: bold;">Connected</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($stores as $store)
+                                                                <tr>
+
+                                                                <td style="font-size: 18px; font-weight: bold;">{{ $store->myshopify_domain }}</td>
+                                                                <td style="font-size: 18px; font-weight: bold;">{{ $store->email }}</td>
+                                                                <td style="font-size: 18px; font-weight: bold;">{{ $store->name }}</td>
+                                                                <td style="font-size: 18px; font-weight: bold;">{{ $store->status }}</td>
+                                                                <td style="font-size: 18px; font-weight: bold;">Connected</td>
+
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="actions">
-                                                </div>
-                                            </div><!-- .sp-pdl-item -->
-                                        </div><!-- .col -->
-                                        <div class="col-xxl-6">
-                                            <div class="nk-download">
-                                                <div class="data">
-                                                    <div class="thumb"><img src="./images/icons/product-ee.svg" alt=""></div>
-                                                    <div class="info">
-                                                        <h6 class="title"><span class="name">Current Trends (New)</span><span class="badge badge-dim bg-primary rounded-pill">New</span></h6>
-                                                        <div class="meta">
-                                                            <span class="version">
-                                                                <span class="text-soft">Version: </span> <span>1.3.1</span>
-                                                            </span>
-                                                            <span class="release">
-                                                                <span class="text-soft">Status: </span> <span>Active</span>
-                                                            </span>
-                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="actions">
-                                                </div>
-                                            </div><!-- .sp-pdl-item -->
-                                        </div><!-- .col -->
-                                        <div class="col-xxl-6">
-                                            <div class="nk-download">
-                                                <div class="data">
-                                                    <div class="thumb"><img src="./images/icons/product-cc.svg" alt=""></div>
-                                                    <div class="info">
-                                                        <h6 class="title"><span class="name">Competitors Research</span> <span class="badge badge-dim bg-primary rounded-pill">New</span></h6>
-                                                        <div class="meta">
-                                                            <span class="version">
-                                                                <span class="text-soft">Version: </span> <span>1.7.2</span>
-                                                            </span>
-                                                            <span class="release">
-                                                                <span class="text-soft">Status: </span> <span>Active</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="actions">
-                                                </div>
-                                            </div><!-- .sp-pdl-item -->
-                                        </div><!-- .col -->
 
                                         </div>
                                     </div>
-                                  
                             </div>
                         </div>
                     </div>
                 </div>
         <!-- Table >Top Products  -->
         <!-- Affiche //// -->
+
 
             </div>
                 </div>

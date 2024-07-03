@@ -34,6 +34,29 @@
     overflow: hidden;
 }
 
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    margin-top: 25px;
+    margin-top: 25px;
+
+
+}
+
+.center-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+.center-container img {
+    width: 350px;
+    height: auto;
+}
+
 .read-more {
     display: none;
     color: #007BFF;

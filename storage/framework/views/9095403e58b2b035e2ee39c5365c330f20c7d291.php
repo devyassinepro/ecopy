@@ -479,7 +479,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('plan-list', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'SvUX32u', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'XGf1HWC', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

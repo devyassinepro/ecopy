@@ -148,22 +148,37 @@ function getDockerHeaders() {
     return ['Content-Type' => 'application/json'];
 }
 
-function getShopifyURLForStore($endpoint, $store) {
-    return checkIfStoreIsPrivate($store) ? 
-        'https://'.$store['api_key'].':'.$store['api_secret_key'].'@'.$store['myshopify_domain'].'/admin/api/'.config('custom.shopify_api_version').'/'.$endpoint 
-        :
-        'https://'.$store['myshopify_domain'].'/admin/api/'.config('custom.shopify_api_version').'/'.$endpoint;
+function getShopifyURLForStore($endpoint, $store)
+{
+    // Directly use the store's URL and endpoint without additional checks
+    return 'https://' . $store['myshopify_domain'] . '/admin/api/' . config('custom.shopify_api_version') . '/' . $endpoint;
 }
 
-function getShopifyHeadersForStore($store, $method = 'GET') {
-    return $method == 'GET' ? [
+function getShopifyHeadersForStore($store, $method = 'GET')
+{
+    // Directly return headers using the store's access token
+    return [
         'Content-Type' => 'application/json',
         'X-Shopify-Access-Token' => $store['access_token']
-    ] : [
-        'Content-Type: application/json',
-        'X-Shopify-Access-Token: '.$store['access_token']
     ];
 }
+
+// function getShopifyURLForStore($endpoint, $store) {
+//     return checkIfStoreIsPrivate($store) ? 
+//         'https://'.$store['api_key'].':'.$store['api_secret_key'].'@'.$store['myshopify_domain'].'/admin/api/'.config('custom.shopify_api_version').'/'.$endpoint 
+//         :
+//         'https://'.$store['myshopify_domain'].'/admin/api/'.config('custom.shopify_api_version').'/'.$endpoint;
+// }
+
+// function getShopifyHeadersForStore($store, $method = 'GET') {
+//     return $method == 'GET' ? [
+//         'Content-Type' => 'application/json',
+//         'X-Shopify-Access-Token' => $store['access_token']
+//     ] : [
+//         'Content-Type: application/json',
+//         'X-Shopify-Access-Token: '.$store['access_token']
+//     ];
+// }
 
 function getGraphQLHeadersForStore($store) {
     return checkIfStoreIsPrivate($store) ? [

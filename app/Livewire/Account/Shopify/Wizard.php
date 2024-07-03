@@ -25,20 +25,37 @@ class Wizard extends Component
     }
 
     public function savesecret() {
+        
+        $storeuser = Shopifystores::where('user_id', $user_id)->count();
+        if(currentTeam()->onTrial()){
+
+            if($storeuser >=1 ){
+                $this->alert('warning', __('You can not add more stores on trial!'));
+                return redirect()->route('account.homeshopify.index');
+            }
+        }
+        else if(check_store_limit() <= $storeuser)
+        {
+            $storeLimit = check_store_limit();
+            if ($storeLimit) {
+                $this->alert('warning', __('You can not add stores more than :limit!'));
+                return redirect()->route('account.homeshopify.index');
+            }
+        }
 
         $user_id = Auth::user()->id;
         $urlshopify = $this->urlshopify;
         $urltoken = $this->urltoken ;
-        $apikey = $this->apikey ;
-        $apisecret = $this->apisecret ;
+        // $apikey = $this->apikey ;
+        // $apisecret = $this->apisecret ;
 
 
         try {
             $validated = $this->validate([
                 'urlshopify' => 'required',
                 'urltoken' => 'required',
-                'apikey' => 'required',
-                'apisecret' => 'required',
+                // 'apikey' => 'required',
+                // 'apisecret' => 'required',
             ]);
         
             // Validation passed, continue with your logic
@@ -53,8 +70,8 @@ class Wizard extends Component
         // App shopify online
 
         $store_arr = [
-            'api_key' => $apikey,
-            'api_secret_key' => $apisecret,
+            // 'api_key' => $apikey,
+            // 'api_secret_key' => $apisecret,
             'myshopify_domain' => $urlshopify,
             'access_token' => $urltoken
         ];

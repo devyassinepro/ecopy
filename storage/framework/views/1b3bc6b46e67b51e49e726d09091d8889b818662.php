@@ -49,7 +49,7 @@
                                         </div>
 
 
-                                            <a href="#" data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Connect Shopify Store</span></a>
+                                            <a data-target="addProduct" class="toggle btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Connect Shopify Store</span></a>
 
                                               
                                                 </li>
@@ -66,6 +66,10 @@
                                     <div class="nk-block-head">
                                         <div class="nk-block-head-content">
                                             <h5 class="nk-block-title">Connect Shopify Store</h5>
+
+                                            <div class="center-container">
+                                                <img src="assets/img/shopifyconnect.png" alt="Shopify Connect">
+                                            </div>   
                                           
                                         </div>
                                     </div><!-- .nk-block-head -->
@@ -91,11 +95,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <!-- <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="form-label" for="tags">Api Key</label>
                                                     <div class="form-control-wrap">
-                                                        <!-- <input type="text" class="form-control" id="tags"> -->
                                                         <input type="text" class="form-control" wire:model="apikey" id="site-name" placeholder="Api key">
 
                                                     </div>
@@ -105,18 +108,20 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="tags">Api Secret</label>
                                                     <div class="form-control-wrap">
-                                                        <!-- <input type="text" class="form-control" id="tags"> -->
                                                         <input type="text" class="form-control" wire:model="apisecret" id="site-name" placeholder="Api Secret">
                                                     </div>
                                                 </div>
                                             </div>
-                                          
+                                           -->
                                             <div class="col-12">
                                                 <!-- <button class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add New</span></button> -->
                                                 <button type="submit" class="btn btn-lg btn-primary">Connect Store</button>
 
                                             </div>
                                         </div>
+                                        <div class="center-video">      
+                                    <iframe width="300" height="300" src="https://www.youtube.com/embed/Nn9MEKO2Uek?start=41" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
                                     </div><!-- .nk-block -->
                                 </div>
                        
@@ -127,6 +132,7 @@
                                                 <div></div>
                                             </div>
                                 </div>
+                                
                         </div>  
             <!-- Test Content -->
 <!-- content @e -->
@@ -155,7 +161,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.shopify.single-product', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'ahjuuu4', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, '5UWXkhf', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -173,7 +179,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.shopify.multiple-products', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'n6KTvoi', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'TL1gXNv', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

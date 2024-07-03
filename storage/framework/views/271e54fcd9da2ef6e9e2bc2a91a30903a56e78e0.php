@@ -71,3 +71,4 @@
 </div>
 
 </div>
+<?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/livewire/account/shopify/wizard.blade.php ENDPATH**/ ?>
