@@ -1,23 +1,35 @@
-@extends('layouts.accountsubscribe')
-@section('title', 'Checkout')
-@section('content')
+<?php $__env->startSection('title', 'Checkout'); ?>
+<?php $__env->startSection('content'); ?>
 
-            @if ($message = Session::get('error'))
+            <?php if($message = Session::get('error')): ?>
                     <div class="alert alert-danger">
-                        <p>{{ $message }}</p>
+                        <p><?php echo e($message); ?></p>
                     </div>
-                @endif
+                <?php endif; ?>
     
-                <!-- <x:card-form :action="route('subscriptions.store')">
-                    <input type="hidden" name="plan" value="{{ request('plan') }}" <div class="text-center">
+                <!-- <?php if (isset($component)) { $__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58 = $component; } ?>
+<?php $component = App\View\Components\CardForm::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('card-form'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\CardForm::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('subscriptions.store'))]); ?>
+                    <input type="hidden" name="plan" value="<?php echo e(request('plan')); ?>" <div class="text-center">
 
                     <div class="form-group">
-                        <label for="coupon">{{ __('Coupon') }}</label>
+                        <label for="coupon"><?php echo e(__('Coupon')); ?></label>
                         <input type="text" name="coupon" id="coupon" class="form-control">
                     </div>
                     
-                    <button type="submit" class="btn btn-primary " id="card-button" data-secret="{{ $intent->client_secret }}"> {{ __('Subscribe') }} </button>
-                </x:card-form> -->
+                    <button type="submit" class="btn btn-primary " id="card-button" data-secret="<?php echo e($intent->client_secret); ?>"> <?php echo e(__('Subscribe')); ?> </button>
+                 <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58)): ?>
+<?php $component = $__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58; ?>
+<?php unset($__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58); ?>
+<?php endif; ?> -->
    <!-- wrap @s -->
    <div class="nk-wrap nk-wrap-nosidebar">
                 <!-- content @s -->
@@ -39,25 +51,38 @@
                           <p>All transactions are secure and encrypted.</p>
                           <div class="icons">
                
-               <img src="{{ asset('saas/img/master.png') }}" width="30">
-               <img src="{{ asset('saas/img/visa.png') }}" width="30">
-               <img src="{{ asset('saas/img/stripe.png') }}" width="30">
-               <img src="{{ asset('saas/img/master2.png') }}" width="30">
+               <img src="<?php echo e(asset('saas/img/master.png')); ?>" width="30">
+               <img src="<?php echo e(asset('saas/img/visa.png')); ?>" width="30">
+               <img src="<?php echo e(asset('saas/img/stripe.png')); ?>" width="30">
+               <img src="<?php echo e(asset('saas/img/master2.png')); ?>" width="30">
              </div>
                   
-                          @push('styles')
+                          <?php $__env->startPush('styles'); ?>
                           <script src="https://js.stripe.com/v3/"></script>
-                          @endpush
-                                  <x:card-form :action="route('subscriptions.store')">
-                                      <input type="hidden" name="plan" value="{{ request('plan') }}" <div class="text-center">
+                          <?php $__env->stopPush(); ?>
+                                  <?php if (isset($component)) { $__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58 = $component; } ?>
+<?php $component = App\View\Components\CardForm::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('card-form'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\CardForm::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('subscriptions.store'))]); ?>
+                                      <input type="hidden" name="plan" value="<?php echo e(request('plan')); ?>" <div class="text-center">
 
                                       <div class="form-group">
-                                          <label for="coupon">{{ __('Coupon') }}</label>
+                                          <label for="coupon"><?php echo e(__('Coupon')); ?></label>
                                           <input type="text" name="coupon" id="coupon" class="form-control">
                                       </div>
                                       
-                                      <button type="submit" class="btn btn-primary " id="card-button" data-secret="{{ $intent->client_secret }}"> Try it free for 2 days (0$) </button>
-                                  </x:card-form>
+                                      <button type="submit" class="btn btn-primary " id="card-button" data-secret="<?php echo e($intent->client_secret); ?>"> Try it free for 7 days (0$) </button>
+                                   <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58)): ?>
+<?php $component = $__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58; ?>
+<?php unset($__componentOriginal3839f283ab924aa717f3c08cb91e7bdc23806d58); ?>
+<?php endif; ?>
                          
                             </div><!-- .nk-block -->
                             <div class="nk-block nk-auth-footer">
@@ -87,15 +112,15 @@
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                            @foreach ($plans as $plan)
+                                            <?php $__currentLoopData = $plans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $plan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                               <div class="position-relative single-pricing-wrap rounded-custom bg-gradient text-white p-5 mb-4 mb-lg-0">
                                                   <div class="pricing-header mb-32">
-                                                      <h3 class="package-name text-primary d-block">{{$plan->name}}</h3>
-                                                      <h4 class="display-6 fw-semi-bold">${{$plan->price}}<span>/month</span></h4>
+                                                      <h3 class="package-name text-primary d-block"><?php echo e($plan->name); ?></h3>
+                                                      <h4 class="display-6 fw-semi-bold">$<?php echo e(round($plan->price,0)); ?><span>/month</span></h4>
                                                   </div>
                                                   <div class="pricing-info mb-4">
                                                       <ul class="pricing-feature-list list-unstyled">
-                                                      <li><i class="fas fa-circle fa-2xs text-warning me-2"></i>{{$plan->store_access_count}} linked Stores</li>
+                                                      <li><i class="fas fa-circle fa-2xs text-warning me-2"></i><?php echo e($plan->store_access_count); ?> linked Stores</li>
                                                       <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Import Products in 1-Click</li>
                                                       <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Edit Products before Importing</li>
                                                           <!-- <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Every Minute</li> -->
@@ -106,13 +131,13 @@
                                                       <img src="assets/img/shape/dot-big-square.svg" alt="shape">
                                                   </div>
                                                   <!--pattern end-->
-                                              @endforeach                                           
+                                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                           
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
                                                 <h4>Ecopy</h4>
                                                 <ul class="nav justify-content-center subscribe-feature-list mt-4">
                                     <li class="nav-item">
-                                        <span><i class="far fa-check-circle text-primary me-2"></i>Free 2-day trial</span>
+                                        <span><i class="far fa-check-circle text-primary me-2"></i>Free 7-day trial</span>
                                     </li>
                                     <!-- <li class="nav-item">
                                         <span><i
@@ -137,4 +162,6 @@
                 <!-- wrap @e -->
             </div>
     
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.accountsubscribe', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/subscriptions/checkout.blade.php ENDPATH**/ ?>

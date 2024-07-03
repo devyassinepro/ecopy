@@ -45,6 +45,7 @@
                                     </div><!-- .nk-block-between -->
                                     <br> </br>
                                 </div><!-- .nk-block-head -->
+                              
                                 <div class="nk-block">
                                     <div class="row g-gs">
                              
@@ -86,6 +87,7 @@
                                         </div>
                                     </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
