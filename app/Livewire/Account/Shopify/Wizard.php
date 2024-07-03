@@ -26,6 +26,9 @@ class Wizard extends Component
 
     public function savesecret() {
         
+        $user_id = Auth::user()->id;
+        $urlshopify = $this->urlshopify;
+        $urltoken = $this->urltoken ;
         $storeuser = Shopifystores::where('user_id', $user_id)->count();
         if(currentTeam()->onTrial()){
 
@@ -43,9 +46,7 @@ class Wizard extends Component
             }
         }
 
-        $user_id = Auth::user()->id;
-        $urlshopify = $this->urlshopify;
-        $urltoken = $this->urltoken ;
+
         // $apikey = $this->apikey ;
         // $apisecret = $this->apisecret ;
 
