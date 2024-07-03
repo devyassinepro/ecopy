@@ -269,7 +269,7 @@
                                         <div class="testimonial-tab-content mb-5 mb-lg-0 mb-md-0">
                                             <img src="assets/img/testimonial/quotes-left.svg" alt="testimonial quote" width="65" class="img-fluid mb-32">
                                             <div class="blockquote-title-review mb-4">
-                                                <h3 class="mb-0 h4 fw-semi-bold">Amazing Weenify template!</h3>
+                                                <h3 class="mb-0 h4 fw-semi-bold">Amazing Ecopy template!</h3>
                                                 <ul class="review-rate mb-0 list-unstyled list-inline">
                                                     <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
                                                     </li>
@@ -474,7 +474,7 @@
                 <div class="row g-5 justify-content-center">
                     <!-- <div class="col-xl-5 col-lg-8">
                         <div class="hd-chat-box">
-                            <h3 class="text-white mb-3">24/7 Chat Support<br>for all Weenify Desk Users</h3>
+                            <h3 class="text-white mb-3">24/7 Chat Support<br>for all Ecopy Desk Users</h3>
                             <p class="text-white mb-4">Distinctively initiate viral ideas for goal-oriented partnerships. Appropriately network cross-media opportunities platform total linkage. Uniquely create turnkey value rather than revolutionary applications. Dynamically architect.</p>
                             <a href="contact-us.html" class="read-more-link text-warning">Chat with us Right Now <i
                               class="fas fa-angle-right ms-1"></i></a>
@@ -489,21 +489,21 @@
                             <div class="accordion hd-accordion hd-accordion2 mt-60" id="hd_accordion2">
                                 <div class="accordion-item">
                                     <div class="accordion-header">
-                                        <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">Whats Is Weenify?</a>
+                                        <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">Whats Is Ecopy?</a>
                                     </div>
                                     <div class="accordion-collapse collapse" id="hd2_acc1" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
-                                            <p class="mb-0">Weenify is an extremely powerful product research and the most advanced product spying tool on the market for Shopify. Sniperfy tracks any Shopify store products and sales minute by minute.</p>
+                                            <p class="mb-0">Ecopy is an extremely powerful product research and the most advanced product spying tool on the market for Shopify. Sniperfy tracks any Shopify store products and sales minute by minute.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item active">
                                     <div class="accordion-header">
-                                        <a href="#hd2_acc2" class="" data-bs-toggle="collapse">How Weenify Works ?</a>
+                                        <a href="#hd2_acc2" class="" data-bs-toggle="collapse">How Ecopy Works ?</a>
                                     </div>
                                     <div class="accordion-collapse collapse show" id="hd2_acc2" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
-                                            <p class="mb-0">Weenify tracks just Shopify stores. add any shopify store and we'll get products and track sales minute by minute or less. you can get the winners products by filtering with the best data analytics tool in the world now. filter by sales today, yesterday or 7 days ..., price, finding date ...</p>
+                                            <p class="mb-0">Ecopy tracks just Shopify stores. add any shopify store and we'll get products and track sales minute by minute or less. you can get the winners products by filtering with the best data analytics tool in the world now. filter by sales today, yesterday or 7 days ..., price, finding date ...</p>
                                         </div>
                                     </div>
                                 </div>
@@ -677,7 +677,7 @@
                             <div class="subscribe-info-wrap text-center position-relative z-2">
                                 <div class="section-heading">
                                     <h4 class="h5 text-warning">Let's Try!</h4>
-                                    <h2>Start Your 7-Day Free Trial</h2>
+                                    <h2>Start Your 2-Day Free Trial</h2>
                                     <!-- <p>We can help you to create your dream website for better business revenue.</p> -->
                                 </div>
                                 <div class="form-block-banner mw-60 m-auto mt-5">

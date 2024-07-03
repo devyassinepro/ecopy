@@ -4,7 +4,7 @@
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="Weenify , store shopify tracking ,store shopify,product spying, keyword research, search engine optimization, search engine marketing" />
+    <meta name="keywords" content="Ecopy , store shopify tracking ,store shopify,product spying, keyword research, search engine optimization, search engine marketing" />
     <meta name="description" content="Iteck - Multi-Purpose HTML5 Template" />
     <meta name="author" content="Touzani Yassine" />
 
@@ -12,7 +12,7 @@
         <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }} - Track winning stores Shopify</title>
+    <title>{{ config('app.name') }} - Copy products for shopify | Product Importer</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" title="Favicon" sizes="16x16" />
@@ -290,7 +290,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-md-7 col-lg-7">
                             <div class="copyright-text">
-                                <p class="mb-lg-0 mb-md-0">&copy; 2024 Weenify Rights Reserved. <a href="https://weenify.io/" class="text-decoration-none">Weenify</a></p>
+                                <p class="mb-lg-0 mb-md-0">&copy; 2024 Ecopy Rights Reserved. <a href="https://weenify.io/" class="text-decoration-none">Ecopy</a></p>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4">

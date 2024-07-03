@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Title -->
-  <title>{{ config('app.name', 'Weenify') }}</title>
+  <title>{{ config('app.name', 'Ecopy') }}</title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ asset('saas/img/favicon.png') }}">
@@ -93,7 +93,7 @@ src="https://www.facebook.com/tr?id=691407819506168&ev=PageView&noscript=1"
                 <div class="nk-footer">
                     <div class="container-fluid">
                         <div class="nk-footer-wrap">
-                            <div class="nk-footer-copyright"> &copy; 2024 <a href="https://weenify.io" target="_blank">Weenify</a>
+                            <div class="nk-footer-copyright"> &copy; 2024 <a href="https://weenify.io" target="_blank">Ecopy</a>
                             </div>
                         </div>
                     </div>

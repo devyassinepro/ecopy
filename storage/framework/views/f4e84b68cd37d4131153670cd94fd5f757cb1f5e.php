@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <!-- Title -->
-  <title><?php echo e(config('app.name', 'Weenify')); ?> - Winning Products For Dropshipping</title>
+  <title><?php echo e(config('app.name', 'Ecopy')); ?> - Winning Products For Dropshipping</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Favicon -->
@@ -169,7 +169,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.navigator', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'RhIFDL0', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'ezzqL1R', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

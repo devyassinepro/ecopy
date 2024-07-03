@@ -105,7 +105,7 @@ class StoresController extends Controller
                     $domain = $parsedUrl['scheme'] . '://' . $parsedUrl['host']. '/' ;
 
                 } else {
-                    return redirect()->route('account.stores.create')->with('error','This Store not Supported by Weenify');
+                    return redirect()->route('account.stores.create')->with('error','This Store not Supported by Ecopy');
                 }
 
                 // check if store already added
@@ -213,7 +213,7 @@ class StoresController extends Controller
                             }
                         }
                     } catch(\Exception $exception) {
-                        return redirect()->route('account.stores.create')->with('error','This Store not Supported by Weenify');
+                        return redirect()->route('account.stores.create')->with('error','This Store not Supported by Ecopy');
 
                         // Log::error($exception->getMessage());
                     }

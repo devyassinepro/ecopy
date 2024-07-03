@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center mb-5">
-                    <div class="col-lg-3">
+                    <!-- <div class="col-lg-3">
                         <div class="media d-flex align-items-center py-2 p-sm-2">
                             <div class="icon-box mb-0 bg-primary-soft rounded-circle d-block me-3">
                                 <i class="fas fa-credit-card text-primary"></i>
@@ -22,14 +22,14 @@
                                 No credit card required
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-lg-3">
                         <div class="media d-flex align-items-center py-2 p-sm-2">
                             <div class="icon-box mb-0 bg-success-soft rounded-circle d-block me-3">
                                 <i class="fas fa-calendar-check text-success"></i>
                             </div>
                             <div class="media-body fw-medium h6 mb-0">
-                                Get 7 day free trial
+                                Get 2 day free trial
                             </div>
                         </div>
                     </div>
@@ -51,17 +51,17 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="position-relative single-pricing-wrap rounded-custom <?php echo e($plan->id == 16 ? 'bg-gradient text-white p-5 mb-4 mb-lg-0' : 'bg-white custom-shadow p-5 mb-4 mb-lg-0'); ?>">
                             <div class="pricing-header mb-32">
-                                <h3 class="package-name text-primary d-block"><?php echo e($plan->name); ?></h3>
-                                <h4 class="display-6 fw-semi-bold">$<?php echo e(round($plan->price,0)); ?><span>/month</span></h4>
+                                <h3 class="package-name text-primary d-block">2-day trial</h3>
+                                <h4 class="display-6 fw-semi-bold">$<?php echo e($plan->price); ?><span>/month</span></h4>
                             </div>
                             <div class="pricing-info mb-4">
                                 <ul class="pricing-feature-list list-unstyled">
-                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i><?php echo e($plan->store_access_count); ?> Tracked Stores</li>
-                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Top 100 Stores</li>
-                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Top 500 Products</li>
-                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Real Time Sales</li>
+                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i><?php echo e($plan->store_access_count); ?> linked Stores</li>
+                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Import Products in 1-Click</li>
+                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Edit Products before Importing</li>
+                                    <!-- <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Real Time Sales</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Product Filters</li>
-                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Change Store Any Time</li>
+                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Change Store Any Time</li> -->
                                     <!-- <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Every Minute</li> -->
                                 </ul>
                             </div>

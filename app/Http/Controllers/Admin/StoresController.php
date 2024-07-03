@@ -133,7 +133,7 @@ class StoresController extends Controller
                     }  
                 }
         } catch(\Exception $exception) {
-            return redirect()->route('admin.stores.index')->with('error','This Store not Supported by Weenify');
+            return redirect()->route('admin.stores.index')->with('error','This Store not Supported by Ecopy');
 
             // Log::error($exception->getMessage());
         }

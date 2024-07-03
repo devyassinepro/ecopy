@@ -14,14 +14,13 @@
                     <a href="/" class="mb-4 d-block text-center"><img src="assets/img/logo.png" alt="logo" class="img-fluid"></a>
                     <div class="register-wrap p-5 bg-light-subtle shadow rounded-custom">
                         <h1 class="h3">Login</h1>
-                        <p class="text-muted">Please log in to access your account web-enabled methods of innovative
-                            niches.</p>
-                        <div class="action-btns">
+                        <p class="text-muted">Please log in to access</p>
+                        <!-- <div class="action-btns">
                             <a href="#" class="btn google-btn bg-white shadow-sm mt-4 d-block d-flex align-items-center text-decoration-none justify-content-center">
                                 <img src="assets/img/google-icon.svg" alt="google" class="me-3">
                                 <span>Connect with Google</span>
                             </a>
-                        </div>
+                        </div> -->
                         <div class="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
                             <span class="divider-bar"></span>
                             <h6 class="position-absolute text-center divider-text bg-light-subtle mb-0">Or</h6>
@@ -54,7 +53,7 @@
                                 </div>
                         </div>
                             <p class="font-monospace fw-medium text-center text-muted mt-3 pt-4 mb-0">Don’t have an
-                                account? <a href="/register" class="text-decoration-none">Try 7 days free</a>
+                                account? <a href="/register" class="text-decoration-none">Try 2 days free</a>
                                 <br>
                                 @if (Route::has('password.request'))
                                 <a class="link link-primary link-sm" tabindex="-1" href="{{ route('password.request') }}">Forgot password?</a>

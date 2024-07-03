@@ -75,7 +75,7 @@
                                     </ul><!-- .nav -->
                                 </div>
                                 <div class="mt-3">
-                                    <p>&copy; 2024 Weenify. All Rights Reserved.</p>
+                                    <p>&copy; 2024 Ecopy. All Rights Reserved.</p>
                                 </div>
                             </div><!-- .nk-block -->
                         </div><!-- .nk-split-content -->
@@ -112,7 +112,7 @@
                                               @endforeach                                           
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Weenify</h4>
+                                                <h4>Ecopy</h4>
                                                 <ul class="nav justify-content-center subscribe-feature-list mt-4">
                                     <li class="nav-item">
                                         <span><i class="far fa-check-circle text-primary me-2"></i>Free 7-day trial</span>

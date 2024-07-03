@@ -263,7 +263,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-md-7 col-lg-7">
                             <div class="copyright-text">
-                                <p class="mb-lg-0 mb-md-0">&copy; 2024 Weenify Rights Reserved. <a href="https://weenify.io/" class="text-decoration-none">Weenify</a></p>
+                                <p class="mb-lg-0 mb-md-0">&copy; 2024 Ecopy Rights Reserved. <a href="https://weenify.io/" class="text-decoration-none">Ecopy</a></p>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4">

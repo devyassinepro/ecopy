@@ -3,7 +3,7 @@
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
 
-          <h2>How to Use Weenify</h2>
+          <h2>How to Use Ecopy</h2>
         </br></br>
 
         <div class="table-responsive">

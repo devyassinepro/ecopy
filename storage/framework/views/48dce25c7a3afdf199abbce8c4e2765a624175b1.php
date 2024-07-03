@@ -7,7 +7,7 @@
                         <!-- __BLOCK__ --><?php if(!currentTeam()->subscribed()): ?>                  
                         <div class="alert alert-icon alert-warning" role="alert">
                             <em class="icon ni ni-alert-circle"></em> 
-                            <strong>Welcome to Weenify.</strong> Visit the <a href="<?php echo e(route('subscription.plans')); ?>">billing page</a> to activate a Trial plan.
+                            <strong>Welcome to Ecopy.</strong> Visit the <a href="<?php echo e(route('subscription.plans')); ?>">billing page</a> to activate a Trial plan.
                         </div>
                         <?php endif; ?> <!-- __ENDBLOCK__ -->
 

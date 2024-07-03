@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Admin Weenify',
+                'name' => 'Admin Ecopy',
                 'email' => 'weenify@gmail.com',
                 'email_verified_at' => '2020-11-14 20:42:47',
                 'password' => '$2y$10$YbmnPXHd9EnTgrvP7FM/TOt9whguBUPJqM1chDQKjsELlxc9vd2ve',

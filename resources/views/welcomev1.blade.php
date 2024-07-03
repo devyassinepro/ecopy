@@ -7,12 +7,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="keywords" content="Weenify , store shopify tracking ,store shopify,product spying, keyword research, search engine optimization, search engine marketing" />
+    <meta name="keywords" content="Ecopy , store shopify tracking ,store shopify,product spying, keyword research, search engine optimization, search engine marketing" />
     <meta name="description" content="Iteck - Multi-Purpose HTML5 Template" />
     <meta name="author" content="TouzaniYassine" />
 
     <!-- Title  -->
-    <title>Weenify - Track winning stores Shopify</title>
+    <title>Ecopy - Copy products for shopify | Product Importer</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/fav.png" title="Favicon" sizes="16x16" />
@@ -331,9 +331,9 @@
                         <div class="info">
                             <div class="section-head style-8 wow fadeInUp">
                        
-                                <h3> Join 3000+ Merchants Using Weenify </h3>
+                                <h3> Join 3000+ Merchants Using Ecopy </h3>
                             </div><div></div>
-                            <p4>Take advantage of Weenify tools to make your selling journey easier while increasing your chances of success.
+                            <p4>Take advantage of Ecopy tools to make your selling journey easier while increasing your chances of success.
                             </p4>
                             <div class="d-flex align-items-center mt-40 wow fadeInUp">
                                 <a href="/register" class="butn bg-orange1 border-0 rounded-pill hover-shadow flex-shrink-0" type="submit">
@@ -608,24 +608,24 @@
                                     <div class="accordion-item border-bottom rounded-0">
                                         <h2 class="accordion-header" id="heading11">
                                             <button class="accordion-button collapsed rounded-0 py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
-                                                Whats is Weenify?
+                                                Whats is Ecopy?
                                             </button>
                                         </h2>
                                         <div id="collapse11" class="accordion-collapse collapse rounded-0" aria-labelledby="heading11" data-bs-parent="#accordionSt4">
                                             <div class="accordion-body">
-                                                Weenify is an extremely powerful product research and the most advanced product spying tool on the market for Shopify. Sniperfy tracks any Shopify store products and sales minute by minute.
+                                            Ecopy is an extremely powerful product research and the most advanced product spying tool on the market for Shopify. Sniperfy tracks any Shopify store products and sales minute by minute.
                                             </div>
                                         </div>
                                     </div>
                                     <div class="accordion-item border-bottom rounded-0">
                                         <h2 class="accordion-header" id="heading12">
                                             <button class="accordion-button py-4" type="button" data-bs-toggle="collapse" data-bs-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
-                                                How Weenify Works ?
+                                                How Ecopy Works ?
                                             </button>
                                         </h2>
                                         <div id="collapse12" class="accordion-collapse collapse show rounded-0" aria-labelledby="heading12" data-bs-parent="#accordionSt4">
                                             <div class="accordion-body">
-                                                Weenify tracks just Shopify stores. add any shopify store and we'll get products and track sales minute by minute or less. you can get the winners products by filtering with the best data analytics tool in the world now. filter by sales today, yesterday or 7 days ..., price, finding date ...
+                                            Ecopy tracks just Shopify stores. add any shopify store and we'll get products and track sales minute by minute or less. you can get the winners products by filtering with the best data analytics tool in the world now. filter by sales today, yesterday or 7 days ..., price, finding date ...
                                             </div>
                                         </div>
                                     </div>
@@ -822,7 +822,7 @@
                                 <img src="{{ asset('saas/img/logo.png') }}" class="navbar-brand-img"> 
                                 </a>
                                 <h6 class="foot-title"> About Us </h6> 
-                                <p> Track winning stores Shopify</p>
+                                <p> Copy products for shopify | Product Importer</p>
                                 <ul class="mt-20">
                              <li> 
                             <a href="#"> <i class="fas fa-envelope-open me-2 color-main"></i>contact@wennify.io                         </a>                             
@@ -833,10 +833,10 @@
                                 <a href="#">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="https://www.tiktok.com/@weenify">
+                                <a href="https://www.tiktok.com/@Ecopy">
                                     <i class="fab fa-tiktok"></i>
                                 </a>
-                                <a href="https://www.instagram.com/weenifyio">
+                                <a href="https://www.instagram.com/Ecopy">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                                 <a href="https://www.youtube.com/channel/UCBuzUBYeBY1NemZE5DFXuaw">

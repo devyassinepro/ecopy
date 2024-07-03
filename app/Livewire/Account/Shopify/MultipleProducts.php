@@ -69,7 +69,7 @@ class MultipleProducts extends Component
             $domain = $parsedUrl['scheme'] . '://' . $parsedUrl['host']. '/' ;
 
         } else {
-            $this->alert('warning', __('This Store not Supported by Weenify !'));
+            $this->alert('warning', __('This Store not Supported by Ecopy !'));
 
             // return redirect()->route('account.storesearch.index');
         }
@@ -279,7 +279,7 @@ class MultipleProducts extends Component
  
     //     // JSON string
     //        // store Dev
-    //      // $store = '{"table_id":2,"id":67046080733,"email":"devyassinepro@gmail.com","name":"Weenify","access_token":"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","api_key":"59a995e864b719f1c5405554b7156bfb","api_secret_key":"d687a676685b8e18ececd78abc3b39d5","myshopify_domain":"weenify.myshopify.com","phone":null,"fulfillment_service_response":null,"address1":null,"fulfillment_orders_opt_in":0,"fulfillment_service":0,"address2":null,"zip":null,"created_at":"2024-06-07T12:03:34.000000Z","updated_at":"2024-06-07T12:03:34.000000Z"}';
+    //      // $store = '{"table_id":2,"id":67046080733,"email":"devyassinepro@gmail.com","name":"Ecopy","access_token":"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","api_key":"59a995e864b719f1c5405554b7156bfb","api_secret_key":"d687a676685b8e18ececd78abc3b39d5","myshopify_domain":"weenify.myshopify.com","phone":null,"fulfillment_service_response":null,"address1":null,"fulfillment_orders_opt_in":0,"fulfillment_service":0,"address2":null,"zip":null,"created_at":"2024-06-07T12:03:34.000000Z","updated_at":"2024-06-07T12:03:34.000000Z"}';
  
     //      $user_id = Auth::user()->id;
     //      $store = Shopifystores::where('user_id', $user_id)

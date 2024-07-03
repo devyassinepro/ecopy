@@ -1,12 +1,21 @@
-<x-guest-layout> <div class="main-wrapper">
+<?php if (isset($component)) { $__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015 = $component; } ?>
+<?php $component = App\View\Components\GuestLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('guest-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\GuestLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?> <div class="main-wrapper">
 
 <div class="main-wrapper">
 
-@if (session('status'))
+<?php if(session('status')): ?>
 <div class="mb-3 alert alert-success rounded-0" role="alert">
-    {{ session('status') }}
+    <?php echo e(session('status')); ?>
+
 </div>
- @endif
+ <?php endif; ?>
     <!--register section start-->
     <section class="sign-up-in-section bg-dark ptb-60" style="background: url('assets/img/page-header-bg.svg')no-repeat right bottom">
         <div class="container">
@@ -29,17 +38,24 @@
                             <span class="divider-bar"></span>
                             <h6 class="position-absolute text-center divider-text bg-light-subtle mb-0">Or</h6>
                         </div>
-                        <form action="{{ route('register') }}" method="POST">
-                                @csrf
+                        <form action="<?php echo e(route('register')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
                                 <div class="row">
                                 <div class="col-sm-12">
                                     <label for="name" class="mb-1">Name <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Enter your name" required autofocus>
                                     </div>
-                                    @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                              
                                 <div class="col-sm-12">
@@ -47,9 +63,16 @@
                                     <div class="input-group mb-3">
                                         <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Enter your email address" required>
                                     </div>
-                                    @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="password" class="mb-1">Password <span
@@ -61,9 +84,16 @@
                                         </a>
                                         <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
                                     </div>
-                                    @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="password" class="mb-1">Confirm Password <span
@@ -75,9 +105,16 @@
                                         </a>
                                         <input type="password" class="form-control form-control-lg" id="repassword" name="password_confirmation" placeholder="Renter your password" required>
                                    </div>
-                                   @error('password')
-                                   <div class="invalid-feedback">{{ $message }}</div>
-                                   @enderror
+                                   <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                   <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                   <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check d-flex">
@@ -110,4 +147,9 @@
     </section>
     <!--register section end-->
 </div>
-</x-guest-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015)): ?>
+<?php $component = $__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015; ?>
+<?php unset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015); ?>
+<?php endif; ?><?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/auth/register.blade.php ENDPATH**/ ?>
