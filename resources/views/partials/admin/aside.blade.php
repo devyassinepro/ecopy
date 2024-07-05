@@ -63,7 +63,7 @@
                     </ul>
                 </li>
 
-                <li class="u-sidebar-nav-menu__item">
+                <!-- <li class="u-sidebar-nav-menu__item">
                     <a class="u-sidebar-nav-menu__link {{ return_if(on_page('admin.niches.index') OR on_page('admin.niches.create') OR on_page('admin.niches.edit'), ' active') }}" href="{{ route('admin.niches.index') }}">
                         <i class="fas fa-tag u-sidebar-nav-menu__item-icon"></i>
                         <span class="u-sidebar-nav-menu__item-title">{{ __('Niches') }}</span>
@@ -92,7 +92,7 @@
                         <i class="fas fa-chart-bar u-sidebar-nav-menu__item-icon"></i>
                         <span class="u-sidebar-nav-menu__item-title">{{ __('Dns') }}</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="u-sidebar-nav-menu__item">
                     <a class="u-sidebar-nav-menu__link {{ return_if(on_page('admin.plans.index') OR on_page('admin.plans.create') OR on_page('admin.plans.edit'), ' active') }}" href="{{ route('admin.plans.index') }}">
                         <i class="fas fa-chart-bar u-sidebar-nav-menu__item-icon"></i>

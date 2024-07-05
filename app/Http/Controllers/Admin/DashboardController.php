@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use Stripe;
-use App\Models\stores;
-use App\Models\Product;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Coupon;
@@ -18,12 +16,12 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $totalProducts = Product::count();
-        $totalStores = stores::count();
-        $activeStores = stores::where('status', '1')->count();
+        // $totalProducts = Product::count();
+        // $totalStores = stores::count();
+        // $activeStores = stores::where('status', '1')->count();
 
         // $totalsales = Product::all()->sum('totalsales');
-        $totalSales = Product::sum('totalsales');
+        // $totalSales = Product::sum('totalsales');
         $user_count = User::all()->count();
         $team_count = Team::all()->count();
         $newTicket = Ticket::where('status', 'Open')->count();
@@ -37,6 +35,6 @@ class DashboardController extends Controller
             'chart_type' => 'bar',
         ];
         $chart1 = new LaravelChart($chart_options);
-        return view('admin.index', compact('user_count', 'newTicket', 'total_subscription', 'team_count', 'chart1','totalProducts', 'totalStores' , 'totalSales', 'activeStores'));
+        return view('admin.index', compact('user_count', 'newTicket', 'total_subscription', 'team_count', 'chart1'));
     }
 }

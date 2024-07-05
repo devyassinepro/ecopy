@@ -10,11 +10,11 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Ticket\TicketsController;
 use App\Http\Controllers\Account\AccountController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\NicheController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\StoresController;
-use App\Http\Controllers\Admin\DnsController;
+// use App\Http\Controllers\Admin\DashboardController;
+// use App\Http\Controllers\Admin\NicheController;
+// use App\Http\Controllers\Admin\ProductController;
+// use App\Http\Controllers\Admin\StoresController;
+// use App\Http\Controllers\Admin\DnsController;
 use App\Http\Controllers\Team\TeamMemberController;
 use App\Http\Controllers\Ticket\CommentsController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -264,11 +264,11 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::view('notifications', 'admin.notifications')->name('notifications');
 
-        Route::resource('/product', ProductController::class);
-        Route::resource('/stores', StoresController::class);
-        Route::resource('/dns', DnsController::class);
-        Route::resource('/niches', NicheController::class);
-        Route::get('/stores/storeproducts/{id}', [StoresController::class, 'storeproducts'])->name('stores.storeproducts');
+        // Route::resource('/product', ProductController::class);
+        // Route::resource('/stores', StoresController::class);
+        // Route::resource('/dns', DnsController::class);
+        // Route::resource('/niches', NicheController::class);
+        // Route::get('/stores/storeproducts/{id}', [StoresController::class, 'storeproducts'])->name('stores.storeproducts');
 
     });
 
