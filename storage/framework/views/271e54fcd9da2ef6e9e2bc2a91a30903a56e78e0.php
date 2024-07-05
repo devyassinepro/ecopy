@@ -66,9 +66,9 @@
                                         
 </div><!-- .nk-block -->
 
-<div class="center-video">      
+<!-- <div class="center-video">      
     <iframe width="800" height="415" src="https://www.youtube.com/embed/Nn9MEKO2Uek?start=41" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
+</div> -->
 
 </div>
 <?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/livewire/account/shopify/wizard.blade.php ENDPATH**/ ?>

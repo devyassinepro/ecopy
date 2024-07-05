@@ -66,7 +66,7 @@ class SubscriptionController extends Controller
         try {
             currentTeam()->newSubscription('default', $plan->stripe_id)
                 ->withCoupon($request->coupon)
-                ->trialDays(7)
+                ->trialDays(2)
                 ->create($request->token);
         } catch (PaymentActionRequired $e) {
             return redirect()->route(

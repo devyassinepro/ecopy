@@ -81,8 +81,9 @@ unset($__errorArgs, $__bag); ?></div>
                                     <div class="nk-tb-list is-separate is-medium mb-3">
                                         <div class="nk-tb-item nk-tb-head">
                                             <div class="nk-tb-col" style="font-size: 16px; font-weight: bold;">
-                                            <input type="checkbox" wire:model="selectedProducts" value="all"> Select All
+                                            <input type="checkbox" wire:model="selectedProducts" value="all">
                                         </div>
+                                            <div class="nk-tb-col" style="font-size: 16px; font-weight: bold;"><span></span></div>
                                             <div class="nk-tb-col" style="font-size: 16px; font-weight: bold;"><span>Name</span></div>
                                             <div class="nk-tb-col tb-col-md" style="font-size: 16px; font-weight: bold;"><span>Price</span></div>        
                                             <!-- <div class="nk-tb-col" style="font-size: 16px; font-weight: bold;"><span>Expand</span></div> -->
@@ -93,11 +94,13 @@ unset($__errorArgs, $__bag); ?></div>
                                                     <div class="nk-tb-col">
                                                     <input type="checkbox" wire:model="selectedProducts" value="<?php echo e($product->id); ?>"> </div>
                                                     <div class="nk-tb-col">  <!-- __BLOCK__ --><?php if(isset($product->images) && count($product->images) > 0): ?>
-                                                        <img src="<?php echo e($product->images[0]->src); ?>" alt="<?php echo e($product->title); ?>" style="width: 50px; height: auto;">
+                                                        <img src="<?php echo e($product->images[0]->src); ?>" alt="<?php echo e($product->title); ?>" style="width: 100px; height: auto;">
                                                     <?php else: ?>
-                                                        <img src="path/to/default-image.jpg" alt="No Image" style="width: 50px; height: auto;">
+                                                        <img src="path/to/default-image.jpg" alt="No Image" style="width: 100px; height: auto;">
                                                     <?php endif; ?> <!-- __ENDBLOCK__ -->
-                                                    <?php echo e($product->title); ?></div>
+                                                    </div>
+                                                    <div class="nk-tb-col tb-col-sm"> <h6 style="font-size: 16px; font-weight: bold;"><?php echo e($product->title); ?></h6> </div>
+
                                                     <div class="nk-tb-col tb-col-sm"> <h6 style="font-size: 16px; font-weight: bold;">$ <?php echo e($product->variants[0]->price); ?></h6> 
                                                     </div>
                                                 </div><!-- .nk-tb-item -->

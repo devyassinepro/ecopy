@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Title -->
-  <title>{{ config('app.name', 'Ecopy') }} - Winning Products For Dropshipping</title>
+  <title>{{ config('app.name', 'Ecopy') }} - Copy products for shopify | Product Importer</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Favicon -->
