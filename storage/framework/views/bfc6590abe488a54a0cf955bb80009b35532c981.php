@@ -1,5 +1,4 @@
-@extends('layouts.admin')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="u-body">
     <!-- Doughnut Chart -->
     <div class="row">
@@ -12,9 +11,9 @@
 
                     <div class="media-body">
                         <h5 class="h6 text-muted text-uppercase mb-2">
-                            {{ __('Total Users') }} <i class="fa fa-arrow-up text-success ml-1"></i>
+                            <?php echo e(__('Total Users')); ?> <i class="fa fa-arrow-up text-success ml-1"></i>
                         </h5>
-                        <span class="h1 mb-0">{{ $user_count }}</span>
+                        <span class="h1 mb-0"><?php echo e($user_count); ?></span>
                     </div>
                 </div>
             </div>
@@ -28,9 +27,9 @@
                     </div>
                     <div class="media-body">
                         <h5 class="h6 text-muted text-uppercase mb-2">
-                            {{ __('New Tickets') }} <i class="fa fa-arrow-down text-danger ml-1"></i>
+                            <?php echo e(__('New Tickets')); ?> <i class="fa fa-arrow-down text-danger ml-1"></i>
                         </h5>
-                        <span class="h2 mb-0">{{ $newTicket }}</span>
+                        <span class="h2 mb-0"><?php echo e($newTicket); ?></span>
                     </div>
                 </div>
             </div>
@@ -44,9 +43,9 @@
 
                     <div class="media-body">
                         <h5 class="h6 text-muted text-uppercase mb-2">
-                            {{ __('Total subscribers') }} <i class="fa fa-arrow-up text-success ml-1"></i>
+                            <?php echo e(__('Total subscribers')); ?> <i class="fa fa-arrow-up text-success ml-1"></i>
                         </h5>
-                        <span class="h2 mb-0">{{ $total_subscription }}</span>
+                        <span class="h2 mb-0"><?php echo e($total_subscription); ?></span>
                     </div>
                 </div>
             </div>
@@ -61,9 +60,9 @@
 
                     <div class="media-body">
                         <h5 class="h6 text-muted text-uppercase mb-2">
-                            {{ __('Teams') }} <i class="fa fa-arrow-up text-danger ml-1"></i>
+                            <?php echo e(__('Teams')); ?> <i class="fa fa-arrow-up text-danger ml-1"></i>
                         </h5>
-                        <span class="h2 mb-0">{{ $team_count }}</span>
+                        <span class="h2 mb-0"><?php echo e($team_count); ?></span>
                     </div>
                 </div>
             </div>
@@ -81,15 +80,16 @@
     <div class="card mb-4">
         <!-- Card Header -->
         <header class="card-header d-md-flex align-items-center">
-            <h2 class="h3 card-header-title">{{ __('Statistics') }}</h2>
+            <h2 class="h3 card-header-title"><?php echo e(__('Statistics')); ?></h2>
         </header>
         <!-- End Card Header -->
 
         <!-- Card Body -->
         <div class="card-body">
             <div id="chart">
-                <h1>{{ $chart1->options['chart_title'] }}</h1>
-                {!! $chart1->renderHtml() !!}
+                <h1><?php echo e($chart1->options['chart_title']); ?></h1>
+                <?php echo $chart1->renderHtml(); ?>
+
             </div>
         </div>
         <!-- End Card Body -->
@@ -98,8 +98,8 @@
 
 
 </div>
-@endsection
-@push('styles')
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('styles'); ?>
     <style>
         .icon{
             font-size:26px;
@@ -110,19 +110,14 @@
             height: 50px;
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('scripts')
-   {{-- <!-- Charting library -->
-   <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
-   <!-- Chartisan -->
-   <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
-    <script>
-        const chart = new Chartisan({
-        el: '#chart',
-        url: "@chart('users_chart')",
-      });
-    </script> --}}
-    {!! $chart1->renderChartJsLibrary() !!}
-    {!! $chart1->renderJs() !!}
-@endpush
+<?php $__env->startPush('scripts'); ?>
+   
+    <?php echo $chart1->renderChartJsLibrary(); ?>
+
+    <?php echo $chart1->renderJs(); ?>
+
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/touzani/Desktop/ecopy/ecopy.app/resources/views/admin/index.blade.php ENDPATH**/ ?>
