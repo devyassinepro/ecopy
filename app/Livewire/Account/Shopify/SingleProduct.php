@@ -17,7 +17,7 @@ class SingleProduct extends Component
     use RequestTrait, FunctionTrait;
 
     public $urlsingle = ''; 
-    public $publish = false;
+    public $publish = true;
 
     public function render()
     {
