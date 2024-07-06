@@ -102,7 +102,7 @@
   <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
 
 <!-- Scripts -->
-
+  <?php echo $__env->yieldPushContent('scripts'); ?>
   <?php echo $__env->yieldPushContent('styles'); ?>
   <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
 
@@ -146,7 +146,6 @@
                  <!-- Page content -->
                  <?php echo e($slot); ?>
 
-
               <!-- footer @s -->
               <!-- footer @e -->
           </div>
@@ -169,7 +168,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.navigator', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'o5ZO6Qm', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'IpGsW3p', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -191,22 +190,7 @@ if (isset($__slots)) unset($__slots);
 
 
 
-              <script>
-                $('#summernote').summernote({
-                  placeholder: 'Hello stand alone ui',
-                  tabsize: 2,
-                  height: 120,
-                  toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                  ]
-                });
-              </script>
+
    <!-- footer @s -->
                
                 <!-- footer @e -->
@@ -243,7 +227,6 @@ if (isset($__slots)) unset($__slots);
              <!-- Argon JS -->
              <!--Start of Tawk.to Script-->
 
-                <?php echo $__env->yieldPushContent('scripts'); ?>
               <!--Start of Tawk.to Script-->
             <?php if(config('saas.demo_mode')): ?>
             <script type="text/javascript">
@@ -288,6 +271,9 @@ if (isset($__slots)) unset($__slots);
                       icon: "success"
                     });
             });
+        Livewire.on('reload-page', function () {
+            location.reload();
+        });
           
     
 </script>

@@ -17,6 +17,7 @@ class SingleProduct extends Component
     use RequestTrait, FunctionTrait;
 
     public $urlsingle = ''; 
+    public $publish = false;
 
     public function render()
     {
@@ -34,8 +35,9 @@ class SingleProduct extends Component
             // Validation passed, continue with your logic
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Validation failed, handle the error here
+            $this->dispatch('reload-page');
             $this->alert('warning', __('url not valid!'));
-        
+
             // Redirect back to the previous page with the validation errors
             return redirect()->back()->withErrors($e->validator);
         }
@@ -48,9 +50,11 @@ class SingleProduct extends Component
 
         $storeArray = $store->toArray();
         $store = $storeArray[0];
+        $publish = $this->publish;
+
 
         try {
-            $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($store, $this->urlsingle) . '}) { 
+            $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($store, $this->urlsingle,$publish) . '}) { 
                 product {
                     id
                     variants(first: 100) {
@@ -65,7 +69,7 @@ class SingleProduct extends Component
                 }
                 userErrors { field message }
             }';
-            // Log::info("Json file " . $productCreateMutation);
+            Log::info("Json file " . $productCreateMutation);
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
             
             $endpoint = getShopifyURLForStore('graphql.json', $store);
@@ -87,7 +91,9 @@ class SingleProduct extends Component
                     return back()->with('error', 'Product creation failed: ' . implode(', ', $errorMessages));
                 }
 
+                $this->dispatch('reload-page');
                 $this->alert('success', __('Product Imported successfully'));
+
 
             // // Capture the product ID and variant IDs
             // $productID = $response['body']['data']['productCreate']['product']['id'];
@@ -186,18 +192,27 @@ class SingleProduct extends Component
             return back()->with('error', 'Product creation failed: ' . $e->getMessage());
         }
     }
+
+    public function testEvent()
+    {
+        $this->dispatch('test-event');
+    }
     
-    private function getGraphQLPayloadForProductPublishUrl($store, $url) {
+    private function getGraphQLPayloadForProductPublishUrl($store, $url,$publishproduct) {
   
         $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
         $context = stream_context_create($opts);
         $html = file_get_contents($url . '.json', false, $context);
         $productData = json_decode($html, true);
-    
+        
+        Log::info('Publish Product:'.$publishproduct);
+        $publishproduct = $publishproduct ? 'true' : 'false';
+
+
         $temp = [];
         $temp[] = 
             ' title: "' . $productData['product']['title'] . '",
-              published: true,
+              published: ' . $publishproduct . ',
               vendor: "' . $productData['product']['vendor'] . '" ';
         if (isset($productData['product']['body_html']) && $productData['product']['body_html'] !== null)
              $escapedDescriptionHtml = json_encode($productData['product']['body_html']);

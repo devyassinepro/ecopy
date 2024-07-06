@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="keywords" content="Ecopy , store shopify tracking ,store shopify,product spying, keyword research, search engine optimization, search engine marketing" />
-    <meta name="description" content="Iteck - Multi-Purpose HTML5 Template" />
+    <meta name="description" content="" />
     <meta name="author" content="Touzani Yassine" />
 
 

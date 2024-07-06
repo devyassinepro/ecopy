@@ -102,7 +102,7 @@
   @vite(['resources/css/app.css','resources/js/app.js'])
 
 <!-- Scripts -->
-
+  @stack('scripts')
   @stack('styles')
   @livewireStyles
 </head>
@@ -144,7 +144,6 @@
               <!-- main header @e -->
                  <!-- Page content -->
                  {{ $slot }}
-
               <!-- footer @s -->
               <!-- footer @e -->
           </div>
@@ -173,22 +172,7 @@
                    {{ $slot }}
 
 
-              <script>
-                $('#summernote').summernote({
-                  placeholder: 'Hello stand alone ui',
-                  tabsize: 2,
-                  height: 120,
-                  toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                  ]
-                });
-              </script>
+
    <!-- footer @s -->
                
                 <!-- footer @e -->
@@ -210,7 +194,6 @@
              <!-- Argon JS -->
              <!--Start of Tawk.to Script-->
 
-                @stack('scripts')
               <!--Start of Tawk.to Script-->
             @if (config('saas.demo_mode'))
             <script type="text/javascript">
@@ -255,6 +238,9 @@
                       icon: "success"
                     });
             });
+        Livewire.on('reload-page', function () {
+            location.reload();
+        });
           
     
 </script>
