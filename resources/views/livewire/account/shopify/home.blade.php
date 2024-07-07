@@ -119,7 +119,7 @@
                                             </div>
                                         </div>
                                         <div class="center-video">      
-                                    <iframe width="300" height="300" src="https://www.youtube.com/embed/Nn9MEKO2Uek?start=41" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    <iframe width="300" height="300" src="https://www.youtube.com/embed/noCZIZdcZuY?si=J0UNVRFEav51WNrJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
                                     </div><!-- .nk-block -->
                                 </div>

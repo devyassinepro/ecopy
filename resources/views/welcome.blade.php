@@ -74,11 +74,17 @@
                             <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
                                 <i class="fas fa-bug fa-2x text-white"></i>
                             </div>
-                            <h2>The #1 Tool for E-Commerce Dropshipper</h2>
+                            <h2>Seamless Product Importation</h2>
                         
-                            <span><i class="far fa-check-circle text-primary me-2"></i>Increase Your Revenue</span><br>
-                            <span><i class="far fa-check-circle text-primary me-2"></i>Less Effort, More Results</span><br>
-                            <span><i class="far fa-check-circle text-primary me-2"></i>The all-in-one tool that solves your problems!</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Import products</span><br>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Enhance descriptions</span><br>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Easy to use</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Boost Your Productivity</span>
+
+                            <br>
+                            <div class="mt-auto">
+                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
+                            </div>
 
                             <!-- <a href="about-us.html" class="read-more-link text-decoration-none">Start For Free<i
                                 class="fas fa-arrow-right ms-2"></i></a> -->
@@ -92,6 +98,8 @@
                 </div>
             </div>
         </section>
+
+
         <!--why choose us section end-->
 
         <!--image feature section start-->
@@ -103,12 +111,14 @@
                             <div class="icon-box rounded-custom bg-dark shadow-sm d-inline-block">
                                 <i class="fas fa-fingerprint fa-2x text-white"></i>
                             </div>
-                            <h2>Track the Daily Store Revenue in Real-Time</h2>
+                            <h2>Stay Ahead of the Competition</h2>
                             <p>
-							Unlock Real-Time Access to Store Product Offerings and Revenue Data with Dropship,
-							Empowering You to Identify Winning Products and Mitigate the Risk of Selling Low-Performing Items.
+							Kopy allows you to import bulk products quickly to keep you ahead of your competitors
 							</p>
                            
+                            <div class="mt-auto">
+                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
+                            </div>
                             <!-- <a href="about-us.html" class="read-more-link text-decoration-none d-block mt-4">Start For Free <i class="fas fa-arrow-right ms-2"></i></a> -->
                         </div>
                     </div>
@@ -123,8 +133,38 @@
         <!--image feature section end--> <!--feature left right content end-->
 
 
+        <section class="why-choose-us ptb-120">
+            <div class="container">
+                <div class="row justify-content-lg-between align-items-center">
+                    <div class="col-lg-5 col-12">
+                        <div class="why-choose-content">
+                            <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
+                                <i class="fas fa-bug fa-2x text-white"></i>
+                            </div>
+                            <h3>Ecopy ensures that your new imported product aligns with your store's unique style.</h3>
+            </br></br>
+                            <h4><i class="far fa-check-circle text-primary me-2"></i>1 - Copy And Paste The Product URL</h4>
+                            <h4><i class="far fa-check-circle text-primary me-2"></i>2 - Customize & AI Enhance Product Details</h4>
+                            <h4><i class="far fa-check-circle text-primary me-2"></i>3 - Easy & Fast Import To Your Store</h4>
+
+                            <div class="mt-auto">
+                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
+                            </div>
+                            <!-- <a href="about-us.html" class="read-more-link text-decoration-none">Start For Free<i
+                                class="fas fa-arrow-right ms-2"></i></a> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="feature-img-holder mt-4 mt-lg-0 mt-xl-0">
+                            <img src="assets/img/screen/widget-13.png" class="img-fluid" alt="feature-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!--feature promo section start-->
-        <section class="feature-promo ptb-120 bg-light-subtle">
+        <!-- <section class="feature-promo ptb-120 bg-light-subtle">
             <div class="container">
                 <div class="row pt-lg-5 pt-3">
                     <div class="col-lg-6 mt-4">
@@ -157,7 +197,7 @@
                     </div>
                 </div>
             </div>
-        </section> <!--feature promo section end-->
+        </section> feature promo section end -->
         <!--customer review tab section start-->
         <!-- <section class="customer-review-tab ptb-120 bg-gradient text-white  position-relative z-2">
             <div class="container">
@@ -489,41 +529,22 @@
                             <div class="accordion hd-accordion hd-accordion2 mt-60" id="hd_accordion2">
                                 <div class="accordion-item">
                                     <div class="accordion-header">
-                                        <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">Whats Is Ecopy?</a>
+                                        <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">What is Kopy, and how does it work?</a>
                                     </div>
                                     <div class="accordion-collapse collapse" id="hd2_acc1" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
-                                            <p class="mb-0">Ecopy is an extremely powerful product research and the most advanced product spying tool on the market for Shopify. Sniperfy tracks any Shopify store products and sales minute by minute.</p>
+                                            <p class="mb-0">Ecopy is an app that lets you effortlessly copy products from any Shopify store to your own with just one click.
+Simply insert the URL of the desired product, collection, or store, and save a significant amount of time as all the titles, images, descriptions, variants, prices, "compare at" prices, and SEO information are copied into your store within seconds</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item active">
                                     <div class="accordion-header">
-                                        <a href="#hd2_acc2" class="" data-bs-toggle="collapse">How Ecopy Works ?</a>
+                                        <a href="#hd2_acc2" class="" data-bs-toggle="collapse">How much time takes to copy products?</a>
                                     </div>
                                     <div class="accordion-collapse collapse show" id="hd2_acc2" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
-                                            <p class="mb-0">Ecopy tracks just Shopify stores. add any shopify store and we'll get products and track sales minute by minute or less. you can get the winners products by filtering with the best data analytics tool in the world now. filter by sales today, yesterday or 7 days ..., price, finding date ...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-header">
-                                        <a href="#hd2_acc3" class="collapsed" data-bs-toggle="collapse">Can I Change A Store ?</a>
-                                    </div>
-                                    <div class="accordion-collapse collapse" id="hd2_acc3" data-bs-parent="#hd_accordion2">
-                                        <div class="accordion-body pt-0">
-                                            <p class="mb-0">Yes you can do it any time and multiple times</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-header">
-                                        <a href="#hd2_acc4" class="collapsed" data-bs-toggle="collapse">How Many Products Tracking For One Store ?</a>
-                                    </div>
-                                    <div class="accordion-collapse collapse" id="hd2_acc4" data-bs-parent="#hd_accordion2">
-                                        <div class="accordion-body pt-0">
-                                            <p class="mb-0">Now, 1000 products for one store, maybe updated in next days.</p>
+                                            <p class="mb-0">You can copy products just in seconds and also edit them before importing</p>
                                         </div>
                                     </div>
                                 </div>
