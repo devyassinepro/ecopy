@@ -14,7 +14,7 @@
                     <div class="col-lg-6 col-md-10">
                         <div class="hero-content-wrap mt-5 mt-lg-0 mt-xl-0">
                             <h1 class="fw-bold display-5">Automate Product Imports: Discover Ecopy</h1>
-                            <p class="lead">Time is Money: Trust Us to Find the Import Products</p>
+                            <p class="lead">Time is Money: Trust Us to Import Products</p>
                             <div class="action-btn mt-5 align-items-center d-block d-sm-flex d-lg-flex d-md-flex">
                                 <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
                                 <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn mt-3 mt-lg-0 mt-md-0"> <i
@@ -82,7 +82,7 @@
                             <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
                                 <i class="fas fa-bug fa-2x text-white"></i>
                             </div>
-                            <h2>Single Product Importation</h2>
+                            <h2>Single Product Importation (Unlimited)</h2>
                             <p class="lead">Time is Money: Trust Us to Find the Import Products</p>
                             <h5><i class="far fa-check-circle text-primary me-2"></i>Import products</h5><br>
                             <h5><i class="far fa-check-circle text-primary me-2"></i>Enhance descriptions</h5><br>
@@ -522,7 +522,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('plan-list', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'MKh7FUr', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'PuYxD5M', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
