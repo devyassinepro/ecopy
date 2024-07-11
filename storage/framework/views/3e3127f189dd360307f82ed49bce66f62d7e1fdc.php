@@ -7,7 +7,7 @@
                     <div class="col-lg-6 col-md-10">
                         <div class="section-heading text-center">
                             <h4 class="h5 text-primary">Pricing</h4>
-                            <h2>{{ __('Find the right plan for your business') }}</h2>
+                            <h2><?php echo e(__('Find the right plan for your business')); ?></h2>
                             <!-- <p>Conveniently mesh cooperative services via magnetic outsourcing. Dynamically grow value whereas accurate e-commerce vectors. </p> -->
                         </div>
                     </div>
@@ -46,17 +46,17 @@
                 </div>
                 <div class="row">
 
-                @foreach ($plans as $index => $plan)
+                <!-- __BLOCK__ --><?php $__currentLoopData = $plans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $plan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                     <div class="col-lg-4 col-md-6">
-                        <div class="position-relative single-pricing-wrap rounded-custom {{$plan->id == 16 ? 'bg-gradient text-white p-5 mb-4 mb-lg-0' : 'bg-white custom-shadow p-5 mb-4 mb-lg-0'}}">
+                        <div class="position-relative single-pricing-wrap rounded-custom <?php echo e($plan->id == 16 ? 'bg-gradient text-white p-5 mb-4 mb-lg-0' : 'bg-white custom-shadow p-5 mb-4 mb-lg-0'); ?>">
                             <div class="pricing-header mb-32">
                                 <h3 class="package-name text-primary d-block">2-day trial</h3>
-                                <h4 class="display-6 fw-semi-bold">${{$plan->price}}<span>/month</span></h4>
+                                <h4 class="display-6 fw-semi-bold">$<?php echo e($plan->price); ?><span>/month</span></h4>
                             </div>
                             <div class="pricing-info mb-4">
                                 <ul class="pricing-feature-list list-unstyled">
-                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i>{{$plan->store_access_count}} linked Stores</li>
+                                    <li><i class="fas fa-circle fa-2xs text-warning me-2"></i><?php echo e($plan->store_access_count); ?> linked Stores</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Import Products in 1-Click</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Edit Products before Importing</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Easy to use </li>
@@ -67,7 +67,7 @@
                                     <!-- <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Every Minute</li> -->
                                 </ul>
                             </div>
-                            <a href="{{ route('subscriptions',['plan' => $plan->slug]) }}" class="btn btn-outline-primary mt-2">{{ __('Start Free Trial') }}</a>
+                            <a href="<?php echo e(route('subscriptions',['plan' => $plan->slug])); ?>" class="btn btn-outline-primary mt-2"><?php echo e(__('Start Free Trial')); ?></a>
 
                             <!--pattern start-->
                             <div class="dot-shape-bg position-absolute z--1 left--40 bottom--40">
@@ -77,9 +77,9 @@
                         </div>
                     </div>
 
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
 
                 </div>
             </div>
         </section> <!--pricing section end-->
-<!--end pricing section -->
+<!--end pricing section --><?php /**PATH /Users/touzani/Desktop/ecopy/resources/views/livewire/plan-list.blade.php ENDPATH**/ ?>

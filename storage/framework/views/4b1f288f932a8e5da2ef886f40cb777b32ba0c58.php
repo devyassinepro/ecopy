@@ -1,4 +1,12 @@
-<x-guest-layout>
+<?php if (isset($component)) { $__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015 = $component; } ?>
+<?php $component = App\View\Components\GuestLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('guest-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\GuestLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
         <!--hero section start-->
         <section class="hero-section ptb-120 text-white bg-gradient" style="background: url('assets/img/hero-dot-bg.png')no-repeat center right">
             <div class="container">
@@ -74,18 +82,16 @@
                             <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
                                 <i class="fas fa-bug fa-2x text-white"></i>
                             </div>
-                            <h2>Single Product Importation</h2>
-                            <p class="lead">Time is Money: Trust Us to Find the Import Products</p>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>Import products</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>Enhance descriptions</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>Easy to use</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>Boost Your Productivity</h5><br>
+                            <h2>Seamless Product Importation</h2>
+                        
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Import products</span><br>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Enhance descriptions</span><br>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Easy to use</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>Boost Your Productivity</span>
 
                             <br>
                             <div class="mt-auto">
-                                <!-- <a href="/register" class="btn btn-outline-primary btn-l">Start For Free</a> -->
-                                <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
-
+                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
                             </div>
 
                             <!-- <a href="about-us.html" class="read-more-link text-decoration-none">Start For Free<i
@@ -119,7 +125,7 @@
 							</p>
                            
                             <div class="mt-auto">
-                              <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
+                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
                             </div>
                             <!-- <a href="about-us.html" class="read-more-link text-decoration-none d-block mt-4">Start For Free <i class="fas fa-arrow-right ms-2"></i></a> -->
                         </div>
@@ -143,15 +149,14 @@
                             <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
                                 <i class="fas fa-bug fa-2x text-white"></i>
                             </div>
-                            <h2>Ecopy ensures that your new imported product aligns with your store's unique style.</h2>
-
-                           </br></br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>1 - Copy And Paste The Product URL</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>2 - Customize & AI Enhance Product Details</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>3 - Easy & Fast Import To Your Store</h5><br>
+                            <h3>Ecopy ensures that your new imported product aligns with your store's unique style.</h3>
+            </br></br>
+                            <h4><i class="far fa-check-circle text-primary me-2"></i>1 - Copy And Paste The Product URL</h4>
+                            <h4><i class="far fa-check-circle text-primary me-2"></i>2 - Customize & AI Enhance Product Details</h4>
+                            <h4><i class="far fa-check-circle text-primary me-2"></i>3 - Easy & Fast Import To Your Store</h4>
 
                             <div class="mt-auto">
-                                  <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
+                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
                             </div>
                             <!-- <a href="about-us.html" class="read-more-link text-decoration-none">Start For Free<i
                                 class="fas fa-arrow-right ms-2"></i></a> -->
@@ -508,7 +513,22 @@
             </div>
         </section> customer review tab section end -->
 
-        <livewire:plan-list />
+        <?php
+$__split = function ($name, $params = []) {
+    return [$name, $params];
+};
+[$__name, $__params] = $__split('plan-list', []);
+
+$__html = app('livewire')->mount($__name, $__params, 's3iBfqZ', $__slots ?? [], get_defined_vars());
+
+echo $__html;
+
+unset($__html);
+unset($__name);
+unset($__params);
+unset($__split);
+if (isset($__slots)) unset($__slots);
+?>
 
 		
         <!--faq section start-->
@@ -733,4 +753,9 @@ Simply insert the URL of the desired product, collection, or store, and save a s
             </div>
         </section> <!--cat subscribe end-->
 
-</x-guest-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015)): ?>
+<?php $component = $__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015; ?>
+<?php unset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015); ?>
+<?php endif; ?><?php /**PATH /Users/touzani/Desktop/ecopy/ecopy/resources/views/welcome.blade.php ENDPATH**/ ?>
