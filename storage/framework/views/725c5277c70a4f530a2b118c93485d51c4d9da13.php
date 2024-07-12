@@ -1,0 +1,155 @@
+<?php if (isset($component)) { $__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015 = $component; } ?>
+<?php $component = App\View\Components\GuestLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('guest-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\GuestLayout::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?> <div class="main-wrapper">
+
+<div class="main-wrapper">
+
+<?php if(session('status')): ?>
+<div class="mb-3 alert alert-success rounded-0" role="alert">
+    <?php echo e(session('status')); ?>
+
+</div>
+ <?php endif; ?>
+    <!--register section start-->
+    <section class="sign-up-in-section bg-dark ptb-60" style="background: url('assets/img/page-header-bg.svg')no-repeat right bottom">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-5 col-md-8 col-12">
+                    <a href="/" class="mb-4 d-block text-center"><img src="assets/img/logo.png" alt="logo" class="img-fluid"></a>
+                    <div class="register-wrap p-5 bg-light-subtle shadow rounded-custom">
+                        <h1 class="h3">Register</h1>
+                        <!-- <h2 class="h6">Try Weenify.io For Free</h2> -->
+
+                        <p class="text-muted">Try Ecopy.app For Free - Get started - it's quick</p>
+<!-- 
+                        <div class="action-btns">
+                            <a href="#" class="btn google-btn bg-white shadow-sm mt-4 d-block d-flex align-items-center text-decoration-none justify-content-center">
+                                <img src="assets/img/google-icon.svg" alt="google" class="me-3">
+                                <span>Connect with Google</span>
+                            </a>
+                        </div> -->
+                        <div class="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
+                            <span class="divider-bar"></span>
+                            <h6 class="position-absolute text-center divider-text bg-light-subtle mb-0">Or</h6>
+                        </div>
+                        <form action="<?php echo e(route('register')); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="name" class="mb-1">Name <span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Enter your name" required autofocus>
+                                    </div>
+                                    <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                             
+                                <div class="col-sm-12">
+                                    <label for="email" class="mb-1">Email <span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Enter your email address" required>
+                                    </div>
+                                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password" class="mb-1">Password <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+                                        <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password" required>
+                                    </div>
+                                    <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password" class="mb-1">Confirm Password <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="repassword">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+                                        <input type="password" class="form-control form-control-lg" id="repassword" name="password_confirmation" placeholder="Renter your password" required>
+                                   </div>
+                                   <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                   <div class="invalid-feedback"><?php echo e($message); ?></div>
+                                   <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check d-flex">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox" required>
+                                        <label class="custom-control-label" for="checkbox">I agree to Ecopy <a tabindex="-1" href="/privacypolicy">Privacy Policy</a></label>
+                                   
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                                </div>
+                            </div>
+                            <div class="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
+                                <span class="divider-bar"></span>
+                                <h6 class="position-absolute text-center divider-text bg-light-subtle mb-0">Or</h6>
+                            </div>
+                            <!-- <div class="action-btns">
+                                <a href="#" class="btn google-btn mt-4 d-block bg-white shadow-sm d-flex align-items-center text-decoration-none justify-content-center">
+                                    <img src="assets/img/google-icon.svg" alt="google" class="me-3">
+                                    <span>Sign up with Google</span>
+                                </a>
+                            </div> -->
+                            <p class="text-center text-muted mt-4 mb-0 fw-medium font-monospace">Already have an
+                                account? <a href="/login" class="text-decoration-none">Sign in</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--register section end-->
+</div>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015)): ?>
+<?php $component = $__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015; ?>
+<?php unset($__componentOriginalc3251b308c33b100480ddc8862d4f9c79f6df015); ?>
+<?php endif; ?><?php /**PATH /Users/touzani/Desktop/ecopy/resources/views/auth/register.blade.php ENDPATH**/ ?>

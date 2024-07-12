@@ -17,7 +17,7 @@
                             <p class="lead">Time is Money: Trust Us to Import Products</p>
                             <div class="action-btn mt-5 align-items-center d-block d-sm-flex d-lg-flex d-md-flex">
                                 <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
-                                <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn mt-3 mt-lg-0 mt-md-0"> <i
+                                <a href="https://www.youtube.com/watch?v=7_PLuhJNsto" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn mt-3 mt-lg-0 mt-md-0"> <i
                                         class="fas fa-play"></i> Watch Demo </a>
                             </div>
                             <div class="row justify-content-lg-start mt-60">
@@ -121,9 +121,9 @@
                             <div class="icon-box rounded-custom bg-dark shadow-sm d-inline-block">
                                 <i class="fas fa-fingerprint fa-2x text-white"></i>
                             </div>
-                            <h2>Stay Ahead of the Competition</h2>
+                            <h2>Import bulk products(All Store)</h2>
                             <p>
-							Kopy allows you to import bulk products quickly to keep you ahead of your competitors
+							Ecopy allows you to import bulk products quickly to keep you ahead of your competitors
 							</p>
                            
                             <div class="mt-auto">
@@ -522,7 +522,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('plan-list', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'PuYxD5M', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, '0twXu1q', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -555,7 +555,7 @@ if (isset($__slots)) unset($__slots);
                             <div class="accordion hd-accordion hd-accordion2 mt-60" id="hd_accordion2">
                                 <div class="accordion-item">
                                     <div class="accordion-header">
-                                        <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">What is Kopy, and how does it work?</a>
+                                        <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">What is Ecopy, and how does it work?</a>
                                     </div>
                                     <div class="accordion-collapse collapse" id="hd2_acc1" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
