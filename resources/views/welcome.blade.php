@@ -11,6 +11,7 @@
                                 <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
                                 <a href="https://www.youtube.com/watch?v=7_PLuhJNsto" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn mt-3 mt-lg-0 mt-md-0"> <i
                                         class="fas fa-play"></i> Watch Demo </a>
+                                
                             </div>
                             <div class="row justify-content-lg-start mt-60">
                                 <h6 class="text-white-70 mb-2">APPLIES TO ALL SELLERS
@@ -94,7 +95,7 @@
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="feature-img-holder mt-4 mt-lg-0 mt-xl-0">
-                            <img src="assets/img/screen/widget-12.png" class="img-fluid" alt="feature-image">
+                            <img src="assets/img/screen/widget-11.png" class="img-fluid" alt="feature-image">
                         </div>
                     </div>
                 </div>
@@ -126,7 +127,7 @@
                     </div>
                     <div class="col-lg-6 col-12 order-lg-0">
                         <div class="feature-img-holder mt-4 mt-lg-0 mt-xl-0">
-                            <img src="assets/img/screen/widget-11.png" class="img-fluid" alt="feature-image">
+                            <img src="assets/img/screen/widget-12.png" class="img-fluid" alt="feature-image">
                         </div>
                     </div>
                 </div>
@@ -706,7 +707,7 @@ Simply insert the URL of the desired product, collection, or store, and save a s
                                 </div>
                                 <div class="form-block-banner mw-60 m-auto mt-5">
                                     <a href="/register" class="btn btn-primary">Start Free Trial</a>
-                                    <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn ms-lg-3 ms-md-3 mt-3 mt-lg-0"> <i
+                                    <a href="https://www.youtube.com/watch?v=7_PLuhJNsto" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn ms-lg-3 ms-md-3 mt-3 mt-lg-0"> <i
                                             class="fas fa-play"></i> Watch Demo </a>
                                 </div>
                                 <ul class="nav justify-content-center subscribe-feature-list mt-4">
