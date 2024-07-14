@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" data-bs-theme="light">
 <head>
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,9 +10,9 @@
 
 
         <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name') }} - Copy products for shopify | Product Importer</title>
+    <title><?php echo e(config('app.name')); ?> - Copy products for shopify | Product Importer</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" title="Favicon" sizes="16x16" />
@@ -32,14 +32,15 @@
     <!--custom css start-->
     <link rel="stylesheet" href="assets/css/custom.css">
 
-    @if(Request::is('email/verify'))
-    <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.2.0') }}" type="text/css">
-    @endif
+    <?php if(Request::is('email/verify')): ?>
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/dashlite.css?ver=3.2.0')); ?>" type="text/css">
+    <?php endif; ?>
 
     <!--custom css end-->
 
-    @livewireStyles
-    @stack('styles')
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
+
+    <?php echo $__env->yieldPushContent('styles'); ?>
     <style>
         .card-body{
             border-top:none;
@@ -48,16 +49,6 @@
             color: #5f6468 !important;
         }
     </style>
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-234R6GX9KR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-234R6GX9KR');
-</script>
 </head>
 
 <body>
@@ -73,16 +64,16 @@
         <header class="main-header position-absolute w-100">
             <nav class="navbar navbar-expand-xl navbar-dark z-10">
                 <div class="container d-flex align-items-center justify-content-lg-between position-relative">
-                @if(Request::is('/'))
+                <?php if(Request::is('/')): ?>
                     <a href="/" class="navbar-brand d-flex align-items-center mb-md-0 text-decoration-none">
                         <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-white" />
                         <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-color" />
                     </a>
-                @else 
+                <?php else: ?> 
                     <!-- <a class="navbar-brand" href="/">
-                    <img src="{{ asset('assets/img/logo.png') }}" class="navbar-brand-img" alt="knine" style="max-height: 3rem;">
+                    <img src="<?php echo e(asset('assets/img/logo.png')); ?>" class="navbar-brand-img" alt="knine" style="max-height: 3rem;">
                   </a> -->
-                @endif
+                <?php endif; ?>
                     <a class="navbar-toggler position-absolute right-0 border-0" href="#offcanvasWithBackdrop">
                         <i class="flaticon-menu" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"
                      data-bs-toggle="offcanvas" role="button"></i>
@@ -90,28 +81,28 @@
                     <div class="clearfix"></div>
                     <div class="collapse navbar-collapse justify-content-center">
                         <ul class="nav col-12 col-md-auto justify-content-center main-menu">
-                        @if(Request::is('/'))
+                        <?php if(Request::is('/')): ?>
 
-                            <li><a href="/" class="nav-link">{{ __('Home') }}</a></li>
-                            <li><a href="#faq" class="nav-link">{{ __('FAQ') }}</a></li>
-                            <li><a href="#pricing" class="nav-link">{{ __('Pricing') }}</a></li>
-                            <li><a href="/contact" class="nav-link">{{ __('Contact') }}</a></li>
+                            <li><a href="/" class="nav-link"><?php echo e(__('Home')); ?></a></li>
+                            <li><a href="#faq" class="nav-link"><?php echo e(__('FAQ')); ?></a></li>
+                            <li><a href="#pricing" class="nav-link"><?php echo e(__('Pricing')); ?></a></li>
+                            <li><a href="/contact" class="nav-link"><?php echo e(__('Contact')); ?></a></li>
 
-                        @endif
+                        <?php endif; ?>
    
                 </ul>
                 </div>
-                @guest
-            <!-- {{-- <a href="/login" role="button" class="btn-1">Login</a> --}} -->
-            <!-- <li class="discover-link"><a href="/login" class="external">{{ __('Login') }}</a></li> -->
-            <!-- <li class="discover-link"><a href="/register" class="external discover-btn">{{ __('Start Free Trial') }}</a></li> -->
-            @else
+                <?php if(auth()->guard()->guest()): ?>
+            <!--  -->
+            <!-- <li class="discover-link"><a href="/login" class="external"><?php echo e(__('Login')); ?></a></li> -->
+            <!-- <li class="discover-link"><a href="/register" class="external discover-btn"><?php echo e(__('Start Free Trial')); ?></a></li> -->
+            <?php else: ?>
             <div class="collapse navbar-collapse justify-content-center">
                         <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                      <span class="avatar rounded-circle">
-                                        <img alt="Image placeholder" class="rounded-circle" width="35" src="{{ Auth::user()->profile_photo_url }}">
+                                        <img alt="Image placeholder" class="rounded-circle" width="35" src="<?php echo e(Auth::user()->profile_photo_url); ?>">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu border-0 rounded-custom shadow py-0 bg-white homepage-list-wrapper">
@@ -121,31 +112,35 @@
                                                     <span class="dropdown-item-icon">
                                                     <i class="fas fa-user"></i>
                                                     </span>
-                                                    {{ __('Dashboard') }}
+                                                    <?php echo e(__('Dashboard')); ?>
+
                                                 </a>
-                                                <a class="dropdown-item" href="{{ route('account.password') }}">
+                                                <a class="dropdown-item" href="<?php echo e(route('account.password')); ?>">
                                                     <span class="dropdown-item-icon">
                                                     <i class="fas fa-unlock-alt"></i>
                                                     </span>
-                                                    {{ __('Password') }}
+                                                    <?php echo e(__('Password')); ?>
+
                                                 </a>
-                                                @role('admin')
-                                                <a class="dropdown-item" target="__blank" href="{{ route('admin.index') }}">
+                                                <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'admin')): ?>
+                                                <a class="dropdown-item" target="__blank" href="<?php echo e(route('admin.index')); ?>">
                                                     <span class="dropdown-item-icon">
                                                     <i class="fas fa-tachometer-alt"></i>
                                                     </span>
-                                                    {{ __('Admin panel') }}
+                                                    <?php echo e(__('Admin panel')); ?>
+
                                                 </a>
-                                                @endrole
-                                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                <?php endif; ?>
+                                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                                     <span class="dropdown-item-icon">
                                                     <i class="fas fa-power-off"></i>
                                                     </span>
-                                                    {{ __('Logout') }}
+                                                    <?php echo e(__('Logout')); ?>
+
                                                 </a>
-                                                <form method="POST" id="logout-form" action="{{ route('logout') }}">
-                                                    @csrf
+                                                <form method="POST" id="logout-form" action="<?php echo e(route('logout')); ?>">
+                                                    <?php echo csrf_field(); ?>
                                                 </form>
                             
                                           
@@ -159,11 +154,11 @@
                            
                         </ul>
                     </div>
-            @endguest
+            <?php endif; ?>
                 <div class="hs-unfold">
                 
                           </div>
-                    @guest
+                    <?php if(auth()->guard()->guest()): ?>
                     <div class="action-btns text-end me-5 me-lg-0 d-none d-md-block d-lg-block">
                         <a href="javascript:void(0)" class="btn btn-link p-1 tt-theme-toggle">
                             <div class="tt-theme-light" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Light"><i class="flaticon-sun-1 fs-lg"></i></div>
@@ -172,7 +167,7 @@
                         <a href="/login" class="btn btn-link text-decoration-none me-2">Sign In</a>
                         <a href="/register" class="btn btn-primary">Get Started</a>
                     </div>
-                    @endguest
+                    <?php endif; ?>
 
                     
                 </div>
@@ -189,42 +184,43 @@
                 </div>
                 <div class="offcanvas-body z-10">
 
-                    @guest
+                    <?php if(auth()->guard()->guest()): ?>
                     <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                         <li class="nav-item dropdown">
                            
-                            <li><a href="/" class="nav-link">{{ __('Home') }}</a></li>
-                            <li><a href="#faq" class="nav-link">{{ __('FAQ') }}</a></li>
-                            <li><a href="#pricing" class="nav-link">{{ __('Pricing') }}</a></li>
-                            <li><a href="/contact" class="nav-link">{{ __('Contact') }}</a></li>
+                            <li><a href="/" class="nav-link"><?php echo e(__('Home')); ?></a></li>
+                            <li><a href="#faq" class="nav-link"><?php echo e(__('FAQ')); ?></a></li>
+                            <li><a href="#pricing" class="nav-link"><?php echo e(__('Pricing')); ?></a></li>
+                            <li><a href="/contact" class="nav-link"><?php echo e(__('Contact')); ?></a></li>
                     </ul>
                     <div class="action-btns mt-4 ps-3">
                         <a href="/login" class="btn btn-outline-primary me-2">Sign In</a>
                         <a href="/register" class="btn btn-primary">Get Started</a>
                     </div>
-                    @else
+                    <?php else: ?>
 
                     <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                         <li class="nav-item dropdown">
                            
 
-                            <li><a href="/dashboard" class="nav-link">{{ __('Dashboard') }}</a></li>
-                            <li><a href="{{ route('account.password') }}" class="nav-link">{{ __('Password') }}</a></li>
+                            <li><a href="/dashboard" class="nav-link"><?php echo e(__('Dashboard')); ?></a></li>
+                            <li><a href="<?php echo e(route('account.password')); ?>" class="nav-link"><?php echo e(__('Password')); ?></a></li>
                             <li>  
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                             <span class="dropdown-item-icon">
                             <i class="fas fa-power-off"></i>
                             </span>
-                            {{ __('Logout') }}
+                            <?php echo e(__('Logout')); ?>
+
                         </a>
-                        <form method="POST" id="logout-form" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" id="logout-form" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                         </form>
-                            <li><a href="/contact" class="nav-link">{{ __('Contact') }}</a></li>
+                            <li><a href="/contact" class="nav-link"><?php echo e(__('Contact')); ?></a></li>
                     </ul>
                     <!-- start -->
-                    @endguest
+                    <?php endif; ?>
                     <!-- end -->
 
                 </div>
@@ -234,8 +230,9 @@
 <!--begin header -->
 <!--end header -->
 
-        {{ $slot }}
-        @unless(Request::is('register') || Request::is('login') || Request::is('email/verify'))
+        <?php echo e($slot); ?>
+
+        <?php if (! (Request::is('register') || Request::is('login') || Request::is('email/verify'))): ?>
         <footer class="footer-section">
             <!--footer top start-->
             <!--for light footer add .footer-light class and for dark footer add .bg-dark .text-white class-->
@@ -319,11 +316,12 @@
             </div>
             <!--footer bottom end-->
         </footer>
-        @endunless
-        @livewireScripts
+        <?php endif; ?>
+        <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
+
     
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="<?php echo e(asset('assets/js/app.js')); ?>"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/swiper-bundle.min.js"></script>
     <script src="assets/js/vendors/parallax.min.js"></script>
@@ -335,3 +333,4 @@
 
 </body>
 </html>
+<?php /**PATH /Users/touzani/Desktop/ecopy/resources/views/layouts/guest.blade.php ENDPATH**/ ?>
