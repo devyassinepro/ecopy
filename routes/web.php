@@ -115,7 +115,13 @@ Route::group(['middleware' => 'language'], function () {
         return redirect('https://shopify.pxf.io/MmW3NY');
     });
 
-    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Dashboard::class)->name('dashboard.index');;
+
+    Route::get('/thankyou', function () {
+        // Here you can add any additional logic if needed before redirecting
+        return redirect()->route('dashboard')->name('thankyou');
+    });
+
+    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Dashboard::class)->name('dashboard.index');
 
 
     Route::group(['prefix' => '', 'as' => 'account.', 'middleware' => ['auth:sanctum', 'verified']], function () {

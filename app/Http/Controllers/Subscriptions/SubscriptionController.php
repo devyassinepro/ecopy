@@ -78,7 +78,8 @@ class SubscriptionController extends Controller
             );
         }
 
-        return back();
+        // return back();
+        return redirect()->route('thankyou');
     }
 
 }
