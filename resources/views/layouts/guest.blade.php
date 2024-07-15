@@ -58,7 +58,15 @@
 
   gtag('config', 'G-234R6GX9KR');
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-992215432"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'AW-992215432');
+</script>
 <!-- Hotjar Tracking Code for Site 5058947 (nom manquant) -->
 <script>
     (function(h,o,t,j,a,r){
