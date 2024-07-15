@@ -117,10 +117,10 @@ Route::group(['middleware' => 'language'], function () {
 
 
     Route::get('/thankyou', function () {
-        // Here you can add any additional logic if needed before redirecting
-        return redirect()->route('dashboard')->name('thankyou');
-    });
-
+        // Directly redirect to the dashboard
+        return redirect()->route('dashboard');
+    })->name('thankyou');
+    
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Dashboard::class)->name('dashboard.index');
 
 
