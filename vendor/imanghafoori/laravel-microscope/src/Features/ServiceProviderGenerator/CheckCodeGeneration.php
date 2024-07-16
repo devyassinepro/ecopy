@@ -5,7 +5,7 @@ namespace Imanghafoori\LaravelMicroscope\Features\ServiceProviderGenerator;
 use Illuminate\Console\Command;
 use Imanghafoori\LaravelMicroscope\Analyzers\ComposerJson;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
-use Imanghafoori\LaravelMicroscope\FileReaders\FilePath;
+use Imanghafoori\LaravelMicroscope\FileReaders\PhpFinder;
 
 class CheckCodeGeneration extends Command
 {
@@ -18,10 +18,12 @@ class CheckCodeGeneration extends Command
         $this->info('Scanning for Empty Provider Files');
         ErrorPrinter::singleton($this->output);
 
-        foreach (ComposerJson::readAutoload() as $psr4) {
-            foreach ($psr4 as $psr4Namespace => $psr4Path) {
-                $files = FilePath::getAllPhpFiles($psr4Path);
-                GenerateCode::serviceProvider($files, $psr4Path, $psr4Namespace, $this);
+        foreach (ComposerJson::readPsr4() as $psr4) {
+            foreach ($psr4 as $psr4Namespace => $psr4Paths) {
+                foreach ((array) $psr4Paths as $psr4Path) {
+                    $files = PhpFinder::getAllPhpFiles($psr4Path);
+                    GenerateCode::serviceProvider($files, $psr4Path, $psr4Namespace, $this);
+                }
             }
         }
     }

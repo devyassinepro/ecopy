@@ -5,53 +5,31 @@ namespace Imanghafoori\LaravelMicroscope\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
-use Imanghafoori\LaravelMicroscope\ForPsr4LoadedClasses;
 use Imanghafoori\LaravelMicroscope\SearchReplace\IsSubClassOf;
-use Imanghafoori\LaravelMicroscope\SearchReplace\PatternRefactorings;
 use Imanghafoori\LaravelMicroscope\Traits\LogsErrors;
 use Imanghafoori\SearchReplace\Filters;
-use Imanghafoori\SearchReplace\PatternParser;
+use JetBrains\PhpStorm\ExpectedValues;
 
 class EnforceQuery extends Command
 {
     use LogsErrors;
+    use PatternApply;
 
-    protected $signature = 'enforce:query {--f|file=} {--d|folder=} {--detailed : Show files being checked} {--s|nofix : avoids the automatic fixes}';
+    protected $signature = 'enforce:query {--f|file=} {--d|folder=} {--detailed : Show files being checked}';
 
     protected $description = 'Enforces the ::query() method call on models.';
 
+    protected $customMsg = 'No case was found to add ::query()-> to it.  \(^_^)/';
+
+    #[ExpectedValues(values: [0, 1])]
     public function handle(ErrorPrinter $errorPrinter)
     {
         event('microscope.start.command');
         $this->info('Soaring like an eagle...');
 
-        $this->option('nofix') && config(['microscope.no_fix' => true]);
+        Filters::$filters['is_subclass_of'] = IsSubClassOf::class;
 
-        $errorPrinter->printer = $this->output;
-
-        $fileName = ltrim($this->option('file'), '=');
-        $folder = ltrim($this->option('folder'), '=');
-        Filters::$filters['is_sub_class_of'] = IsSubClassOf::class;
-
-        app()->singleton('current.command', function () {
-            return $this;
-        });
-
-        $errorPrinter->printer = $this->output;
-
-        $patterns = $this->getPatterns();
-        $parsedPatterns = PatternParser::parsePatterns($patterns);
-
-        $this->checkPsr4($parsedPatterns, $patterns, $fileName, $folder);
-
-        // Checks the blade files for class references.
-        // BladeFiles::check([PatternRefactorings::class], $fileName, $folder);
-
-        $this->finishCommand($errorPrinter);
-
-        $errorPrinter->printTime();
-
-        return $errorPrinter->hasErrors() ? 1 : 0;
+        return $this->patternCommand($errorPrinter);
     }
 
     private function getPatterns(): array
@@ -62,7 +40,7 @@ class EnforceQuery extends Command
                 'replace' => '<1>::query()-><2>',
                 'filters' => [
                     1 => [
-                        'is_sub_class_of' => Model::class,
+                        'is_subclass_of' => Model::class,
                     ],
                     2 => [
                         'in_array' => $this->getMethods(),
@@ -95,14 +73,13 @@ class EnforceQuery extends Command
             'pluck',
             'firstOrNew',
             'select',
+            'selectRaw',
             'create',
             'insert',
+            'limit',
+            'orderBy',
             'findMany',
+            'get',
         ];
-    }
-
-    private function checkPsr4($parsedPatterns, $patterns, $fileName, $folder)
-    {
-        ForPsr4LoadedClasses::checkNow([PatternRefactorings::class], [$parsedPatterns, $patterns], $fileName, $folder);
     }
 }

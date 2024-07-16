@@ -6,20 +6,21 @@ use Exception;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Facade;
 use Imanghafoori\Filesystem\Filesystem;
-use Imanghafoori\LaravelMicroscope\Analyzers\ComposerJson;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
 use Imanghafoori\RealtimeFacades\SmartRealTimeFacadesProvider;
 use Imanghafoori\SearchReplace\Searcher;
 use ReflectionClass;
 use ReflectionMethod;
-use Symfony\Component\Finder\SplFileInfo;
 
 class FacadeDocblocks
 {
     public static $command;
 
-    public static function check($tokens, $absFilePath, $params, SplFileInfo $classFilePath, $psr4Path, $psr4Namespace)
+    public static function check(PhpFileDescriptor $file)
     {
-        $facade = ComposerJson::make()->getNamespacedClassFromPath($absFilePath);
+        $absFilePath = $file->getAbsolutePath();
+
+        $facade = $file->getNamespace();
 
         if (! self::isFacade($facade)) {
             return null;
@@ -42,10 +43,10 @@ class FacadeDocblocks
             }
         }
 
-        self::addDocBlocks($accessor, $facade, $tokens, $classFilePath);
+        self::addDocBlocks($accessor, $facade, $file->getTokens(), $absFilePath);
     }
 
-    private static function addDocBlocks(string $accessor, $facade, $tokens, SplFileInfo $classFilePath)
+    private static function addDocBlocks(string $accessor, $facade, $tokens, $absFilePath)
     {
         $publicMethods = (new ReflectionClass($accessor))->getMethods(ReflectionMethod::IS_PUBLIC);
 
@@ -69,9 +70,9 @@ class FacadeDocblocks
         $className = array_pop($s);
         $newVersion = self::injectDocblocks($className, $docblocks, $tokens);
 
-        if (Filesystem::$fileSystem::file_get_contents($classFilePath) !== $newVersion) {
-            Event::dispatch('microscope.facade.docblocked', [$facade, $classFilePath]);
-            Filesystem::$fileSystem::file_put_contents($classFilePath, $newVersion);
+        if (Filesystem::$fileSystem::file_get_contents($absFilePath) !== $newVersion) {
+            Event::dispatch('microscope.facade.docblocked', [$facade, $absFilePath]);
+            Filesystem::$fileSystem::file_put_contents($absFilePath, $newVersion);
         }
     }
 

@@ -3,13 +3,14 @@
 namespace Imanghafoori\LaravelMicroscope\Features\CheckDD;
 
 use Illuminate\Console\Command;
-use Imanghafoori\LaravelMicroscope\Analyzers\ComposerJson;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
-use Imanghafoori\LaravelMicroscope\FileReaders\FilePath;
-use Imanghafoori\LaravelMicroscope\FileReaders\Paths;
+use Imanghafoori\LaravelMicroscope\Features\CheckImports\Reporters\LaravelFoldersReport;
+use Imanghafoori\LaravelMicroscope\Features\CheckImports\Reporters\Psr4Report;
+use Imanghafoori\LaravelMicroscope\ForPsr4LoadedClasses;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
+use Imanghafoori\LaravelMicroscope\Iterators\ClassMapIterator;
+use Imanghafoori\LaravelMicroscope\Iterators\FileIterators;
 use Imanghafoori\LaravelMicroscope\LaravelPaths\LaravelPaths;
-use Imanghafoori\LaravelMicroscope\SpyClasses\RoutePaths;
-use Imanghafoori\TokenAnalyzer\FunctionCall;
 
 class CheckDDCommand extends Command
 {
@@ -17,31 +18,33 @@ class CheckDDCommand extends Command
 
     protected $signature = 'check:dd {--f|file=} {--d|folder=}';
 
-    protected $description = 'Checks the debug functions';
+    protected $description = 'Checks the debug functions.';
 
     public function handle()
     {
         event('microscope.start.command');
         $this->info('Checking dd...');
 
-        $file = ltrim($this->option('file'), '=');
+        $fileName = ltrim($this->option('file'), '=');
         $folder = ltrim($this->option('folder'), '=');
 
-        $this->checkPaths(RoutePaths::get());
+        $paramProvider = function (PhpFileDescriptor $file, $token) {
+            ErrorPrinter::singleton()->simplePendError(
+                $token[1], $file->getTokens(), $token[2], 'ddFound', 'Debug function found: '
+            );
+        };
 
-        $paths = [
-            Paths::getAbsFilePaths(LaravelPaths::migrationDirs(), $file, $folder),
-            Paths::getAbsFilePaths(LaravelPaths::seedersDir(), $file, $folder),
-            Paths::getAbsFilePaths(LaravelPaths::factoryDirs(), $file, $folder),
-        ];
+        $psr4Stats = ForPsr4LoadedClasses::check([CheckDD::class], [$paramProvider], $fileName, $folder);
+        $classMapStats = ClassMapIterator::iterate(base_path(), [CheckDD::class], [$paramProvider], $fileName, $folder);
 
-        foreach ($paths as $path) {
-            foreach ($path as $p) {
-                $this->checkPaths($p);
-            }
-        }
+        $foldersStats = FileIterators::checkFolders(
+            [CheckDD::class], $this->getLaravelFolders(), [$paramProvider], $fileName, $folder
+        );
 
-        $this->checkPsr4Classes();
+        $this->getOutput()->writeln(implode(PHP_EOL, [
+            Psr4Report::printAutoload($psr4Stats, $classMapStats),
+            LaravelFoldersReport::foldersStats($foldersStats),
+        ]));
 
         $this->getOutput()->writeln(' - Finished looking for debug functions. ('.self::$checkedCallsNum.' files checked)');
 
@@ -50,43 +53,14 @@ class CheckDDCommand extends Command
         return app(ErrorPrinter::class)->hasErrors() ? 1 : 0;
     }
 
-    private function checkForDD($absPath)
+    /**
+     * @return array<string, \Generator>
+     */
+    private function getLaravelFolders()
     {
-        $tokens = token_get_all(file_get_contents($absPath));
-
-        foreach ($tokens as $i => $token) {
-            if (
-                ($index = FunctionCall::isGlobalCall('dd', $tokens, $i)) ||
-                ($index = FunctionCall::isGlobalCall('microscope_pretty_print_route', $tokens, $i)) ||
-                ($index = FunctionCall::isGlobalCall('microscope_dd_listeners', $tokens, $i)) ||
-                ($index = FunctionCall::isGlobalCall('microscope_write_route', $tokens, $i)) ||
-                ($index = FunctionCall::isGlobalCall('dump', $tokens, $i)) ||
-                ($index = FunctionCall::isGlobalCall('ddd', $tokens, $i))
-            ) {
-                ddFound::warn($absPath, $tokens[$index][2], $tokens[$index][1]);
-            }
-        }
-    }
-
-    private function checkPaths($paths)
-    {
-        foreach ($paths as $filePath) {
-            self::$checkedCallsNum++;
-            $this->checkForDD($filePath);
-        }
-    }
-
-    private function checkPsr4Classes()
-    {
-        foreach (ComposerJson::readAutoload() as $psr4) {
-            foreach ($psr4 as $_namespace => $dirPaths) {
-                foreach ((array) $dirPaths as $dirPath) {
-                    foreach (FilePath::getAllPhpFiles($dirPath) as $filePath) {
-                        self::$checkedCallsNum++;
-                        $this->checkForDD($filePath->getRealPath());
-                    }
-                }
-            }
-        }
+        return [
+            'config' => LaravelPaths::configDirs(),
+            'migrations' => LaravelPaths::migrationDirs(),
+        ];
     }
 }

@@ -3,18 +3,19 @@
 namespace Imanghafoori\LaravelMicroscope\Features\Psr4;
 
 use Imanghafoori\LaravelMicroscope\Analyzers\ComposerJson;
-use Imanghafoori\LaravelMicroscope\FileReaders\FilePath;
 use Imanghafoori\LaravelMicroscope\FileReaders\Paths;
+use Imanghafoori\LaravelMicroscope\FileReaders\PhpFinder;
 use Imanghafoori\LaravelMicroscope\LaravelPaths\LaravelPaths;
 use Imanghafoori\LaravelMicroscope\SpyClasses\RoutePaths;
 
 class FilePathsForReferenceFix
 {
-    private static $pathsForReferenceFix = [];
+    public static $pathsForReferenceFix = [];
 
     public static function getFiles()
     {
         if (self::$pathsForReferenceFix) {
+            // Used for testing and memoization:
             return self::$pathsForReferenceFix;
         }
 
@@ -25,20 +26,18 @@ class FilePathsForReferenceFix
         $paths['routes'] = RoutePaths::get();
         $paths['blades'] = LaravelPaths::allBladeFiles();
 
-        $dirs = [
-            LaravelPaths::migrationDirs(),
-            LaravelPaths::configDirs(),
-            //LaravelPaths::factoryDirs(),
-            //LaravelPaths::seedersDir(),
-        ];
-        $paths = self::collectFilesInNonPsr4Paths($paths, $dirs);
+        // $dirs = [
+        //     LaravelPaths::migrationDirs(),
+        //     LaravelPaths::configDirs(),
+        // ];
+        // $paths['others'] = self::collectFilesInNonPsr4Paths($dirs);
 
         self::$pathsForReferenceFix = $paths;
 
         return $paths;
     }
 
-    private static function collectFilesInNonPsr4Paths($paths, $dirs)
+    private static function collectFilesInNonPsr4Paths($dirs)
     {
         foreach ($dirs as $dir) {
             yield from Paths::getAbsFilePaths($dir);
@@ -47,10 +46,13 @@ class FilePathsForReferenceFix
 
     private static function getPsr4()
     {
-        foreach (ComposerJson::readAutoload() as $autoload) {
+        // @todo: this should get refactored into the ComposerJson class using the iterator pattern.
+        foreach (ComposerJson::readPsr4() as $autoload) {
             foreach ($autoload as $psr4Path) {
-                foreach (FilePath::getAllPhpFiles($psr4Path) as $file) {
-                    yield $file->getRealPath();
+                foreach ((array) $psr4Path as $path) {
+                    foreach (PhpFinder::getAllPhpFiles($path) as $file) {
+                        yield $file->getRealPath();
+                    }
                 }
             }
         }

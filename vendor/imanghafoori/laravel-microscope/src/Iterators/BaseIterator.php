@@ -2,17 +2,23 @@
 
 namespace Imanghafoori\LaravelMicroscope\Iterators;
 
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
+
 abstract class BaseIterator
 {
-    protected static function applyChecks($absFilePaths, $checks, $paramProvider)
+    protected static function applyChecks($absFilePaths, $checks, $params)
     {
         foreach ($absFilePaths as $absFilePath) {
-            $tokens = token_get_all(file_get_contents($absFilePath));
-            $params = $paramProvider($tokens);
+            $file = PhpFileDescriptor::make($absFilePath);
             foreach ($checks as $check) {
-                $check::check($tokens, $absFilePath, $params);
+                $check::check($file, self::processParams($file, $params));
             }
-            yield $absFilePath;
+            yield $file;
         }
+    }
+
+    private static function processParams(PhpFileDescriptor $file, $params)
+    {
+        return (! is_array($params) && is_callable($params)) ? $params($file) : $params;
     }
 }

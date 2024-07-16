@@ -4,7 +4,10 @@ namespace Imanghafoori\LaravelMicroscope\Features\FacadeAlias;
 
 use Illuminate\Console\Command;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
+use Imanghafoori\LaravelMicroscope\Features\CheckImports\Reporters\Psr4Report;
 use Imanghafoori\LaravelMicroscope\ForPsr4LoadedClasses;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
+use Imanghafoori\LaravelMicroscope\Iterators\ClassMapIterator;
 use Imanghafoori\LaravelMicroscope\Traits\LogsErrors;
 use Imanghafoori\TokenAnalyzer\ParseUseStatement;
 
@@ -33,13 +36,19 @@ class CheckAliasesCommand extends Command
             FacadeAliasesCheck::$handler = FacadeAliasReporter::class;
         }
 
-        $paramProvider = function ($tokens) {
-            $imports = ParseUseStatement::parseUseStatements($tokens);
+        $paramProvider = function (PhpFileDescriptor $file) {
+            $imports = ParseUseStatement::parseUseStatements($file->getTokens());
 
             return $imports[0] ?: [$imports[1]];
         };
-        $results = ForPsr4LoadedClasses::check([FacadeAliasesCheck::class], $paramProvider, $fileName, $folder);
-        iterator_to_array($results);
+
+        $check = [FacadeAliasesCheck::class];
+        $psr4Stats = ForPsr4LoadedClasses::check($check, $paramProvider, $fileName, $folder);
+        $classMapStats = ClassMapIterator::iterate(base_path(), $check, $paramProvider, $fileName, $folder);
+
+        $this->getOutput()->writeln(implode(PHP_EOL, [
+            Psr4Report::printAutoload($psr4Stats, $classMapStats),
+        ]));
 
         $this->info(PHP_EOL.' '.$this->finishMsg);
 

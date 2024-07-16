@@ -2,6 +2,8 @@
 
 namespace Imanghafoori\LaravelMicroscope\Features\CheckImports\Reporters;
 
+use JetBrains\PhpStorm\Pure;
+
 class ClassMapStats
 {
     use Reporting;
@@ -11,6 +13,7 @@ class ClassMapStats
      * @param  \Closure  $callback
      * @return string|void
      */
+    #[Pure]
     public static function getMessage($stat, $callback)
     {
         $lines = '';
@@ -24,7 +27,7 @@ class ClassMapStats
             $total += $count;
             $c++;
             $lines .= self::addLine($path, $count);
-            $callback($path, $count);
+            $callback && $callback($path, $count);
         }
 
         if ($total) {

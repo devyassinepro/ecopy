@@ -4,18 +4,23 @@ namespace Imanghafoori\LaravelMicroscope\SearchReplace;
 
 use Illuminate\Support\Str;
 use Imanghafoori\Filesystem\Filesystem;
+use Imanghafoori\LaravelMicroscope\Check;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
 use Imanghafoori\SearchReplace\Finder;
 use Imanghafoori\SearchReplace\Replacer;
 use Imanghafoori\SearchReplace\Stringify;
 use Imanghafoori\TokenAnalyzer\Refactor;
 
-class PatternRefactorings
+class PatternRefactorings implements Check
 {
     public static $patternFound = false;
 
-    public static function check($tokens, $absFilePath, $classFilePath, $psr4Path, $psr4Namespace, $patterns)
+    public static function check(PhpFileDescriptor $file, $patterns)
     {
+        $tokens = $file->getTokens();
+        $absFilePath = $file->getAbsolutePath();
+
         foreach ($patterns[0] as $pattern) {
             if (isset($pattern['file']) && ! Str::endsWith($absFilePath, $pattern['file'])) {
                 continue;
@@ -89,7 +94,7 @@ class PatternRefactorings
     {
         $text = 'Do you want to replace '.basename($absFilePath).' with new version of it?';
 
-        return app('current.command')->getOutput()->confirm($text, true);
+        return ErrorPrinter::singleton()->printer->confirm($text);
     }
 
     private static function save($matchedValue, $tokens, $to, $lineNum, $absFilePath, $newTokens)

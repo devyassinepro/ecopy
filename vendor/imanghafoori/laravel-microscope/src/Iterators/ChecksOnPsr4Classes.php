@@ -3,12 +3,18 @@
 namespace Imanghafoori\LaravelMicroscope\Iterators;
 
 use Imanghafoori\LaravelMicroscope\Analyzers\ComposerJson;
-use Imanghafoori\LaravelMicroscope\FileReaders\FilePath;
+use Imanghafoori\LaravelMicroscope\FileReaders\PhpFinder;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
 use Throwable;
 
 class ChecksOnPsr4Classes
 {
     use FiltersFiles;
+
+    /**
+     * @var class-string
+     */
+    public static $errorExceptionHandler;
 
     /**
      * @var \Throwable[]
@@ -22,40 +28,39 @@ class ChecksOnPsr4Classes
 
     /**
      * @param  array<class-string<\Imanghafoori\LaravelMicroscope\Iterators\Check>>  $checks
-     * @param  $params
+     * @param  array  $params
+     * @param  string  $includeFile
+     * @param  string  $includeFolder
      * @return array<string, \Generator>
      */
     public static function apply($checks, $params, $includeFile, $includeFolder)
     {
-        $includeFile && FilePath::$fileName = $includeFile;
-        $stats = [];
-        foreach (ComposerJson::readAutoload() as $composerPath => $psr4) {
-            $stats[$composerPath] = self::processGetStats($psr4, $checks, $params, $includeFolder);
-        }
+        $includeFile && PhpFinder::$fileName = $includeFile;
 
-        try {
-            return [$stats, self::$exceptions];
-        } finally {
-            self::$exceptions = [];
-        }
+        $stats = self::processAll($checks, $params, $includeFolder);
+
+        self::handleExceptions();
+
+        return $stats;
     }
 
-    private static function getParams($params, array $tokens, $absFilePath, $psr4Path, $psr4Namespace)
+    private static function getParams($params, PhpFileDescriptor $file, $psr4Path, $psr4Namespace)
     {
-        return (! is_array($params) && is_callable($params)) ? $params($tokens, $absFilePath, $psr4Path, $psr4Namespace) : $params;
+        return (! is_array($params) && is_callable($params)) ? $params($file, $psr4Path, $psr4Namespace) : $params;
     }
 
     /**
-     * @param  array<class-string<\Imanghafoori\LaravelMicroscope\Iterators\Check>>  $checks
      * @param  string  $psr4Namespace
      * @param  string  $psr4Path
+     * @param  array<class-string<\Imanghafoori\LaravelMicroscope\Iterators\Check>>  $checks
      * @param  array  $params
+     * @param  string  $includeFolder
      * @return int
      */
     private static function applyChecksInPath($psr4Namespace, $psr4Path, $checks, $params, $includeFolder): int
     {
         $filesCount = 0;
-        $finder = FilePath::getAllPhpFiles($psr4Path);
+        $finder = PhpFinder::getAllPhpFiles($psr4Path);
         $includeFolder && $finder = self::filterFiles($finder, $includeFolder);
         foreach ($finder as $phpFilePath) {
             $filesCount++;
@@ -65,21 +70,22 @@ class ChecksOnPsr4Classes
         return $filesCount;
     }
 
-    private static function applyChecks($phpFilePath, $params, $psr4Path, $psr4Namespace, $checks)
+    private static function applyChecks($phpFileObj, $params, $psr4Path, $psr4Namespace, $checks)
     {
-        $absFilePath = $phpFilePath->getRealPath();
-        $tokens = token_get_all(file_get_contents($absFilePath));
+        $absFilePath = $phpFileObj->getRealPath();
 
-        $processedParams = self::getParams($params, $tokens, $absFilePath, $psr4Path, $psr4Namespace);
+        $file = PhpFileDescriptor::make($absFilePath);
+
+        $processedParams = self::getParams($params, $file, $psr4Path, $psr4Namespace);
         foreach ($checks as $check) {
             try {
                 /**
                  * @var $check \Imanghafoori\LaravelMicroscope\Iterators\Check
                  */
-                $newTokens = $check::check($tokens, $absFilePath, $processedParams, $phpFilePath, $psr4Path, $psr4Namespace);
+                $newTokens = $check::check($file, $processedParams, $psr4Path, $psr4Namespace);
                 if ($newTokens) {
-                    $tokens = $newTokens;
-                    $processedParams = self::getParams($params, $tokens, $absFilePath, $psr4Path, $psr4Namespace);
+                    $file->setTokens($newTokens);
+                    $processedParams = self::getParams($params, $file, $psr4Path, $psr4Namespace);
                 }
             } catch (Throwable $exception) {
                 self::$exceptions[] = $exception;
@@ -109,5 +115,24 @@ class ChecksOnPsr4Classes
 
             yield $psr4Path => $filesCount;
         }
+    }
+
+    private static function handleExceptions()
+    {
+        foreach (self::$exceptions as $e) {
+            self::$errorExceptionHandler::handle($e);
+        }
+
+        self::$exceptions = [];
+    }
+
+    private static function processAll(array $checks, $params, $includeFolder)
+    {
+        $stats = [];
+        foreach (ComposerJson::readPsr4() as $composerPath => $psr4) {
+            $stats[$composerPath] = self::processGetStats($psr4, $checks, $params, $includeFolder);
+        }
+
+        return $stats;
     }
 }

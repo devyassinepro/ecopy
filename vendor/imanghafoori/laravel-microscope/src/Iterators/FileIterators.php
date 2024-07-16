@@ -4,35 +4,22 @@ namespace Imanghafoori\LaravelMicroscope\Iterators;
 
 use Generator;
 use Imanghafoori\LaravelMicroscope\FileReaders\Paths;
-use Imanghafoori\LaravelMicroscope\LaravelPaths\LaravelPaths;
 
 class FileIterators extends BaseIterator
 {
     /**
      * @param  \Generator  $paths
      * @param  \Closure  $paramProvider
+     * @param  array  $checks
      * @return \Generator
      */
     public static function checkFilePaths($paths, $paramProvider, $checks)
     {
         foreach ($paths as $dir => $absFilePaths) {
-            if (is_string($absFilePaths)) {
-                $absFilePaths = [$absFilePaths];
-            }
+            is_string($absFilePaths) && ($absFilePaths = [$absFilePaths]);
 
             yield $dir => self::checkFiles($absFilePaths, $paramProvider, $checks);
         }
-    }
-
-    /**
-     * @return array<string, \Generator>
-     */
-    public static function getLaravelFolders()
-    {
-        return [
-            'config' => LaravelPaths::configDirs(),
-            'migrations' => LaravelPaths::migrationDirs(),
-        ];
     }
 
     /**
@@ -43,7 +30,7 @@ class FileIterators extends BaseIterator
      * @param  array  $checks
      * @return \Generator
      */
-    public static function checkFolders($dirsList, $paramProvider, $file, $folder, $checks)
+    public static function checkFolders($checks, $dirsList, $paramProvider, $file, $folder)
     {
         foreach ($dirsList as $listName => $dirs) {
             $filePathsGen = Paths::getAbsFilePaths($dirs, $file, $folder);

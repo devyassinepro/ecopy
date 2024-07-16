@@ -2,6 +2,7 @@
 
 namespace Imanghafoori\LaravelMicroscope\Features\CheckImports\Reporters;
 
+use Generator;
 use JetBrains\PhpStorm\Pure;
 
 class Psr4Report
@@ -11,27 +12,26 @@ class Psr4Report
     public static $callback;
 
     /**
-     * @param  array<string, array<string, array<string, int>>>  $psr4Stats
+     * @param  array<string, \Generator>  $psr4Stats
      * @return string
      */
+    #[Pure]
     public static function printAutoload($psr4Stats, $classMapStats)
     {
-        $output = '';
+        $callback = function ($composerPath, $psr4, $classMapStats) {
+            return self::present($composerPath, $psr4, $classMapStats);
+        };
+
+        $outputAll = '';
         foreach ($psr4Stats as $composerPath => $psr4) {
-            $output .= PHP_EOL;
-            $output .= self::formatComposerPath($composerPath);
-            $output .= PHP_EOL;
-            $output .= self::hyphen('<options=bold;fg=white>PSR-4 </>');
-            $output .= self::formatPsr4Stats($psr4);
-            if (isset($classMapStats[$composerPath])) {
-                $lines = ClassMapStats::getMessage($classMapStats[$composerPath], self::$callback);
-                $lines && ($output .= PHP_EOL.$lines);
-            }
+            $output = $callback($composerPath, $psr4, $classMapStats);
+            $outputAll .= $output;
         }
 
-        return trim($output);
+        return trim($outputAll);
     }
 
+    #[Pure]
     public static function formatComposerPath($composerPath)
     {
         $composerPath = trim($composerPath, '/');
@@ -44,6 +44,7 @@ class Psr4Report
      * @param  array<string, array<string, int>>  $psr4
      * @return string
      */
+    #[Pure]
     public static function formatPsr4Stats($psr4)
     {
         $lengths = [1];
@@ -54,7 +55,7 @@ class Psr4Report
             if (! $folders) {
                 continue;
             }
-            (self::$callback)();
+            self::$callback && (self::$callback)();
             $i++;
             $lengths[] = strlen($psr4Namespace);
             $lines[$i][0] = PHP_EOL.self::getPsr4Head();
@@ -62,14 +63,7 @@ class Psr4Report
             $lines[$i][2] = $folders;
         }
 
-        $longest = max($lengths);
-
-        foreach ($lines as $i => $line) {
-            $line[1] = self::getPsr4($longest, $line[1]);
-            $lines[$i] = $line[0].$line[1].$line[2];
-        }
-
-        return implode('', $lines);
+        return self::concatinate(max($lengths), $lines);
     }
 
     #[Pure]
@@ -96,6 +90,7 @@ class Psr4Report
      * @param  $psr4Paths
      * @return string
      */
+    #[Pure]
     private static function getFolders($psr4Paths): string
     {
         $result = [];
@@ -119,11 +114,40 @@ class Psr4Report
         return self::implode($result);
     }
 
+    #[Pure]
     private static function implode($lines)
     {
         $output = '';
         foreach ($lines as $segments) {
             $output .= implode('', $segments);
+        }
+
+        return $output;
+    }
+
+    #[Pure]
+    private static function concatinate($longest, array $lines)
+    {
+        foreach ($lines as $i => $line) {
+            $line[1] = self::getPsr4($longest, $line[1]);
+            $lines[$i] = implode('', $line);
+        }
+
+        return implode('', $lines);
+    }
+
+    #[Pure]
+    private static function present(string $composerPath, Generator $psr4, $classMapStats)
+    {
+        $output = '';
+        $output .= PHP_EOL;
+        $output .= self::formatComposerPath($composerPath);
+        $output .= PHP_EOL;
+        $output .= self::hyphen('<options=bold;fg=white>PSR-4 </>');
+        $output .= self::formatPsr4Stats($psr4);
+        if (isset($classMapStats[$composerPath])) {
+            $lines = ClassMapStats::getMessage($classMapStats[$composerPath], self::$callback);
+            $lines && ($output .= PHP_EOL.$lines);
         }
 
         return $output;

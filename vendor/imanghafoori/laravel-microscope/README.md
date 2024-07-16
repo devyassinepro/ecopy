@@ -28,7 +28,7 @@ Give your eyes a rest, we will detect and fix them for you.
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Today Downloads][ico-today-downloads]][link-downloads]
-[![tests](https://github.com/imanghafoori1/laravel-microscope/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-microscope/actions/workflows/tests.yml)
+[![tests](https://github.com/imanghafoori1/laravel-microscope/actions/workflows/run-tests.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-microscope/actions/workflows/run-tests.yml)
 [![Imports](https://github.com/imanghafoori1/laravel-microscope/actions/workflows/imports.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-microscope/actions/workflows/imports.yml)
 
 <!--
@@ -80,6 +80,8 @@ Give your eyes a rest, we will detect and fix them for you.
         1. [`php artisan check:aliases`](#aliases)
         1. [`php artisan check:dead_controllers`](#dead_controllers)
         1. [`php artisan check:generic_docblocks`](#generic_docblocks)
+        1. [`php artisan check:migrations`](#migrations)
+        1. [`php artisan check:empty_comment`](#empty_comment)
         1. [`php artisan enforce:helper_functions`](#helper_functions)
         1. [`php artisan list:models`](#models)
     

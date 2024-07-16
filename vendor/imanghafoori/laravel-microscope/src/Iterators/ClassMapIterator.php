@@ -8,15 +8,15 @@ class ClassMapIterator extends BaseIterator
 {
     /**
      * @param  string  $basePath
-     * @param  \Closure  $paramProvider
      * @param  array  $checks
+     * @param  \Closure| null  $paramProvider
      * @param  string  $folder
      * @param  string  $fileName
      * @return array<string, \Generator>
      */
-    public static function iterate($basePath, $checks, $paramProvider, $folder, $fileName)
+    public static function iterate($basePath, $checks, $paramProvider = null, $fileName = '', $folder = '')
     {
-        $classMapFiles = ComposerJson::getClassMaps($basePath, $folder, $fileName);
+        $classMapFiles = ComposerJson::getClassMaps($basePath, $fileName, $folder);
 
         $results = [];
         foreach ($classMapFiles as $composerPath => $classMap) {
@@ -28,8 +28,8 @@ class ClassMapIterator extends BaseIterator
 
     private static function getDirStats($classMap, $checks, $paramProvider)
     {
-        foreach ($classMap as $dir => $files) {
-            yield $dir => self::applyChecks($files, $checks, $paramProvider);
+        foreach ($classMap as $dir => $absFilePaths) {
+            yield $dir => self::applyChecks($absFilePaths, $checks, $paramProvider);
         }
     }
 }

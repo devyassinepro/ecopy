@@ -4,13 +4,18 @@ namespace Imanghafoori\LaravelMicroscope\Checks;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Imanghafoori\LaravelMicroscope\Check;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
 use Imanghafoori\TokenAnalyzer\ParseUseStatement;
 
-class CheckIsQuery
+class CheckIsQuery implements Check
 {
-    public static function check($tokens, $absPath)
+    public static function check(PhpFileDescriptor $file)
     {
+        $tokens = $file->getTokens();
+        $absPath = $file->getAbsolutePath();
+
         [$classes] = ParseUseStatement::findClassReferences($tokens);
 
         foreach ($classes as $class) {

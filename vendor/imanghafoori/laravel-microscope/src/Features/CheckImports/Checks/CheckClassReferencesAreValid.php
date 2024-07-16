@@ -2,10 +2,12 @@
 
 namespace Imanghafoori\LaravelMicroscope\Features\CheckImports\Checks;
 
+use Imanghafoori\LaravelMicroscope\Check;
 use Imanghafoori\LaravelMicroscope\Features\CheckImports\Handlers;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
 use Imanghafoori\TokenAnalyzer\ImportsAnalyzer;
 
-class CheckClassReferencesAreValid
+class CheckClassReferencesAreValid implements Check
 {
     public static $checkWrong = true;
 
@@ -17,8 +19,11 @@ class CheckClassReferencesAreValid
 
     public static $wrongClassRefsHandler = Handlers\FixWrongClassRefs::class;
 
-    public static function check($tokens, $absFilePath, $imports = [])
+    public static function check(PhpFileDescriptor $file, $imports = [])
     {
+        $tokens = $file->getTokens();
+        $absFilePath = $file->getAbsolutePath();
+
         loopStart:
         [
             $hostNamespace,

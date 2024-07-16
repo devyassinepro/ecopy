@@ -62,6 +62,11 @@ class CssInliner extends AbstractHtmlProcessor
     private $excludedSelectors = [];
 
     /**
+     * @var array<non-empty-string, bool>
+     */
+    private $excludedCssSelectors = [];
+
+    /**
      * @var array<string, bool>
      */
     private $allowedMediaTypes = ['all' => true, 'screen' => true, 'print' => true];
@@ -296,6 +301,36 @@ class CssInliner extends AbstractHtmlProcessor
     {
         if (isset($this->excludedSelectors[$selector])) {
             unset($this->excludedSelectors[$selector]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Adds a selector to exclude CSS selector from emogrification.
+     *
+     * @param non-empty-string $selector the selector to exclude, e.g., `.editor`
+     *
+     * @return $this
+     */
+    public function addExcludedCssSelector(string $selector): self
+    {
+        $this->excludedCssSelectors[$selector] = true;
+
+        return $this;
+    }
+
+    /**
+     * No longer excludes the CSS selector from emogrification.
+     *
+     * @param non-empty-string $selector the selector to no longer exclude, e.g., `.editor`
+     *
+     * @return $this
+     */
+    public function removeExcludedCssSelector(string $selector): self
+    {
+        if (isset($this->excludedCssSelectors[$selector])) {
+            unset($this->excludedCssSelectors[$selector]);
         }
 
         return $this;
@@ -588,7 +623,21 @@ class CssInliner extends AbstractHtmlProcessor
 
             $mediaQuery = $cssRule->getContainingAtRule();
             $declarationsBlock = $cssRule->getDeclarationAsText();
-            foreach ($cssRule->getSelectors() as $selector) {
+            $selectors = $cssRule->getSelectors();
+
+            // Maybe exclude CSS selectors
+            if (\count($this->excludedCssSelectors) > 0) {
+                // Normalize spaces, line breaks & tabs
+                $selectorsNormalized = \array_map(static function (string $selector): string {
+                    return (string) \preg_replace('@\\s++@u', ' ', $selector);
+                }, $selectors);
+
+                $selectors = \array_filter($selectorsNormalized, function (string $selector): bool {
+                    return !isset($this->excludedCssSelectors[$selector]);
+                });
+            }
+
+            foreach ($selectors as $selector) {
                 // don't process pseudo-elements and behavioral (dynamic) pseudo-classes;
                 // only allow structural pseudo-classes
                 $hasPseudoElement = \strpos($selector, '::') !== false;
@@ -665,7 +714,7 @@ class CssInliner extends AbstractHtmlProcessor
             return false;
         }
 
-        return (bool)\preg_match('/:(?:' . self::OF_TYPE_PSEUDO_CLASS_MATCHER . ')/i', $selectorPart);
+        return (bool) \preg_match('/:(?:' . self::OF_TYPE_PSEUDO_CLASS_MATCHER . ')/i', $selectorPart);
     }
 
     /**
@@ -693,7 +742,7 @@ class CssInliner extends AbstractHtmlProcessor
      */
     private function getCssSelectorPrecedence(string $selector): int
     {
-        $selectorKey = \md5($selector);
+        $selectorKey = $selector;
         if (isset($this->caches[self::CACHE_KEY_SELECTOR][$selectorKey])) {
             return $this->caches[self::CACHE_KEY_SELECTOR][$selectorKey];
         }
@@ -705,7 +754,7 @@ class CssInliner extends AbstractHtmlProcessor
             }
             $number = 0;
             $selector = \preg_replace('/' . $matcher . '\\w+/', '', $selector, -1, $number);
-            $precedence += ($value * (int)$number);
+            $precedence += ($value * (int) $number);
         }
         $this->caches[self::CACHE_KEY_SELECTOR][$selectorKey] = $precedence;
 
@@ -804,7 +853,7 @@ class CssInliner extends AbstractHtmlProcessor
      */
     private function attributeValueIsImportant(string $attributeValue): bool
     {
-        return (bool)\preg_match('/!\\s*+important$/i', $attributeValue);
+        return (bool) \preg_match('/!\\s*+important$/i', $attributeValue);
     }
 
     /**
@@ -1187,7 +1236,7 @@ class CssInliner extends AbstractHtmlProcessor
         ));
 
         $pregLastError = \preg_last_error();
-        $message = 'PCRE regex execution error `' . (string)($pcreErrorConstantNames[$pregLastError] ?? $pregLastError)
+        $message = 'PCRE regex execution error `' . (string) ($pcreErrorConstantNames[$pregLastError] ?? $pregLastError)
             . '`';
 
         if ($this->debug) {

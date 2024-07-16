@@ -2,8 +2,9 @@
 
 namespace Imanghafoori\LaravelMicroscope\Iterators\BladeFiles;
 
+use Imanghafoori\LaravelMicroscope\Features\CheckUnusedBladeVars\ViewsData;
+use Imanghafoori\LaravelMicroscope\Foundations\PhpFileDescriptor;
 use Imanghafoori\LaravelMicroscope\Iterators\FiltersFiles;
-use Imanghafoori\LaravelMicroscope\SpyClasses\ViewsData;
 use Symfony\Component\Finder\Finder;
 
 class CheckBladePaths
@@ -11,6 +12,8 @@ class CheckBladePaths
     use FiltersFiles;
 
     public static $scanned = [];
+
+    public static $readOnly = true;
 
     /**
      * @param  \Generator  $dirs
@@ -48,7 +51,7 @@ class CheckBladePaths
      * @param  string  $path
      * @return bool
      */
-    private static function shouldSkip(string $path)
+    private static function shouldSkip($path)
     {
         if (! is_dir($path)) {
             return true;
@@ -70,11 +73,11 @@ class CheckBladePaths
 
     /**
      * @param  \Iterator  $files
-     * @param  callable|array  $params
+     * @param  callable|array  $paramsProvider
      * @param  $checkers
      * @return int
      */
-    private static function applyChecks($files, $params, $checkers): int
+    private static function applyChecks($files, $paramsProvider, $checkers): int
     {
         $count = 0;
         foreach ($files as $blade) {
@@ -82,12 +85,19 @@ class CheckBladePaths
             /**
              * @var \Symfony\Component\Finder\SplFileInfo $blade
              */
-            $absPath = $blade->getPathname();
-            $tokens = ViewsData::getBladeTokens($absPath);
-            $params1 = (! is_array($params) && is_callable($params)) ? $params($tokens, $absPath) : $params;
+            $absFilePath = $blade->getPathname();
 
-            foreach ($checkers as $checkerClass) {
-                call_user_func_array([$checkerClass, 'check'], [$tokens, $absPath, $params1]);
+            $file = PhpFileDescriptor::make($absFilePath);
+            if (self::$readOnly) {
+                $file->setTokenizer(function ($absPath) {
+                    return ViewsData::getBladeTokens($absPath);
+                });
+            }
+
+            $params1 = (! is_array($paramsProvider) && is_callable($paramsProvider)) ? $paramsProvider($file) : $paramsProvider;
+
+            foreach ($checkers as $check) {
+                $check::check($file, $params1);
             }
         }
 

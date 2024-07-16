@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
+    'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
     'hisorange\\BrowserDetect\\' => array($vendorDir . '/hisorange/browser-detect/src'),
     'ZipStream\\' => array($vendorDir . '/maennchen/zipstream-php/src'),
@@ -71,6 +72,7 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
+    'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'PragmaRX\\Google2FA\\' => array($vendorDir . '/pragmarx/google2fa/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
@@ -101,6 +103,7 @@ return array(
     'Laravel\\SerializableClosure\\' => array($vendorDir . '/laravel/serializable-closure/src'),
     'Laravel\\Sanctum\\' => array($vendorDir . '/laravel/sanctum/src'),
     'Laravel\\Jetstream\\' => array($vendorDir . '/laravel/jetstream/src'),
+    'Laravel\\Horizon\\' => array($vendorDir . '/laravel/horizon/src'),
     'Laravel\\Fortify\\' => array($vendorDir . '/laravel/fortify/src'),
     'Laravel\\Cashier\\' => array($vendorDir . '/laravel/cashier/src'),
     'LaravelDaily\\LaravelCharts\\' => array($vendorDir . '/laraveldaily/laravel-charts/src'),
@@ -129,6 +132,7 @@ return array(
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Fruitcake\\Cors\\' => array($vendorDir . '/fruitcake/laravel-cors/src', $vendorDir . '/fruitcake/php-cors/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
