@@ -68,42 +68,37 @@ class PublishProductToShopifyJob implements ShouldQueue
             Log::error('Error in publishProductUrl:', ['message' => $e->getMessage()]);
         }
     }
-
     private function getGraphQLPayloadForProductPublishUrl($store, $productData) 
     {
         $temp = [];
-        $temp[] = 'title: "' . addslashes($productData['title']) . '"';
+        $temp[] = 'title: "' . addslashes($productData->title) . '"';
         $temp[] = 'published: true';
-        $temp[] = 'vendor: "' . addslashes($productData['vendor']) . '"';
+        $temp[] = 'vendor: "' . addslashes($productData->vendor) . '"';
         
-        if (isset($productData['body_html']) && $productData['body_html'] !== null) {
-            $escapedDescriptionHtml = json_encode($productData['body_html']);
+        if (isset($productData->body_html) && $productData->body_html !== null) {
+            $escapedDescriptionHtml = json_encode($productData->body_html);
             $temp[] = 'descriptionHtml: ' . $escapedDescriptionHtml;
         }
     
-        if (isset($productData['product_type'])) {
-            $temp[] = 'productType: "' . addslashes($productData['product_type']) . '"';
+        if (isset($productData->product_type)) {
+            $temp[] = 'productType: "' . addslashes($productData->product_type) . '"';
         }
     
-        // if (isset($productData['tags'])) {
-        //     $temp[] = 'tags: ["' . implode('", "', explode(',', $productData['tags'])) . '"]';
-        // }
-    
-        if (isset($productData['options']) && is_array($productData['options'])) {
+        if (isset($productData->options) && is_array($productData->options)) {
             $options = [];
-            foreach ($productData['options'] as $option) {
-                $optionValues = implode(',', array_map('addslashes', $option['values']));
+            foreach ($productData->options as $option) {
+                $optionValues = implode(',', array_map('addslashes', $option->values));
                 $options[] = '"' . $optionValues . '"';
             }
             $temp[] = 'options: [' . implode(', ', $options) . ']';
         }
     
-        if (isset($productData['variants']) && is_array($productData['variants'])) {
-            $temp[] = 'variants: [' . $this->getVariantsGraphQLConfigUrl($productData['variants']) . ']';
+        if (isset($productData->variants) && is_array($productData->variants)) {
+            $temp[] = 'variants: [' . $this->getVariantsGraphQLConfigUrl($productData->variants) . ']';
         }
     
-        if (isset($productData['images']) && is_array($productData['images'])) {
-            $temp[] = 'images: [' . $this->getImagesGraphQLConfigUrl($productData['images']) . ']';
+        if (isset($productData->images) && is_array($productData->images)) {
+            $temp[] = 'images: [' . $this->getImagesGraphQLConfigUrl($productData->images) . ']';
         }
     
         return implode(', ', $temp);
@@ -114,22 +109,22 @@ class PublishProductToShopifyJob implements ShouldQueue
     {
         $str = [];
         foreach ($variants as $variant) {
-            $compareAtPriceField = !empty($variant['compare_at_price']) ? 'compareAtPrice: "' . $variant['compare_at_price'] . '",' : '';
+            $compareAtPriceField = !empty($variant->compare_at_price) ? 'compareAtPrice: "' . $variant->compare_at_price . '",' : '';
             $optionValues = [];
-            if (isset($variant['option1'])) $optionValues[] = addslashes($variant['option1']);
-            if (isset($variant['option2'])) $optionValues[] = addslashes($variant['option2']);
-            if (isset($variant['option3'])) $optionValues[] = addslashes($variant['option3']);
+            if (isset($variant->option1)) $optionValues[] = addslashes($variant->option1);
+            if (isset($variant->option2)) $optionValues[] = addslashes($variant->option2);
+            if (isset($variant->option3)) $optionValues[] = addslashes($variant->option3);
             $formattedOptionValues = implode('", "', $optionValues);
     
             $str[] = '{
                 taxable: false,
-                title: "' . addslashes($variant['title']) . '",
-                price: ' . $variant['price'] . ',
+                title: "' . addslashes($variant->title) . '",
+                price: ' . $variant->price . ',
                 ' . $compareAtPriceField . '
-                sku: "' . addslashes($variant['sku']) . '",
+                sku: "' . addslashes($variant->sku) . '",
                 options: ["' . $formattedOptionValues . '"],
-                position: ' . $variant['position'] . ',
-                inventoryItem: {cost: ' . $variant['price'] . ', tracked: false},
+                position: ' . $variant->position . ',
+                inventoryItem: {cost: ' . $variant->price . ', tracked: false},
                 inventoryManagement: null,
                 inventoryPolicy: DENY
             }';
@@ -137,13 +132,12 @@ class PublishProductToShopifyJob implements ShouldQueue
         return implode(', ', $str);
     }
 
-
     private function getImagesGraphQLConfigUrl($images) 
     {
         $str = [];
         foreach ($images as $image) {
             $str[] = '{
-                src: "' . addslashes($image['src']) . '"
+                src: "' . addslashes($image->src) . '"
             }';
         }
         return implode(', ', $str);

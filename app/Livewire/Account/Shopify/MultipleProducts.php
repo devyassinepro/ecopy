@@ -11,6 +11,8 @@ use Livewire\Component;
 use App\Models\Shopifystores;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Jobs\PublishProductToShopifyJob;
+use App\Jobs\ProcessProductsShopify;
+
 
 
 class MultipleProducts extends Component
@@ -62,27 +64,24 @@ class MultipleProducts extends Component
     {
 
 
-        //if domaine with url ;;; 
         $parsedUrl = parse_url($url);
 
         if (isset($parsedUrl['host'])) {
-            $domain = $parsedUrl['scheme'] . '://' . $parsedUrl['host']. '/' ;
-
+            $domain = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . '/';
         } else {
-            $this->alert('warning', __('This Store not Supported by Ecopy !'));
-
-            // return redirect()->route('account.storesearch.index');
+            $this->alert('warning', __('This Store not Supported by Ecopy!'));
+            return;
         }
-       
+    
         $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
         $context = stream_context_create($opts);
         $html = file_get_contents($domain . 'products.json?page=1&limit=250', false, $context);
-        $response = json_decode($html);
-
+        $response = json_decode($html);  // Notice that 'true' is removed to get objects
+    
         if (isset($response->products)) {
             return $response->products;
         }
-
+    
         throw new Exception('Failed to fetch products from Shopify');
     }
   
@@ -93,19 +92,24 @@ class MultipleProducts extends Component
             $store = Shopifystores::where('user_id', $user_id)
                                     ->where('status', 'active')
                                     ->firstOrFail(); 
+
+            $selectedProducts = array_map([$this, 'findProductById'], $this->selectedProducts);
+            $selectedProducts = array_filter($selectedProducts);
+
+            ProcessProductsShopify::dispatch($selectedProducts, $store);
     
-            foreach ($this->selectedProducts as $productId) {
-                $product = $this->findProductById($productId);
-                if ($product) {
-                    $productArray = json_decode(json_encode($product), true);
-                    // Log::info('Product:', ['product' => $productArray]);
-                    // $this->createShopifyProduct($productArray, $store);
+            // foreach ($this->selectedProducts as $productId) {
+            //     $product = $this->findProductById($productId);
+            //     if ($product) {
+            //         $productArray = json_decode(json_encode($product), true);
+            //         // Log::info('Product:', ['product' => $productArray]);
+            //         // $this->createShopifyProduct($productArray, $store);
                    
-                        PublishProductToShopifyJob::dispatch($productArray, $store);
+            //             PublishProductToShopifyJob::dispatch($productArray, $store);
                     
     
-                }
-            }
+            //     }
+            // }
     
             $this->alert('success', __('Products imported successfully'));
             return redirect()->route('account.homeshopify.index');
