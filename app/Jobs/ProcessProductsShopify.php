@@ -45,10 +45,19 @@ class ProcessProductsShopify implements ShouldQueue
         //
 
             try {
-                foreach ($this->products as $product) {
-                    PublishProductToShopifyJob::dispatch($product, $this->store);
+
+                $queueNames = ['importshopify1', 'importshopify2', 'importshopify3'];
+                $totalProducts = count($this->products);
+    
+                foreach ($this->products as $index => $product) {
+                    $queueName = $queueNames[$index % 3]; // Distribute across queues
+                    PublishProductToShopifyJob::dispatch($product, $this->store)->onQueue($queueName);
                 }
-                Log::info('All products processed successfully.');
+    
+                // foreach ($this->products as $product) {
+                //     PublishProductToShopifyJob::dispatch($product, $this->store);
+                // }
+              //  Log::info('All products processed successfully.');
             } catch (Exception $e) {
                 Log::error('Error processing products:', ['message' => $e->getMessage()]);
             }

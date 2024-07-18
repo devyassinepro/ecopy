@@ -182,7 +182,7 @@ return [
     'defaults' => [
         'supervisor-1' => [
             'connection' => 'redis',
-            'queue' => ['default','tracksales','countstorerevenue','daycounter'],
+            'queue' => ['importshopify1'],
             'balance' => 'auto',
             'autoScalingStrategy' => 'time',
             'maxProcesses' => 1,
@@ -195,7 +195,20 @@ return [
         ],
         'supervisor-2' => [
             'connection' => 'redis',
-            'queue' => ['countproductrevenue'],
+            'queue' => ['importshopify2'],
+            'balance' => 'auto',
+            'autoScalingStrategy' => 'time',
+            'maxProcesses' => 1,
+            'maxTime' => 0,
+            'maxJobs' => 0,
+            'memory' => 128,
+            'tries' => 1,
+            'timeout' => 60,
+            'nice' => 0,
+        ],
+        'supervisor-3' => [
+            'connection' => 'redis',
+            'queue' => ['importshopify3'],
             'balance' => 'auto',
             'autoScalingStrategy' => 'time',
             'maxProcesses' => 1,
@@ -211,7 +224,7 @@ return [
     'environments' => [
         'production' => [
             'supervisor-1' => [
-                'maxProcesses' => 25,
+                'maxProcesses' => 1,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
@@ -220,10 +233,23 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
+            'supervisor-3' => [
+                'maxProcesses' => 1,
+                'balanceMaxShift' => 1,
+                'balanceCooldown' => 3,
+            ],
         ],
 
         'local' => [
             'supervisor-1' => [
+                'maxProcesses' => 3,
+                'timeout' => 180
+            ],
+            'supervisor-2' => [
+                'maxProcesses' => 3,
+                'timeout' => 180
+            ],
+            'supervisor-3' => [
                 'maxProcesses' => 3,
                 'timeout' => 180
             ],
