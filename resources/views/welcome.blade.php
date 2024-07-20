@@ -5,7 +5,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-10">
                         <div class="hero-content-wrap mt-5 mt-lg-0 mt-xl-0">
-                            <h1 class="fw-bold display-5">Automate Product Imports: Discover Ecopy 2</h1>
+                            <h1 class="fw-bold display-5">Automate Product Imports: Discover Ecopy</h1>
                             <p class="lead">Time is Money: Trust Us to Import Products</p>
                             <div class="action-btn mt-5 align-items-center d-block d-sm-flex d-lg-flex d-md-flex">
                                 <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
