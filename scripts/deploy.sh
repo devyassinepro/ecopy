@@ -11,14 +11,14 @@ cd /var/www/laravel || { echo "Directory /var/www/laravel not found"; exit 1; }
 git pull origin main
 
 # Install dependencies
-COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
+COMPOSER_ALLOW_SUPERUSER=1 composer update 
 
 # Clear and cache configuration
 php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+# php artisan route:cache
+# php artisan view:cache
 
 # Run database migrations
-# php artisan migrate --force
+php artisan migrate 
 
 echo "Deployment finished."
