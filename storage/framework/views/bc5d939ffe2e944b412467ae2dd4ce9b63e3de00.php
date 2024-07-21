@@ -14,7 +14,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('backup', []);
 
-$__html = app('livewire')->mount($__name, $__params, '6ZH97d6', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'ZlkiKRI', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

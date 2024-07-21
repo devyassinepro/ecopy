@@ -13,7 +13,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('show-users', []);
 
-$__html = app('livewire')->mount($__name, $__params, '0MthR9R', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'VBvNT64', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

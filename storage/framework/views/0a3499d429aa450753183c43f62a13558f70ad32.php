@@ -56,7 +56,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('notifications', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'lcWlUuF', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, '69kSfUP', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

@@ -161,7 +161,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.shopify.single-product', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'C0sjDWc', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'P4LdDPZ', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -179,7 +179,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.shopify.multiple-products', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'xy7yeM4', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'PFtj2EE', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

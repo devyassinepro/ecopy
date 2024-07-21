@@ -69,17 +69,17 @@ class SingleProduct extends Component
                 }
                 userErrors { field message }
             }';
-            Log::info("Json file " . $productCreateMutation);
+            // Log::info("Json file " . $productCreateMutation);
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
             
             $endpoint = getShopifyURLForStore('graphql.json', $store);
-            Log::info('Shopify endpoint:'.$endpoint);
+            // Log::info('Shopify endpoint affiche:'.$endpoint);
 
             $headers = getShopifyHeadersForStore($store);
             $payload = ['query' => $mutation];
             
             $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-             Log::info('Shopify API Response:', ['response' => $response]);
+            //  Log::info('Shopify API Response:', ['response' => $response]);
             
             // Check the response
             if (isset($response['statusCode']) && $response['statusCode'] == 200) {
@@ -205,7 +205,7 @@ class SingleProduct extends Component
         $html = file_get_contents($url . '.json', false, $context);
         $productData = json_decode($html, true);
         
-        Log::info('Publish Product:'.$publishproduct);
+        // Log::info('Publish Product:'.$publishproduct);
         $publishproduct = $publishproduct ? 'true' : 'false';
 
 

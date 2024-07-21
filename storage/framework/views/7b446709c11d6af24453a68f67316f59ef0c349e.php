@@ -9,7 +9,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('send-notifications', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'ktyopxW', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'hblPtIS', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

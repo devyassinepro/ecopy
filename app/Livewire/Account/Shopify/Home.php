@@ -71,12 +71,12 @@ class Home extends Component
              $this->activeStore = $selectedStore->store_id;
 
  
-             Log::info('Selected store is now active: ' . $this->changestore);
+            //  Log::info('Selected store is now active: ' . $this->changestore);
          } else {
              Log::error('Store not found: ' . $storeName);
              session()->flash('error', 'Store not found');
          }
-        Log::info('$this->changestore: ' . $this->changestore);
+        // Log::info('$this->changestore: ' . $this->changestore);
 
 
     }
@@ -146,18 +146,18 @@ class Home extends Component
         $headers = getShopifyHeadersForStore($store_arr);
 
         $response = $this->makeAnAPICallToShopify('GET', $endpoint, null, $headers);
-        Log::info('Shopify API Response:', ['response' => $response]);
+        // Log::info('Shopify API Response:', ['response' => $response]);
 
         if($response['statusCode'] == 200) {
             $shop_body = $response['body']['shop'];
-            Log::info('$this->urlshopify:'.$shop_body['email']);
+            // Log::info('$this->urlshopify:'.$shop_body['email']);
 
             // Check if the store already exists
             $existingStore = Shopifystores::where('store_id', $shop_body['id'])->first();
             
             if ($existingStore) {
                 // Store already exists, log a message or alert the user
-                Log::info('Store already exists with store_id: '.$shop_body['id']);
+                // Log::info('Store already exists with store_id: '.$shop_body['id']);
                 $this->alert('warning', __('Store already exists!'));
             } else {
                 // Store does not exist, create a new record

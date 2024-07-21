@@ -14,7 +14,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.dashboard', []);
 
-$__html = app('livewire')->mount($__name, $__params, '9ax5Nyg', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'c9ebgqY', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

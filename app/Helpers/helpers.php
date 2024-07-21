@@ -148,10 +148,16 @@ function getDockerHeaders() {
     return ['Content-Type' => 'application/json'];
 }
 
+// function getShopifyURLForStore($endpoint, $store)
+// {
+//     // Directly use the store's URL and endpoint without additional checks
+//     return 'https://' . $store['myshopify_domain'] . '/admin/api/' . config('custom.shopify_api_version') . '/' . $endpoint;
+// }
+
 function getShopifyURLForStore($endpoint, $store)
 {
     // Directly use the store's URL and endpoint without additional checks
-    return 'https://' . $store['myshopify_domain'] . '/admin/api/' . config('custom.shopify_api_version') . '/' . $endpoint;
+    return 'https://' . $store['myshopify_domain'] . '/admin/api/2022-07/' . $endpoint;
 }
 
 function getShopifyHeadersForStore($store, $method = 'GET')

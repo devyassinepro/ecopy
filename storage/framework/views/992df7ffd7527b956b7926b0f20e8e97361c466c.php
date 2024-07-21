@@ -8,7 +8,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('admin.admin-product-search', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'jSiC9Hh', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'ZMGfHJi', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 

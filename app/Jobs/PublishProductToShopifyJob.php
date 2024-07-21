@@ -60,7 +60,7 @@ class PublishProductToShopifyJob implements ShouldQueue
                     throw new Exception('Product creation failed: ' . implode(', ', $errorMessages));
                 }
 
-                Log::info('Product Imported successfully');
+                // Log::info('Product Imported successfully');
             } else {
                 throw new Exception('Product creation failed!');
             }

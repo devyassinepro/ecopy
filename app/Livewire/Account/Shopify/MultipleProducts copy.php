@@ -71,7 +71,7 @@ class MultipleProducts extends Component
                     foreach ($this->selectedProducts as $productId) {
                     $product = $this->findProductById($productId);
             if ($product) {
-                 Log::info('Product:', ['product' => json_decode(json_encode($product), true)]);
+                //  Log::info('Product:', ['product' => json_decode(json_encode($product), true)]);
 
                }
                 }

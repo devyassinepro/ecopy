@@ -176,17 +176,17 @@ class SingleProduct extends Component
                 userErrors { field message }
             }';
 
-            Log::info("Json file " . $productCreateMutation);
+            // Log::info("Json file " . $productCreateMutation);
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
             
             $endpoint = getShopifyURLForStore('graphql.json', $store);
-            Log::info('Shopify endpoint:'.$endpoint);
+            // Log::info('Shopify endpoint:'.$endpoint);
 
             $headers = getShopifyHeadersForStore($store);
             $payload = ['query' => $mutation];
             
             $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-            Log::info('Shopify API Response:', ['response' => $response]);
+            // Log::info('Shopify API Response:', ['response' => $response]);
 
 
             // Check the response

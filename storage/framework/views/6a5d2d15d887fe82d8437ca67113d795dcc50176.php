@@ -198,7 +198,7 @@ $__split = function ($name, $params = []) {
 };
 [$__name, $__params] = $__split('account.navigator', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'QnMPYpT', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'i9U7XOi', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
