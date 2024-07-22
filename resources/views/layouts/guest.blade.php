@@ -275,7 +275,7 @@
                                     <input type="submit" value="Subscribe" data-wait="Please wait..." class="btn btn-primary mt-3 mt-lg-0 mt-md-0">
                                 </form>
                                 <div class="ratting-wrap mt-4">
-                                    <h6 class="mb-0">10/10 Overall rating</h6>
+                                    <h6 class="mb-0">9/10 Overall rating</h6>
                                     <ul class="list-unstyled rating-list list-inline mb-0">
                                         <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
@@ -326,11 +326,15 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="footer-single-col text-start text-lg-end text-md-end">
                                 <ul class="list-unstyled list-inline footer-social-list mb-0">
-                                    <li class="list-inline-item"><a href="" target=”_blank”><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.instagram.com/weenifyio" target=”_blank”><i class="fab fa-instagram"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.tiktok.com/@weenify" target=”_blank”><i class="fab fa-tiktok"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCBuzUBYeBY1NemZE5DFXuaw" target=”_blank”><i class="fab fa-youtube"></i></a></li>
-                                   
+                                <li class="list-inline-item"><a href="https://www.facebook.com/ecopyapp" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.instagram.com/ecopy.app" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.tiktok.com/@ecopyapp" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.youtube.com/@ecopyapp" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://fr.quora.com/profile/Ecopy-App" target="_blank"><i class="fab fa-quora"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.reddit.com/user/ecopy-app/" target="_blank"><i class="fab fa-reddit"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://x.com/EcopyApp" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.pinterest.fr/ecopyapp/" target="_blank"><i class="fab fa-pinterest"></i></a></li>
+
                                 </ul>
                             </div>
                         </div>
