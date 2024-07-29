@@ -10,11 +10,16 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use App\Models\Shopifystores;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Symfony\Component\DomCrawler\Crawler;
+use GuzzleHttp\Client;
+use JmesPath;
+
 
 class SingleProduct extends Component
 {
     use LivewireAlert;
     use RequestTrait, FunctionTrait;
+    private $client;
 
     public $urlsingle = ''; 
     public $publish = true;
@@ -24,9 +29,14 @@ class SingleProduct extends Component
         return view('livewire.account.shopify.single-product');
     }
 
+    public function __construct()
+    {
+        $this->client = new Client();
+    }
+
     public function importsingleproduct() {
-
-
+      
+ 
         try {
             $validated = $this->validate([
                 'urlsingle' => 'required'
@@ -41,8 +51,35 @@ class SingleProduct extends Component
             // Redirect back to the previous page with the validation errors
             return redirect()->back()->withErrors($e->validator);
         }
+       
+        $url = $this->urlsingle;
+        $productData = null;
 
+        if ($this->isAmazonUrl($url)) {
+            Log::info("Detected Amazon URL, starting scrape.");
+            try {
+                $amazonProductData = $this->scrapeAmazonProduct($url);
+                $productData = $this->transformAmazonProductData($amazonProductData);
 
+            } catch (Exception $e) {
+                Log::error("Amazon scraping error: " . $e->getMessage());
+                return back()->with('error', 'Failed to scrape Amazon product: ' . $e->getMessage());
+            }
+        } elseif ($this->isEtsyUrl($url)) {
+            Log::info("Detected Etsy URL, starting scrape.");
+            try {
+                $etsyProductData = $this->scrapeEtsyProduct($url);
+                $productData = $this->transformEtsyProductData($etsyProductData); // Implement similar transformation for Etsy
+            } catch (Exception $e) {
+                Log::error("Etsy scraping error: " . $e->getMessage());
+                return back()->with('error', 'Failed to scrape Etsy product: ' . $e->getMessage());
+            }
+        }else{
+            $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
+            $context = stream_context_create($opts);
+            $html = file_get_contents($url . '.json', false, $context);
+            $productData = json_decode($html, true);
+        }
         $user_id = Auth::user()->id;
         $store = Shopifystores::where('user_id', $user_id)
                                ->where('status', 'active')
@@ -54,7 +91,7 @@ class SingleProduct extends Component
 
 
         try {
-            $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($store, $this->urlsingle,$publish) . '}) { 
+            $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($store, $publish, $productData) . '}) { 
                 product {
                     id
                     variants(first: 100) {
@@ -69,7 +106,7 @@ class SingleProduct extends Component
                 }
                 userErrors { field message }
             }';
-            // Log::info("Json file " . $productCreateMutation);
+            Log::info("Json file " . $productCreateMutation);
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
             
             $endpoint = getShopifyURLForStore('graphql.json', $store);
@@ -79,10 +116,11 @@ class SingleProduct extends Component
             $payload = ['query' => $mutation];
             
             $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-            //  Log::info('Shopify API Response:', ['response' => $response]);
+            Log::info('Shopify API Response:', ['response' => $response]);
             
             // Check the response
             if (isset($response['statusCode']) && $response['statusCode'] == 200) {
+               
                 if (isset($response['body']['data']['productCreate']['userErrors']) && !empty($response['body']['data']['productCreate']['userErrors'])) {
                     $errors = $response['body']['data']['productCreate']['userErrors'];
                     $errorMessages = array_map(function($error) {
@@ -94,167 +132,423 @@ class SingleProduct extends Component
                 $this->dispatch('reload-page');
                 $this->alert('success', __('Product Imported successfully'));
 
-
-            // // Capture the product ID and variant IDs
-            // $productID = $response['body']['data']['productCreate']['product']['id'];
-            // $variantIDs = [];
-            // foreach ($response['body']['data']['productCreate']['product']['variants']['edges'] as $variant) {
-            //     $variantIDs[$variant['node']['position']] = $variant['node']['id'];
-            // }
-            // Log::info('variantIDs:', ['variantIDs' => $variantIDs]);
-
-            // // Upload images to the product
-            // $images = [
-            //     'https://cdn.shopify.com/s/files/1/0075/7547/0191/products/rejuvene-appareil-anti-age-par-traitement-led-5-en-1-nouveaute-2019-appareil-anti-age-par-traitement-led-1-rejuvene-7181158219887.png?v=1559812289',
-            //     'https://cdn.shopify.com/s/files/1/0075/7547/0191/products/rejuvene-appareil-anti-age-par-traitement-led-5-en-1-nouveaute-2019-appareil-anti-age-par-traitement-led-1-rejuvene-7181157892207.png?v=1559812289',
-            //     // Add more image URLs as needed
-            // ];
-
-            // $imageIDs = [];
-            // foreach ($images as $imageURL) {
-            //     $imageUploadMutation = 'mutation {
-            //         productUpdate(input: {
-            //             id: "' . $productID . '",
-            //             images: {
-            //                 src: "' . $imageURL . '"
-            //             }
-            //         }) {
-            //             product {
-            //                 id
-            //                 images(first: 10) {
-            //                     edges {
-            //                         node {
-            //                             id
-            //                             src
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //             userErrors {
-            //                 field
-            //                 message
-            //             }
-            //         }
-            //     }';
-
-            //     $payload = ['query' => $imageUploadMutation];
-            //     $imageUploadResponse = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-            //     Log::info('Shopify Image Upload Response:', ['response' => $imageUploadResponse]);
-
-            //     if (isset($imageUploadResponse['statusCode']) && $imageUploadResponse['statusCode'] == 200) {
-            //         $imagesData = $imageUploadResponse['body']['data']['productUpdate']['product']['images']['edges'];
-            //         foreach ($imagesData as $imageData) {
-            //             $imageIDs[] = $imageData['node']['id'];
-            //         }
-            //     } else {
-            //         Log::error('Failed to upload image:', ['response' => $imageUploadResponse]);
-            //     }
-            // }
-
-            // // Associate images with variants
-            // foreach ($variantIDs as $position => $variantID) {
-            //     if (isset($imageIDs[$position - 1])) {
-            //         $imageID = $imageIDs[$position - 1];
-            //         $updateMutation = 'mutation {
-            //             productVariantUpdate(input: {
-            //                 id: "' . $variantID . '",
-            //                 imageId: "' . $imageID . '"
-            //             }) {
-            //                 productVariant {
-            //                     id
-            //                     image {
-            //                         id
-            //                         src
-            //                     }
-            //                 }
-            //                 userErrors {
-            //                     field
-            //                     message
-            //                 }
-            //             }
-            //         }';
-
-            //         $payload = ['query' => $updateMutation];
-            //         $updateResponse = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-            //         Log::info('Shopify Variant Image Update Response:', ['response' => $updateResponse]);
-
-            //         if (isset($updateResponse['statusCode']) && $updateResponse['statusCode'] != 200) {
-            //             Log::error('Failed to update variant image:', ['variantID' => $variantID, 'response' => $updateResponse]);
-            //         }
-            //     }
-            // }
-                // return back()->with('success', 'Product Created!');
             } else {
                 return back()->with('error', 'Product creation failed!');
             }
         } catch (Exception $e) {
-            // Log::error('Error in publishProductUrl:', ['message' => $e->getMessage()]);
             return back()->with('error', 'Product creation failed: ' . $e->getMessage());
         }
+}
+
+
+private function getGraphQLPayloadForProduct($productData, $publishproduct) {
+  
+    $publishproduct = $publishproduct ? 'true' : 'false';
+
+    $temp = [];
+    $temp[] = 
+        ' title: "' . $productData['title'] . '",
+          published: ' . $publishproduct . ',
+          vendor: "Scraped Vendor" ';
+    
+    $escapedDescriptionHtml = json_encode($productData['description']);
+    $temp[] = ' descriptionHtml: ' . $escapedDescriptionHtml . '';
+
+    if (isset($productData['variants']) && is_array($productData['variants'])) {
+        $temp[] = 'variants: [' . $this->getVariantsGraphQLConfig($productData['variants'],$productData['price']) . ']';
+    }
+    Log::info("temp[] variants  ".$temp);
+
+    if (isset($productData['images']) && is_array($productData['images'])) {
+        $temp[] = 'images: [' . $this->getImagesGraphQLConfig($productData['images']) . ']';
+    }
+    Log::info("temp[] images  ".$temp);
+
+    Log::info("getGraphQLPayloadForProduct END ");
+    Log::info("getGraphQLPayloadForProduct END aff ".$temp);
+
+    return implode(',', $temp);
+}
+
+private function getVariantsGraphQLConfig($variants,$price) {
+    $str = [];
+    foreach ($variants as $variant) {
+        Log::info("getGraphQLPayloadForProduct variant variant: " . json_encode($variant));
+
+      $formattedOptionValues = implode('", "', $variant['info']);
+      Log::info(" variant variant: " . $variant['info']);
+      Log::info(" variant variant formattedOptionValues: " . $formattedOptionValues);
+
+
+        $str[] = '{
+            taxable: false,
+            title: "' . $variant['info'] . '",
+            price: ' . $price . ',
+            inventoryManagement: null,
+            inventoryPolicy: DENY
+        }';
+    }
+    return implode(',', $str); 
+}
+
+private function getImagesGraphQLConfig($images) {
+    $str = [];
+    foreach ($images as $image) {
+        $str[] = '{
+            src: "' . $image . '",
+        }';
+    }
+    return implode(',', $str); 
+}
+
+private function isAmazonUrl($url)
+{
+    return preg_match('/^(https?:\/\/)?(www\.)?amazon\.[a-z]{2,6}\/.*$/', $url);
+}
+
+private function isEtsyUrl($url)
+{
+    return preg_match('/^(https?:\/\/)?(www\.)?etsy\.[a-z]{2,6}\/.*$/', $url);
+}
+
+ 
+
+//scrapping etsy product 
+    private function scrapeEtsyProduct($url)
+{
+    $response = $this->client->get($url, [
+        'headers' => [
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Accept-Language' => 'en-US,en;q=0.9',
+            'Accept-Encoding' => 'gzip, deflate, br',
+        ]
+    ]);
+    $html = $response->getBody()->getContents();
+    $crawler = new Crawler($html);
+   
+    // Scrape title
+    $titleNode = $crawler->filter('h1[data-buy-box-listing-title="true"]');
+    if ($titleNode->count() === 0) {
+        throw new \Exception("Product title not found");
+    }
+    $title = $titleNode->text();
+ 
+    Log::info("title aff ".$title);
+
+    // Scrape description
+    $descriptionNode = $crawler->filter('.wt-text-body-01.wt-break-word');
+    $description = $descriptionNode->each(function (Crawler $node) {
+        return $node->text();
+    });
+
+    // Scrape product images
+    $images = $crawler->filter('.wt-list-unstyled.carousel-pane-list li img')->each(function (Crawler $node) {
+        return $node->attr('src');
+    });
+
+    // Filter out unwanted images
+    $filteredImages = array_filter($images, function ($src) {
+        // Filter out images that are placeholders or have the 'play-button' in the URL
+        return strpos($src, 'play-button') === false && strpos($src, 'transparent-pixel') === false;
+    });
+
+    // Optionally, you might want to remove small image versions
+    $filteredImages = array_map(function ($src) {
+        return preg_replace('/(_AC_US\d+_\.jpg)$/', '.jpg', $src);
+    }, $filteredImages);
+
+    // Scrape price
+    // Scrape price
+    $priceNode = $crawler->filter('.wt-text-title-larger.wt-mr-xs-1.wt-text-slime, .wt-text-title-larger.wt-mr-xs-1');
+    if ($priceNode->count() > 0) {
+        $priceText = $priceNode->text();
+        // Extract numerical value using regex
+        if (preg_match('/(\d+[,.]\d+)/', $priceText, $matches)) {
+            $price = $matches[1]; // Extracts the first match, which should be the price in format "18,03"
+            $price = str_replace(',', '.', $price); // Convert comma to dot if necessary
+        } else {
+            $price = 'Price not available';
+        }
+    } else {
+        $price = 'Price not available';
+    }
+    // Handle variants extraction if applicable
+    // This needs to be adapted to Etsy's structure
+    // Scrape variants
+    $variants = [];
+    $variantNodes = $crawler->filter('div[data-selector="listing-page-variation"]');
+    $variantNodes->each(function (Crawler $variantNode) use (&$variants) {
+        $labelNode = $variantNode->filter('label');
+        $label = $labelNode->count() > 0 ? $labelNode->text() : 'No label';
+
+        $options = [];
+        $optionNodes = $variantNode->filter('option');
+        $optionNodes->each(function (Crawler $optionNode) use (&$options) {
+            if ($optionNode->attr('value') !== '') {
+                $options[] = $optionNode->text();
+            }
+        });
+
+        $variants[] = ['label' => $label, 'options' => $options];
+    });
+
+    $productData = [
+        'title' => $title,
+        'description' => $description,
+        'images' => array_values($filteredImages),
+        'price' => $price,
+        'variants' => $variants,
+    ];
+
+    // Log the product data
+    Log::info($productData);
+
+    return response()->json($productData);
+    }
+
+
+    //scrapping Amazon product 
+    private function scrapeAmazonProduct($url)
+    {
+
+               // $response = $this->client->get($this->urlsingle);
+               $response = $this->client->get($url, [
+                'headers' => [
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                    'Accept-Language' => 'en-US,en;q=0.9',
+                    'Accept-Encoding' => 'gzip, deflate, br',
+                ]
+            ]);
+            $html = $response->getBody()->getContents();
+            $crawler = new Crawler($html);
+           
+            $titleNode = $crawler->filter('#productTitle');
+            if ($titleNode->count() === 0) {
+                throw new \Exception("Product title not found");
+            }
+            $title = $titleNode->text();
+            Log::info('title product'.$title);
+
+            $descriptionNode = $crawler->filter('#feature-bullets ul li span');
+            $description = $descriptionNode->each(function (Crawler $node) {
+                return $node->text();
+            });
+    
+            // Scrape product images
+            $images = $crawler->filter('.a-unordered-list.a-nostyle.a-button-list.a-vertical.a-spacing-top-micro.regularAltImageViewLayout img')->each(function (Crawler $node) {
+                return $node->attr('src');
+            });
+    
+            // If no images found, try the second list structure
+            if (empty($images)) {
+                $images = $crawler->filter('.a-unordered-list.a-nostyle.a-button-list.a-vertical.a-spacing-top-micro.gridAltImageViewLayoutIn1x7 img')->each(function (Crawler $node) {
+                    $src = $node->attr('src');
+                    // Attempt to get the larger version of the image
+                    $highResSrc = preg_replace('/\._AC_US\d+_\.jpg$/', '.jpg', $src);
+                    return $highResSrc;
+                });
+            }
+            // Filter out unwanted images
+            $filteredImages = array_filter($images, function ($src) {
+                // Filter out images that are placeholders or have the 'play-button' in the URL
+                return strpos($src, 'play-button') === false && strpos($src, 'transparent-pixel') === false;
+            });
+    
+            // Optionally, you might want to remove small image versions
+            $filteredImages = array_map(function ($src) {
+                return preg_replace('/(_AC_US\d+_\.jpg)$/', '.jpg', $src);
+            }, $filteredImages);
+    
+            // Handle price extraction with specific structure
+            $price = null;
+
+            $wholePrice = $crawler->filter('.a-price-whole')->first();
+            $fractionPrice = $crawler->filter('.a-price-fraction')->first();
+            $priceSymbol = $crawler->filter('.a-price-symbol')->first();
+
+            if ($wholePrice->count() > 0 && $fractionPrice->count() > 0 && $priceSymbol->count() > 0) {
+                $price = $wholePrice->text() . '.' . $fractionPrice->text();
+            } else {
+                // Fallback to previous selectors
+                $priceSelectors = [
+                    '#priceblock_ourprice',        // Standard price
+                    '#priceblock_dealprice',       // Deal price
+                    '#priceblock_saleprice',       // Sale price
+                    '#buyNewSection .a-color-price', // "Buy New" price
+                    '#price_inside_buybox',        // Inside buy box price
+                    '.offer-price'                 // Offer price
+                ];
+
+                foreach ($priceSelectors as $selector) {
+                    $priceNode = $crawler->filter($selector);
+                    if ($priceNode->count() > 0) {
+                        $price = trim($priceNode->text());
+                        // Normalize the price format by replacing comma with period
+                        $price = str_replace(',', '.', $price);
+                        break;
+                    }
+                }
+            }
+
+            if (is_null($price)) {
+                $price = 'Price not available';
+            } else {
+                // Ensure the price is a valid float format
+                $price = number_format((float)$price, 2, '.', '');
+            }
+    
+            $variants = $this->scrapeAmazonVariants($html);
+    
+    
+            $productData = [
+                'title' => $title,
+                'description' => $description,
+                'images' => array_values($filteredImages),
+                'price' => $price,
+                'variants' => $variants,
+            ];
+    
+            // Log the product data
+            Log::info($productData);
+
+            return $productData;
+    }
+
+    private function scrapeAmazonVariants($html)
+    {
+        $variants = [];
+        
+        // Regular expression to extract the JSON data for variants
+        if (preg_match('/dimensionValuesDisplayData"\s*:\s*(\{.+?\}),\n/', $html, $matches)) {
+            $jsonData = $matches[1];
+            $variantData = json_decode($jsonData, true);
+
+            // Iterate over each variant and extract ASIN and other relevant information
+            foreach ($variantData as $key => $value) {
+                $variantAsin = $key;
+                $variantInfo = $value;
+
+                // Additional details like price might need separate extraction
+
+                $variants[] = [
+                    'asin' => $variantAsin,
+                    'info' => $variantInfo,
+                ];
+            }
+        } else {
+            Log::warning('No variant data found in the HTML.');
+        }
+
+        return $variants;
+    }
+
+
+    private function transformAmazonProductData($amazonProductData) {
+        $descriptionHtml = implode('<br>', $amazonProductData['description']);
+        
+        // Transform images array into the required format
+        $images = array_map(function($url) {
+            return ['src' => $url];
+        }, $amazonProductData['images']);
+    
+        // Ensure the price is in the correct format
+        $price = str_replace(',', '.', $amazonProductData['price']);
+    
+    
+        // Transform variants array into the required format
+        $variants = array_map(function($variant) use ($amazonProductData) {
+            $variantInfo = is_array($variant['info']) ? implode(', ', $variant['info']) : $variant['info'];
+            return [
+                'title' => $amazonProductData['title'] . ' - ' . $variantInfo,
+                'price' => $amazonProductData['price'],
+                'compare_at_price' => null,
+                'sku' => $variant['asin'],
+                'option1' => isset($variant['info'][0]) ? $variant['info'][0] : null,
+                'option2' => isset($variant['info'][1]) ? $variant['info'][1] : null,
+                'option3' => isset($variant['info'][2]) ? $variant['info'][2] : null,
+                'position' => 1 // Default to 1, or you can set this dynamically
+            ];
+        }, $amazonProductData['variants']);
+    
+        // Extract unique option values and format them as expected
+        $optionValues = array_reduce($amazonProductData['variants'], function($carry, $variant) {
+            foreach ($variant['info'] as $info) {
+                if (!in_array($info, $carry)) {
+                    $carry[] = $info;
+                }
+            }
+            return $carry;
+        }, []);
+    
+        // Create a single string of all unique options
+        $optionsString = implode(',', $optionValues);
+        
+        // Prepare options array to match expected format in `getGraphQLPayloadForProductPublishUrl`
+        $options = [['name' => 'Color', 'values' => $optionValues]];
+    
+        return [
+            'product' => [
+                'title' => $amazonProductData['title'],
+                'body_html' => $descriptionHtml,
+                'vendor' => 'Amazon Vendor', // Set a default vendor
+                'product_type' => 'Electronics', // Set a default product type
+                'tags' => '', // Set empty tags or set relevant tags
+                'options' => $options, // Set the formatted options array
+                'variants' => $variants,
+                'images' => $images
+            ],
+            'optionsString' => $optionsString
+        ];
     }
 
     public function testEvent()
     {
         $this->dispatch('test-event');
     }
-    
-    private function getGraphQLPayloadForProductPublishUrl($store, $url,$publishproduct) {
-  
-        $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
-        $context = stream_context_create($opts);
-        $html = file_get_contents($url . '.json', false, $context);
-        $productData = json_decode($html, true);
-        
-        // Log::info('Publish Product:'.$publishproduct);
+
+
+    private function getGraphQLPayloadForProductPublishUrl($store, $publishproduct, $productData) {
+
         $publishproduct = $publishproduct ? 'true' : 'false';
-
-
         $temp = [];
         $temp[] = 
             ' title: "' . $productData['product']['title'] . '",
               published: ' . $publishproduct . ',
               vendor: "' . $productData['product']['vendor'] . '" ';
-        if (isset($productData['product']['body_html']) && $productData['product']['body_html'] !== null)
-             $escapedDescriptionHtml = json_encode($productData['product']['body_html']);
+              
 
+      if (isset($productData['product']['body_html']) && $productData['product']['body_html'] !== null) {
+            $escapedDescriptionHtml = json_encode($productData['product']['body_html']);
             $temp[] = ' descriptionHtml: ' . $escapedDescriptionHtml . '';
+        }
 
         if (isset($productData['product']['product_type']))
             $temp[] = ' productType: "' . $productData['product']['product_type'] . '"';
+    
+        if (isset($productData['product']['tags']))
             $temp[] = ' tags: ["' . implode('", "', explode(',', $productData['product']['tags'])) . '"]';
-
-            if (isset($productData['product']['options']) && is_array($productData['product']['options'])) {
-                // Extract all option values and combine them into a single string
-                $optionValues = array_reduce($productData['product']['options'], function($carry, $option) {
-                    // Combine the values of each option into a single string, separated by commas
-                    return $carry . implode(',', $option['values']) . ',';
-                }, '');
-            
-                // Remove the trailing comma
-                $optionValues = rtrim($optionValues, ',');
-            
-                // Wrap the combined option values in quotes and prepare the final options array format
-                $formattedOptions = '"' . $optionValues . '"';
-            
-                $temp[] = 'options: [' . $formattedOptions . ']';
-            } else {
-                $formattedOptions = '';
-            }
-
+    
+        if (isset($productData['product']['options']) && is_array($productData['product']['options'])) {
+            $optionValues = array_reduce($productData['product']['options'], function($carry, $option) {
+                return $carry . implode(',', $option['values']) . ',';
+            }, '');
+            $optionValues = rtrim($optionValues, ',');
+            $formattedOptions = '"' . $optionValues . '"';
+            $temp[] = 'options: [' . $formattedOptions . ']';
+        }
+        
+    
         if (isset($productData['product']['variants']) && is_array($productData['product']['variants'])) {
             $temp[] = 'variants: [' . $this->getVariantsGraphQLConfigUrl($productData) . ']';
-
-        }
-
-        if (isset($productData['product']['images']) && is_array($productData['product']['images'])) {
-            $temp[] = 'images: [' . $this->getImagesGraphQLConfigUrl($productData) . ']';
-
         }
     
+        if (isset($productData['product']['images']) && is_array($productData['product']['images'])) {
+            $temp[] = 'images: [' . $this->getImagesGraphQLConfigUrl($productData) . ']';
+        }
+
         return implode(',', $temp);
     }
     
-
     private function getVariantsGraphQLConfigUrl($productData) {
         try {
             $str = [];
@@ -262,8 +556,7 @@ class SingleProduct extends Component
 
                 $compareAtPrice = !empty($variant['compare_at_price']) ? $variant['compare_at_price'] : 'null';
                 $compareAtPriceField = $compareAtPrice !== 'null' ? 'compareAtPrice: ' . $compareAtPrice . ',' : '';
-
-                  // Ensure option values are correctly set
+    
                 $optionValues = [];
                 if (isset($variant['option1']) && $variant['option1'] !== null) {
                     $optionValues[] = $variant['option1'];
@@ -275,42 +568,41 @@ class SingleProduct extends Component
                     $optionValues[] = $variant['option3'];
                 }
                 $formattedOptionValues = implode('", "', $optionValues);
-            
-
+    
                 $str[] = '{
                     taxable: false,
-                    title: "'.$variant['title'].'",
-                    price: '.$variant['price'].',
+                    title: "' . $variant['title'] . '",
+                    price: ' . $variant['price'] . ',
                     ' . $compareAtPriceField . '
-                    sku: "'.$variant['sku'].'",
-                    options: [" '.$formattedOptionValues.' "],
-                    position: '.$variant['position'].',
-                    inventoryItem: {cost: '.$variant['price'].', tracked: false},
+                    sku: "' . $variant['sku'] . '",
+                    options: [" ' . $formattedOptionValues . ' "],
+                    position: ' . $variant['position'] . ',
+                    inventoryItem: {cost: ' . $variant['price'] . ', tracked: false},
                     inventoryManagement: null,
                     inventoryPolicy: DENY
                 }';
             }
-            return implode(',', $str); 
+            return implode(',', $str);
         } catch (Exception $e) {
-            dd($e->getMessage().' '.$e->getLine());
+            dd($e->getMessage() . ' ' . $e->getLine());
             return null;
         }
     }
-
+    
     private function getImagesGraphQLConfigUrl($productData) {
         try {
             $str = [];
             foreach ($productData['product']['images'] as $key => $image) {
                 $str[] = '{
-                    src: "'.$image['src'].'",
+                    src: "' . $image['src'] . '",
                 }';
             }
-            return implode(',', $str); 
+            return implode(',', $str);
         } catch (Exception $e) {
-            dd($e->getMessage().' '.$e->getLine());
+            dd($e->getMessage() . ' ' . $e->getLine());
             return null;
         }
     }
-
+    
 
 }

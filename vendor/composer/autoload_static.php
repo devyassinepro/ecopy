@@ -1057,6 +1057,7 @@ class ComposerStaticInitbbf108121e2b48201da38315b0e06c5c
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Jobs\\CreateBackupJob' => __DIR__ . '/../..' . '/app/Jobs/CreateBackupJob.php',
+        'App\\Jobs\\ProcessProductsShopify' => __DIR__ . '/../..' . '/app/Jobs/ProcessProductsShopify.php',
         'App\\Jobs\\PublishProductToShopifyJob' => __DIR__ . '/../..' . '/app/Jobs/PublishProductToShopifyJob.php',
         'App\\Listeners\\LoginSuccessful' => __DIR__ . '/../..' . '/app/Listeners/LoginSuccessful.php',
         'App\\Listeners\\LogoutSuccessful' => __DIR__ . '/../..' . '/app/Listeners/LogoutSuccessful.php',

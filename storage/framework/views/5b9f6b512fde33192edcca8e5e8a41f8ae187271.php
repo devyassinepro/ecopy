@@ -13,8 +13,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-10">
                         <div class="hero-content-wrap mt-5 mt-lg-0 mt-xl-0">
-                            <h1 class="fw-bold display-5">Automate Product Imports: Discover Ecopy</h1>
-                            <p class="lead">Time is Money: Trust Us to Import Products</p>
+                            <h1 class="fw-bold display-5">Import Products to Shopify with One Click</h1>
+                            <p class="lead">Save time and money with Ecopy. Easily import products from Amazon, Etsy, or AliExpress using just a URL.</p>
                             <div class="action-btn mt-5 align-items-center d-block d-sm-flex d-lg-flex d-md-flex">
                                 <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
                                 <a href="https://www.youtube.com/watch?v=7_PLuhJNsto" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn mt-3 mt-lg-0 mt-md-0"> <i
@@ -25,10 +25,22 @@
                                 <h6 class="text-white-70 mb-2">APPLIES TO ALL SELLERS
                                 </h6>
                                 <div class="col-4 col-sm-3 my-2 ps-lg-0">
-                                    <img src="assets/img/clients/shopify.png" alt="client" class="img-fluid">
+                                    <img src="assets/img/clients/shopify.png" alt="shopify" class="img-fluid">
                                 </div>
                                 <div class="col-4 col-sm-3 my-2 ps-lg-0">
-                                    <img src="assets/img/clients/woocommerce.png" alt="client" class="img-fluid">
+                                    <img src="assets/img/clients/woocommerce.png" alt="woocommerce" class="img-fluid">
+                                </div>
+                                <div class="col-4 col-sm-3 my-2 ps-lg-0">
+                                    <img src="assets/img/clients/amazon.png" alt="amazon" class="img-fluid">
+                                </div>
+                                <div class="col-4 col-sm-3 my-2 ps-lg-0">
+                                    <img src="assets/img/clients/etsy.png" alt="etsy" class="img-fluid">
+                                </div>
+                                <div class="col-4 col-sm-3 my-2 ps-lg-0">
+                                    <img src="assets/img/clients/aliexpress.png" alt="aliexpress" class="img-fluid">
+                                </div>
+                                <div class="col-4 col-sm-3 my-2 ps-lg-0">
+                                    <img src="assets/img/clients/ebay.png" alt="ebay" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -83,8 +95,8 @@
                             <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
                                 <i class="fas fa-bug fa-2x text-white"></i>
                             </div>
-                            <h2>Single Product Importation (Unlimited)</h2>
-                            <p class="lead">Time is Money: Trust Us to Find the Import Products</p>
+                            <h2>Single Product Import (Unlimited)</h2>
+                            <p class="lead">Import a single product instantly using its URL from Shopify, Amazon, Etsy, or AliExpress.</p>
                             <h5><i class="far fa-check-circle text-primary me-2"></i>Import products</h5><br>
                             <h5><i class="far fa-check-circle text-primary me-2"></i>Enhance descriptions</h5><br>
                             <h5><i class="far fa-check-circle text-primary me-2"></i>Easy to use</h5><br>
@@ -123,10 +135,7 @@
                                 <i class="fas fa-fingerprint fa-2x text-white"></i>
                             </div>
                             <h2>Import bulk products(All Store)</h2>
-                            <p>
-							Ecopy allows you to import bulk products quickly to keep you ahead of your competitors
-							</p>
-                           
+                            <p>Import multiple products or even entire stores effortlessly using just a store URL. Our advanced tool allows you to save hours of manual work and streamline your product entry process. Whether sourcing from Amazon, Etsy, or AliExpress, automate your dropshipping operations and keep your store updated with the latest products. Enjoy a cost-effective solution designed for Shopify dropshippers and e-commerce users.</p>
                             <div class="mt-auto">
                               <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
                             </div>
@@ -152,12 +161,15 @@
                             <div class="icon-box rounded-custom bg-primary shadow-sm d-inline-block">
                                 <i class="fas fa-bug fa-2x text-white"></i>
                             </div>
-                            <h2>Ecopy ensures that your new imported product aligns with your store's unique style.</h2>
+                            <h2>How It Works</h2>
 
                            </br></br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>1 - Copy And Paste The Product URL</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>2 - Customize & AI Enhance Product Details</h5><br>
-                            <h5><i class="far fa-check-circle text-primary me-2"></i>3 - Easy & Fast Import To Your Store</h5><br>
+                            <h5><i class="far fa-check-circle text-primary me-2"></i>Step 1: Enter Product URL</h5>
+                            <p>Simply paste the URL of the product from Shopify, Amazon, Etsy, or AliExpress.</p><br>
+                            <h5><i class="far fa-check-circle text-primary me-2"></i>Step 2: Click Import</h5>
+                            <p>Click the import button to automatically add the product to your Shopify store.</p>
+                            <h5><i class="far fa-check-circle text-primary me-2"></i>Step 3: Manage Your Store</h5>
+                            <p>Manage imported products and continue growing your store effortlessly.</p>
 
                             <div class="mt-auto">
                                   <a href="/register" class="btn btn-primary me-3">Start Free Trial</a>
@@ -175,355 +187,13 @@
             </div>
         </section>
 
-        <!--feature promo section start-->
-        <!-- <section class="feature-promo ptb-120 bg-light-subtle">
-            <div class="container">
-                <div class="row pt-lg-5 pt-3">
-                    <div class="col-lg-6 mt-4">
-                        <div class="position-relative d-flex flex-column h-100 flex-wrap bg-danger-soft p-5 rounded-custom">
-                            <div class="cta-left-info mb-2">
-                                <h5>Top 100 lists Stores</h5>
-                                <p>Explore an Extensive List of Trending Products and Stores Tracked Across Tens of Thousands of Retailers, Providing You with a Wealth of Unlimited Ideas.</p>
-                            </div>
-                            <div class="mt-auto">
-                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
-                            </div>
-                            <div class="cta-img position-absolute right-0 bottom-0">
-                                <img src="assets/img/cta-img-1.png" alt="cta img" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-4">
-                        <div class="position-relative d-flex flex-column h-100 flex-wrap bg-primary-soft p-5 rounded-custom">
-                            <div class="cta-left-info mb-2">
-                                <h5>Daily Revenue of Stores with Real-Time Monitoring</h5>
-                                <p>Supercharge Your Sales Tracking: Add Stores and Products to the Sales Tracker to Monitor Performance Over Time, Track Sales, and Uncover the Next Big Opportunity Ahead of the Competition.</p>
-                            </div>
-                            <div class="mt-auto">
-                                <a href="/register" class="btn btn-outline-primary btn-sm">Start For Free</a>
-                            </div>
-                            <div class="cta-img position-absolute right-0 bottom-0">
-                                <img src="assets/img/cta-img-2.png" alt="cta img" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> feature promo section end -->
-        <!--customer review tab section start-->
-        <!-- <section class="customer-review-tab ptb-120 bg-gradient text-white  position-relative z-2">
-            <div class="container">
-                <div class="row justify-content-center align-content-center">
-                    <div class="col-md-10 col-lg-6">
-                        <div class="section-heading text-center">
-                            <h4 class="h5 text-warning text-primary">Testimonial</h4>
-                            <h2>What They Say About Us</h2>
-                            <p>Uniquely promote adaptive quality vectors rather than stand-alone e-markets. pontificate alternative architectures whereas iterate.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="tab-content" id="testimonial-tabContent">
-                            <div class="tab-pane fade active show" id="testimonial-tab-1" role="tabpanel">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="testimonial-tab-content mb-5 mb-lg-0 mb-md-0">
-                                            <img src="assets/img/testimonial/quotes-left.svg" alt="testimonial quote" width="65" class="img-fluid mb-32">
-                                            <div class="blockquote-title-review mb-4">
-                                                <h3 class="mb-0 h4 fw-semi-bold">The Best Template You Got to Have it!</h3>
-                                                <ul class="review-rate mb-0 list-unstyled list-inline">
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <blockquote class="blockquote">
-                                                <p>Globally network long-term high-impact schemas vis-a-vis distinctive
-                                                    e-commerce
-                                                    cross-media infrastructures rather than ethical sticky alignments rather
-                                                    than global. Plagiarize technically sound total linkage for leveraged value media web-readiness and premium processes.</p>
-                                            </blockquote>
-                                            <div class="author-info mt-4">
-                                                <h6 class="mb-0">Joe Richard</h6>
-                                                <span>Visual Designer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="author-img-wrap pt-5 ps-5">
-                                            <div class="testimonial-video-wrapper position-relative">
-                                                <img src="assets/img/testimonial/t-1.jpg" class="img-fluid rounded-custom shadow-lg" alt="testimonial author">
-                                                <div class="customer-info text-white d-flex align-items-center">
-                                                    <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="video-icon popup-youtube text-decoration-none"><i class="fas fa-play"></i> <span class="text-white ms-2 small"> Watch Video</span></a>
-                                                </div>
-                                                <div class="position-absolute bg-primary-dark z--1 dot-mask dm-size-16 dm-wh-350 top--40 left--40 top-left"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="testimonial-tab-2" role="tabpanel">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="testimonial-tab-content mb-5 mb-lg-0 mb-md-0">
-                                            <img src="assets/img/testimonial/quotes-left.svg" alt="testimonial quote" width="65" class="img-fluid mb-32">
-                                            <div class="blockquote-title-review mb-4">
-                                                <h3 class="mb-0 h4 fw-semi-bold">Embarrassed by the First Version.</h3>
-                                                <ul class="review-rate mb-0 list-unstyled list-inline">
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <blockquote class="blockquote">
-                                                <p>Energistically streamline robust architectures whereas distributed
-                                                    mindshare. Intrinsicly leverage other's backend growth strategies
-                                                    through 24/365 products. Conveniently pursue revolutionary communities for compelling process improvements. </p>
-                                            </blockquote>
-                                            <div class="author-info mt-4">
-                                                <h6 class="mb-0">Rupan Oberoi</h6>
-                                                <span>Web Designer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="author-img-wrap pt-5 ps-5">
-                                            <div class="testimonial-video-wrapper position-relative">
-                                                <img src="assets/img/testimonial/t-2.jpg" class="img-fluid rounded-custom shadow-lg" alt="testimonial author">
-                                                <div class="customer-info text-white d-flex align-items-center">
-                                                    <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="video-icon popup-youtube text-decoration-none"><i class="fas fa-play"></i> <span class="text-white ms-2 small"> Watch Video</span></a>
-                                                </div>
-                                                <div class="position-absolute bg-primary-dark z--1 dot-mask dm-size-16 dm-wh-350 top--40 left--40 top-left"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="testimonial-tab-3" role="tabpanel">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="testimonial-tab-content mb-5 mb-lg-0 mb-md-0">
-                                            <img src="assets/img/testimonial/quotes-left.svg" alt="testimonial quote" width="65" class="img-fluid mb-32">
-                                            <div class="blockquote-title-review mb-4">
-                                                <h3 class="mb-0 h4 fw-semi-bold">Amazing Ecopy template!</h3>
-                                                <ul class="review-rate mb-0 list-unstyled list-inline">
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <blockquote class="blockquote">
-                                                <p>
-                                                    Appropriately negotiate interactive niches rather orchestrate scalable
-                                                    benefits whereas flexible systems. Objectively grow quality outsourcing
-                                                    without vertical methods of empowerment. Assertively negotiate just in time innovation after client-centered thinking.
-                                                </p>
-                                            </blockquote>
-                                            <div class="author-info mt-4">
-                                                <h6 class="mb-0">Jon Doe</h6>
-                                                <span>Software Engineer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="author-img-wrap pt-5 ps-5">
-                                            <div class="testimonial-video-wrapper position-relative">
-                                                <img src="assets/img/testimonial/t-3.jpg" class="img-fluid rounded-custom shadow-lg" alt="testimonial author">
-                                                <div class="customer-info text-white d-flex align-items-center">
-                                                    <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="video-icon popup-youtube text-decoration-none"><i class="fas fa-play"></i> <span class="text-white ms-2 small"> Watch Video</span></a>
-                                                </div>
-                                                <div class="position-absolute bg-primary-dark z--1 dot-mask dm-size-16 dm-wh-350 top--40 left--40 top-left"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="testimonial-tab-4" role="tabpanel">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="testimonial-tab-content mb-5 mb-lg-0 mb-md-0">
-                                            <img src="assets/img/testimonial/quotes-left.svg" alt="testimonial quote" width="65" class="img-fluid mb-32">
-                                            <div class="blockquote-title-review mb-4">
-                                                <h3 class="mb-0 h4 fw-semi-bold">Best Template for SAAS Company!</h3>
-                                                <ul class="review-rate mb-0 list-unstyled list-inline">
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <blockquote class="blockquote">
-                                                <p>Competently repurpose cost effective strategic theme areas and customer
-                                                    directed meta-services. Objectively orchestrate orthogonal initiatives
-                                                    after enterprise-wide bandwidth. Dynamically generate extensive through cooperative channels time partnerships. </p>
-                                            </blockquote>
-                                            <div class="author-info mt-4">
-                                                <h6 class="mb-0">Hanry Luice</h6>
-                                                <span>App Developer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="author-img-wrap pt-5 ps-5">
-                                            <div class="testimonial-video-wrapper position-relative">
-                                                <img src="assets/img/testimonial/t-4.jpg" class="img-fluid rounded-custom shadow-lg" alt="testimonial author">
-                                                <div class="customer-info text-white d-flex align-items-center">
-                                                    <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="video-icon popup-youtube text-decoration-none"><i class="fas fa-play"></i> <span class="text-white ms-2 small"> Watch Video</span></a>
-                                                </div>
-                                                <div class="position-absolute bg-primary-dark z--1 dot-mask dm-size-16 dm-wh-350 top--40 left--40 top-left"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="testimonial-tab-5" role="tabpanel">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="testimonial-tab-content mb-5 mb-lg-0 mb-md-0">
-                                            <img src="assets/img/testimonial/quotes-left.svg" alt="testimonial quote" width="65" class="img-fluid mb-32">
-                                            <div class="blockquote-title-review mb-4">
-                                                <h3 class="mb-0 h4 fw-semi-bold">It is Undeniably Good!</h3>
-                                                <ul class="review-rate mb-0 list-unstyled list-inline">
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item"><i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <blockquote class="blockquote">
-                                                <p>Appropriately disintermediate one-to-one vortals through cross functional
-                                                    infomediaries. Collaboratively pursue multidisciplinary systems through
-                                                    stand-alone architectures. Progressively transition covalent architectures whereas vertical applications procrastinate professional.</p>
-                                            </blockquote>
-                                            <div class="author-info mt-4">
-                                                <h6 class="mb-0">Ami Nijai</h6>
-                                                <span>Customer Support</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 col-md-6">
-                                        <div class="author-img-wrap pt-5 ps-5">
-                                            <div class="testimonial-video-wrapper position-relative">
-                                                <img src="assets/img/testimonial/t-5.jpg" class="img-fluid rounded-custom shadow-lg" alt="testimonial author">
-                                                <div class="customer-info text-white d-flex align-items-center">
-                                                    <a href="https://www.youtube.com/watch?v=TZkyCvcSkBo" class="video-icon popup-youtube text-decoration-none"><i class="fas fa-play"></i> <span class="text-white ms-2 small"> Watch Video</span></a>
-                                                </div>
-                                                <div class="position-absolute bg-primary-dark z--1 dot-mask dm-size-16 dm-wh-350 top--40 left--40 top-left"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="nav nav-pills testimonial-tab-menu mt-60" id="testimonial" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <div class="nav-link d-flex align-items-center rounded-custom border border-light border-2 testimonial-tab-link active" data-bs-toggle="pill" data-bs-target="#testimonial-tab-1" role="tab" aria-selected="false">
-                                    <div class="testimonial-thumb me-3">
-                                        <img src="assets/img/testimonial/1.jpg" width="50" class="rounded-circle" alt="testimonial thumb">
-                                    </div>
-                                    <div class="author-info">
-                                        <h6 class="mb-0">Joe Richard</h6>
-                                        <span>Visual Designer</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <div class="nav-link d-flex align-items-center rounded-custom border border-light border-2 testimonial-tab-link" data-bs-toggle="pill" data-bs-target="#testimonial-tab-2" role="tab" aria-selected="false">
-                                    <div class="testimonial-thumb me-3">
-                                        <img src="assets/img/testimonial/2.jpg" width="50" class="rounded-circle" alt="testimonial thumb">
-                                    </div>
-                                    <div class="author-info">
-                                        <h6 class="mb-0">Rupan Oberoi</h6>
-                                        <span>Web Designer</span>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <div class="nav-link d-flex align-items-center rounded-custom border border-light border-2 testimonial-tab-link" data-bs-toggle="pill" data-bs-target="#testimonial-tab-3" role="tab" aria-selected="false">
-                                    <div class="testimonial-thumb me-3">
-                                        <img src="assets/img/testimonial/3.jpg" width="50" class="rounded-circle" alt="testimonial thumb">
-                                    </div>
-                                    <div class="author-info">
-                                        <h6 class="mb-0">Jon Doe</h6>
-                                        <span>Software Engineer</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <div class="nav-link d-flex align-items-center rounded-custom border border-light border-2 testimonial-tab-link" data-bs-toggle="pill" data-bs-target="#testimonial-tab-4" role="tab" aria-selected="false">
-                                    <div class="testimonial-thumb me-3">
-                                        <img src="assets/img/testimonial/4.jpg" width="50" class="rounded-circle" alt="testimonial thumb">
-                                    </div>
-                                    <div class="author-info">
-                                        <h6 class="mb-0">Hanry Luice</h6>
-                                        <span>App Developer</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <div class="nav-link d-flex align-items-center rounded-custom border border-light border-2 testimonial-tab-link" data-bs-toggle="pill" data-bs-target="#testimonial-tab-5" role="tab" aria-selected="true">
-                                    <div class="testimonial-thumb me-3">
-                                        <img src="assets/img/testimonial/5.jpg" width="50" class="rounded-circle" alt="testimonial thumb">
-                                    </div>
-                                    <div class="author-info">
-                                        <h6 class="mb-0">Ami Nijai</h6>
-                                        <span>Customer Support</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section> customer review tab section end -->
-
         <?php
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
 [$__name, $__params] = $__split('plan-list', []);
 
-$__html = app('livewire')->mount($__name, $__params, 's4r21Fl', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'TLOPGbR', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -534,27 +204,17 @@ unset($__split);
 if (isset($__slots)) unset($__slots);
 ?>
 
-		
         <!--faq section start-->
         <section class="hd-faq-section pb-80" id="faq">
             <div class="container">
                 <div class="row g-5 justify-content-center">
-                    <!-- <div class="col-xl-5 col-lg-8">
-                        <div class="hd-chat-box">
-                            <h3 class="text-white mb-3">24/7 Chat Support<br>for all Ecopy Desk Users</h3>
-                            <p class="text-white mb-4">Distinctively initiate viral ideas for goal-oriented partnerships. Appropriately network cross-media opportunities platform total linkage. Uniquely create turnkey value rather than revolutionary applications. Dynamically architect.</p>
-                            <a href="contact-us.html" class="read-more-link text-warning">Chat with us Right Now <i
-                              class="fas fa-angle-right ms-1"></i></a>
-                            <img src="assets/img/help-desk/illustration.png" alt="illustration" class="img-fluid mt-4">
-                        </div>
-                    </div> -->
                     <div class="col-xl-7 col-lg-8 align-self-end">
                         <div class="hd-faq-wrapper">
                             <div class="hd-title">
                                 <h2>Got Questions? <br> We've Got <mark class="bg-transparent p-0 position-relative">Answers <img src="assets/img/shape/line-shape.png" alt="line shape" class="position-absolute line-shape"></mark></h2>
                             </div>
                             <div class="accordion hd-accordion hd-accordion2 mt-60" id="hd_accordion2">
-                                <div class="accordion-item">
+                                <!-- <div class="accordion-item ">
                                     <div class="accordion-header">
                                         <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">What is Ecopy, and how does it work?</a>
                                     </div>
@@ -564,14 +224,47 @@ if (isset($__slots)) unset($__slots);
 Simply insert the URL of the desired product, collection, or store, and save a significant amount of time as all the titles, images, descriptions, variants, prices, "compare at" prices, and SEO information are copied into your store within seconds</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion-item active">
+                                </div> -->
+                                   <div class="accordion-item active">
+                                    <div class="accordion-header">
+                                    <a href="#hd2_acc1" class="collapsed" data-bs-toggle="collapse">What is Ecopy, and how does it work?</a>
+                                    </div>
+                                    <div class="accordion-collapse collapse show" id="hd2_acc1" data-bs-parent="#hd_accordion2">
+                                        <div class="accordion-body pt-0">
+                                        <p class="mb-0"><b>Ecopy</b> is a powerful app that allows you to effortlessly copy products from any Shopify store to your own with just one click. Simply insert the URL of the desired product, collection, or store, and save significant time as all titles, images, descriptions, variants, prices, "compare at" prices, and SEO information are copied into your store within seconds. Enhance your dropshipping efficiency and streamline your e-commerce operations with Ecopy’s seamless product import features. Perfect for Shopify users looking to scale their inventory quickly and easily.
+</p>
+                                                                               </div>
+                                    </div>
+                                </div> 
+                              <div class="accordion-item">
                                     <div class="accordion-header">
                                         <a href="#hd2_acc2" class="" data-bs-toggle="collapse">How much time takes to copy products?</a>
                                     </div>
                                     <div class="accordion-collapse collapse show" id="hd2_acc2" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
                                             <p class="mb-0">You can copy products just in seconds and also edit them before importing</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <a href="#hd2_acc3" class="collapsed" data-bs-toggle="collapse">How do I import a product using its URL?</a>
+                                    </div>
+                                    <div class="accordion-collapse collapse" id="hd2_acc3" data-bs-parent="#hd_accordion2">
+                                        <div class="accordion-body pt-0">
+                                            <p class="mb-0">Simply paste the product URL into our tool and click the import button. The product will be added to your Shopify store instantly.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <a href="#hd2_acc3" class="collapsed" data-bs-toggle="collapse">Can I import multiple products at once?</a>
+                                    </div>
+                                    <div class="accordion-collapse collapse" id="hd2_acc3" data-bs-parent="#hd_accordion2">
+                                        <div class="accordion-body pt-0">
+                                            <p class="mb-0">Yes, you can use the bulk import feature to add multiple products or entire stores using the store URL.</p>
                                         </div>
                                     </div>
                                 </div>

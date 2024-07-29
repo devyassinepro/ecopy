@@ -76,6 +76,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Jobs\\CreateBackupJob' => $baseDir . '/app/Jobs/CreateBackupJob.php',
+    'App\\Jobs\\ProcessProductsShopify' => $baseDir . '/app/Jobs/ProcessProductsShopify.php',
     'App\\Jobs\\PublishProductToShopifyJob' => $baseDir . '/app/Jobs/PublishProductToShopifyJob.php',
     'App\\Listeners\\LoginSuccessful' => $baseDir . '/app/Listeners/LoginSuccessful.php',
     'App\\Listeners\\LogoutSuccessful' => $baseDir . '/app/Listeners/LogoutSuccessful.php',

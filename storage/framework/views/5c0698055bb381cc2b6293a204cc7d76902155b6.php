@@ -1,98 +1,52 @@
 <!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" data-bs-theme="light">
+<html lang="en" data-bs-theme="light">
+
 <head>
-<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="author" content="Touzani Yassine" />
-    <title><?php echo e(config('app.name')); ?> - Copy Products to Shopify | Product Importer</title>
-    <meta name="description" content="Ecopy.app - Copy Products from shopify , amazon , etsy to your shopify store in one click" />
-    <meta name="keywords" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
-    <meta property="og:description" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
-    <meta property="og:url" content="https://ecopy.app/" />
-    <meta property="og:site_name" content="Copy Products to Shopify, WooCommerce and Wix stores , Product Importer shopify" />
+    <!--required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- CSRF Token -->
-    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <!--meta-->
+    <meta name="description" content="">
+    <meta name="author" content="ThemeTags">
 
+    <!--favicon icon-->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="16x16">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/img/favicon.png" title="Favicon" sizes="16x16" />
-    <!-- bootstrap 5 -->
-    <link rel="stylesheet" href="assets/css/lib/bootstrap.min.css">
-    <!-- ====== font family ====== -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"rel="stylesheet">
+    <!--title-->
+    <title><?php echo e(config('app.name')); ?> - Blog</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap" rel="stylesheet">
+    <!-- Font -->
+
     <!--build:css-->
     <link rel="stylesheet" href="assets/css/main.css">
     <!-- endbuild -->
+
     <!--custom css start-->
     <link rel="stylesheet" href="assets/css/custom.css">
-    <?php if(Request::is('email/verify')): ?>
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/dashlite.css?ver=3.2.0')); ?>" type="text/css">
-    <?php endif; ?>
     <!--custom css end-->
-    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
-
-    <?php echo $__env->yieldPushContent('styles'); ?>
-    <style>
-        .card-body{
-            border-top:none;
-        }
-        .navbar-fixed-top .navbar-nav .current a{
-            color: #5f6468 !important;
-        }
-    </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-234R6GX9KR"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-234R6GX9KR');
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-992215432"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'AW-992215432');
-    </script>
-    <!-- Hotjar Tracking Code for Site 5058947 (nom manquant) -->
-    <script>
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:5058947,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
 
 </head>
 
 <body>
-
     <!--main content wrapper start-->
     <div class="main-wrapper">
 
         <!--header section start-->
-        <!--header start-->
-        <script> configObj = {"text":"\nLaunch Your Store on Shopify for Only $1 !","bannerURL":"https://ecopy.app/shopify","selectedBackgroundColor":"#0037b8","selectedTextColor":"#ffffff","bannerHeight":"48px","fontSize":"16px"};function createBanner(obj, pageSimulator) {        var swBannerLink = obj.bannerURL;        var swBannerTarget = "_blank";        var swBannerText = obj.text;        var body = document.body;        var swBanner = document.createElement('a');        var centerDiv = document.createElement('div');        var text = document.createElement('span');        swBanner.href = swBannerLink;        swBanner.target = swBannerTarget;        swBanner.style.display = "flex";        swBanner.style.justifyContent = "center";        swBanner.style.alignItems = "center";        swBanner.style.width = "100%";        swBanner.style.minHeight = "48px";        swBanner.style.maxHeight = "72px";        swBanner.style.paddingTop = "8px";        swBanner.style.paddingBottom = "8px";        swBanner.style.lineHeight = "18px";        swBanner.style.textAlign = "center";        swBanner.style.textDecoration = "none";        swBanner.style.height = obj.bannerHeight;        swBanner.style.fontSize = obj.fontSize;        text.innerHTML = swBannerText;        swBanner.style.backgroundColor = obj.selectedBackgroundColor;        swBanner.style.color = obj.selectedTextColor;        swBanner.id = 'sw-banner';        swBanner.classList.add('sw-banner');        centerDiv.classList.add('center');        centerDiv.append(text);        swBanner.append(centerDiv);        if(!pageSimulator) {          body.insertBefore(swBanner, body.firstChild);        } else {          pageSimulator.insertBefore(swBanner, pageSimulator.firstChild);        }    };document.addEventListener("DOMContentLoaded", function() { createBanner(configObj, null); });</script>      
+
+        <script> configObj = {"text":"\nLaunch Your Store on Shopify for Only $1 !","bannerURL":"https://weenify.io/shopify","selectedBackgroundColor":"#0037b8","selectedTextColor":"#ffffff","bannerHeight":"48px","fontSize":"16px"};function createBanner(obj, pageSimulator) {        var swBannerLink = obj.bannerURL;        var swBannerTarget = "_blank";        var swBannerText = obj.text;        var body = document.body;        var swBanner = document.createElement('a');        var centerDiv = document.createElement('div');        var text = document.createElement('span');        swBanner.href = swBannerLink;        swBanner.target = swBannerTarget;        swBanner.style.display = "flex";        swBanner.style.justifyContent = "center";        swBanner.style.alignItems = "center";        swBanner.style.width = "100%";        swBanner.style.minHeight = "48px";        swBanner.style.maxHeight = "72px";        swBanner.style.paddingTop = "8px";        swBanner.style.paddingBottom = "8px";        swBanner.style.lineHeight = "18px";        swBanner.style.textAlign = "center";        swBanner.style.textDecoration = "none";        swBanner.style.height = obj.bannerHeight;        swBanner.style.fontSize = obj.fontSize;        text.innerHTML = swBannerText;        swBanner.style.backgroundColor = obj.selectedBackgroundColor;        swBanner.style.color = obj.selectedTextColor;        swBanner.id = 'sw-banner';        swBanner.classList.add('sw-banner');        centerDiv.classList.add('center');        centerDiv.append(text);        swBanner.append(centerDiv);        if(!pageSimulator) {          body.insertBefore(swBanner, body.firstChild);        } else {          pageSimulator.insertBefore(swBanner, pageSimulator.firstChild);        }    };document.addEventListener("DOMContentLoaded", function() { createBanner(configObj, null); });</script>      
         <header class="main-header position-absolute w-100">
             <nav class="navbar navbar-expand-xl navbar-dark z-10">
                 <div class="container d-flex align-items-center justify-content-lg-between position-relative">
-                <?php if(Request::is('/')): ?>
                     <a href="/" class="navbar-brand d-flex align-items-center mb-md-0 text-decoration-none">
                         <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-white" />
                         <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-color" />
                     </a>
-                <?php else: ?> 
-                <?php endif; ?>
+                   
                     <a class="navbar-toggler position-absolute right-0 border-0" href="#offcanvasWithBackdrop">
                         <i class="flaticon-menu" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"
                      data-bs-toggle="offcanvas" role="button"></i>
@@ -105,12 +59,13 @@
                             <li><a href="#faq" class="nav-link"><?php echo e(__('FAQ')); ?></a></li>
                             <li><a href="#pricing" class="nav-link"><?php echo e(__('Pricing')); ?></a></li>
                             <li><a href="/contact" class="nav-link"><?php echo e(__('Contact')); ?></a></li>
+
                         <?php endif; ?>
+   
                 </ul>
                 </div>
                 <?php if(auth()->guard()->guest()): ?>
-
-            <?php else: ?>
+           <?php else: ?>
             <div class="collapse navbar-collapse justify-content-center">
                         <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                             <li class="nav-item dropdown">
@@ -156,8 +111,12 @@
                                                 <form method="POST" id="logout-form" action="<?php echo e(route('logout')); ?>">
                                                     <?php echo csrf_field(); ?>
                                                 </form>
+                            
+                                          
                                         </div>
-                      
+                                       
+
+
                                     </div>
                                 </div>
                             </li>
@@ -237,12 +196,16 @@
             </div>
             <!--offcanvas menu end-->
         </header>
-<!--begin header -->
-<!--end header -->
 
-        <?php echo e($slot); ?>
+        <!--blog section start-->
 
-        <?php if (! (Request::is('register') || Request::is('login') || Request::is('email/verify'))): ?>
+        <?php echo $__env->yieldContent('content'); ?>
+
+        <!--blog section end-->
+
+
+        <!--footer section start-->
+        <!--footer section start-->
         <footer class="footer-section">
             <!--footer top start-->
             <!--for light footer add .footer-light class and for dark footer add .bg-dark .text-white class-->
@@ -262,7 +225,7 @@
                                     <input type="submit" value="Subscribe" data-wait="Please wait..." class="btn btn-primary mt-3 mt-lg-0 mt-md-0">
                                 </form>
                                 <div class="ratting-wrap mt-4">
-                                    <h6 class="mb-0">9/10 Overall rating</h6>
+                                    <h6 class="mb-0">10/10 Overall rating</h6>
                                     <ul class="list-unstyled rating-list list-inline mb-0">
                                         <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
@@ -283,7 +246,7 @@
                                             <li><a href="/contact" class="text-decoration-none">Contact</a></li>
                                             <li><a href="/TermsandConditions" class="text-decoration-none">Terms and Conditions</a></li>
                                             <li><a href="/privacypolicy" class="text-decoration-none">Privacy Policy</a></li>
-                                            <!-- <li><a href="https://weenify.firstpromoter.com/" class="text-decoration-none">Affiliate Program</a></li> -->
+                                            <li><a href="https://weenify.firstpromoter.com/" class="text-decoration-none">Affiliate Program</a></li>
                                             <li><a href="/RefundPolicy" class="text-decoration-none">Refund Policy</a></li>
                                             <li><a href="/#pricing" class="text-decoration-none">Pricing</a></li>
 
@@ -300,8 +263,6 @@
                 </div>
             </div>
             <!--footer top end-->
-
-            <!--footer bottom start-->
             <div class="footer-bottom  bg-gradient text-white py-4">
                 <div class="container">
                     <div class="row justify-content-between align-items-center">
@@ -313,15 +274,11 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="footer-single-col text-start text-lg-end text-md-end">
                                 <ul class="list-unstyled list-inline footer-social-list mb-0">
-                                <li class="list-inline-item"><a href="https://www.facebook.com/ecopyapp" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://www.instagram.com/ecopy.app" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://www.tiktok.com/@ecopyapp" target="_blank"><i class="fab fa-tiktok"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://www.youtube.com/@ecopyapp" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://fr.quora.com/profile/Ecopy-App" target="_blank"><i class="fab fa-quora"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://www.reddit.com/user/ecopy-app/" target="_blank"><i class="fab fa-reddit"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://x.com/EcopyApp" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                        <li class="list-inline-item"><a href="https://www.pinterest.fr/ecopyapp/" target="_blank"><i class="fab fa-pinterest"></i></a></li>
-
+                                    <li class="list-inline-item"><a href="" target=”_blank”><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="list-inline-item"><a href="https://www.instagram.com/weenifyio" target=”_blank”><i class="fab fa-instagram"></i></a></li>
+                                    <li class="list-inline-item"><a href="https://www.tiktok.com/@weenify" target=”_blank”><i class="fab fa-tiktok"></i></a></li>
+                                    <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCBuzUBYeBY1NemZE5DFXuaw" target=”_blank”><i class="fab fa-youtube"></i></a></li>
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -330,21 +287,20 @@
             </div>
             <!--footer bottom end-->
         </footer>
-        <?php endif; ?>
-        <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
+        <!--footer section end--> <!--footer section end-->
 
-    
+    </div>
+
+    <!--build:js-->
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
-    <script src="<?php echo e(asset('assets/js/app.js')); ?>"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/swiper-bundle.min.js"></script>
-    <script src="assets/js/vendors/parallax.min.js"></script>
     <script src="assets/js/vendors/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/vendors/parallax.min.js"></script>
     <script src="assets/js/vendors/aos.js"></script>
     <script src="assets/js/vendors/massonry.min.js"></script>
-    <script src="https://codepen.io/steveg3003/pen/zBVakw.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
-
+    <script src="assets/js/app.js"></script>
+    <!--endbuild-->
 </body>
-</html>
-<?php /**PATH /Users/touzani/Desktop/ecopy/resources/views/layouts/guest.blade.php ENDPATH**/ ?>
+
+</html><?php /**PATH /Users/touzani/Desktop/ecopy/resources/views/layouts/blog.blade.php ENDPATH**/ ?>
