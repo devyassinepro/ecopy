@@ -2,7 +2,6 @@
 
 namespace Imanghafoori\LaravelMicroscope\Commands;
 
-use Closure;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Imanghafoori\LaravelMicroscope\ErrorReporters\ErrorPrinter;
@@ -47,11 +46,7 @@ class AnonymizeMigrations extends Command
 
         $errorPrinter->printer = $this->output;
 
-        $this->appliesPatterns(
-            $this->parsePatterns($this->option('nofix')),
-            $fileName,
-            $folder
-        );
+        $this->appliesPatterns($this->parsePatterns(), $fileName, $folder);
 
         $this->finishCommand($errorPrinter);
 
@@ -60,9 +55,9 @@ class AnonymizeMigrations extends Command
         return $errorPrinter->hasErrors() ? 1 : 0;
     }
 
-    private function appliesPatterns(array $patterns, string $fileName, $folderName = '')
+    private function appliesPatterns(array $patterns, string $fileName): void
     {
-        foreach ($this->filterFolders($this->getMigrationFolders(), $folderName) as $migrationFolder) {
+        foreach ($this->filterVendorFolders($this->getMigrationFolders()) as $migrationFolder) {
             foreach ($this->getMigrationFiles($migrationFolder, $fileName) as $migration) {
                 PatternRefactorings::check(
                     PhpFileDescriptor::make($migration->getRealPath()),
@@ -80,10 +75,10 @@ class AnonymizeMigrations extends Command
                 'replace' => 'return new class extends <2>'.PHP_EOL.'{<3>};',
                 'filters' => [
                     2 => [
-                        'is_sub_class_of' => \Illuminate\Database\Migrations\Migration::class
-                    ]
-                ]
-            ]
+                        'is_sub_class_of' => \Illuminate\Database\Migrations\Migration::class,
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -95,16 +90,12 @@ class AnonymizeMigrations extends Command
             ->in($folder);
     }
 
-    private function filterFolders(array $paths, $folderName): array
+    private function filterVendorFolders(array $paths): array
     {
-        $paths = $this->filterPaths($paths, function ($path) {
-            return Str::startsWith($path, base_path('vendor'));
-        });
-
-        if ($folderName) {
-            $paths = $this->filterPaths($paths, function ($path) use ($folderName) {
-                return ! Str::contains($path, $folderName);
-            });
+        foreach ($paths as $key => $path) {
+            if (Str::startsWith($path, base_path('vendor'))) {
+                unset($paths[$key]);
+            }
         }
 
         return $paths;
@@ -117,24 +108,8 @@ class AnonymizeMigrations extends Command
         return array_unique($paths);
     }
 
-    private function parsePatterns($nofix)
+    private function parsePatterns()
     {
-        $patterns = $this->getPatterns();
-        if ($nofix) {
-            unset($patterns['anonymize_migrations']['replace']);
-        }
-
-        return [PatternParser::parsePatterns($patterns)];
-    }
-
-    private function filterPaths(array $paths, Closure $pre): array
-    {
-        foreach ($paths as $key => $path) {
-            if ($pre($path)) {
-                unset($paths[$key]);
-            }
-        }
-
-        return $paths;
+        return [PatternParser::parsePatterns($this->getPatterns())];
     }
 }

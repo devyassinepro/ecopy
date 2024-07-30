@@ -38,7 +38,7 @@ trait CommandsRegistry
         Commands\CheckDynamicWhereMethod::class,
         Features\ListModels\ListModelsArtisanCommand::class,
         Commands\CheckEmptyComments::class,
-        Commands\AnonymizeMigrations::class,
+        Commands\CheckExtraSemiColons::class,
     ];
 
     private function registerCommands()

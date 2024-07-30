@@ -15,7 +15,13 @@ class EnforceQuery extends Command
     use LogsErrors;
     use PatternApply;
 
-    protected $signature = 'enforce:query {--f|file=} {--d|folder=} {--detailed : Show files being checked}';
+    protected $signature = 'enforce:query
+        {--f|file=}
+        {--d|folder=}
+        {--m|methods=}
+        {--c|classes=}
+        {--detailed : Show files being checked}
+    ';
 
     protected $description = 'Enforces the ::query() method call on models.';
 
@@ -32,16 +38,15 @@ class EnforceQuery extends Command
         return $this->patternCommand($errorPrinter);
     }
 
-    private function getPatterns(): array
+    private function getPatterns()
     {
         return [
-            'pattern_name' => [
+            'enforce_query' => [
+                'cache_key' => 'enforce_query-v1',
                 'search' => '<class_ref>::<name>',
                 'replace' => '<1>::query()-><2>',
                 'filters' => [
-                    1 => [
-                        'is_subclass_of' => Model::class,
-                    ],
+                    1 => $this->getModelConditions(),
                     2 => [
                         'in_array' => $this->getMethods(),
                     ],
@@ -50,13 +55,37 @@ class EnforceQuery extends Command
         ];
     }
 
-    private function getMethods(): array
+    private function getMethods()
+    {
+        $methods = ltrim($this->option('methods'), '=');
+
+        if ($methods) {
+            return explode(',', $methods);
+        }
+
+        return $this->allMethods();
+    }
+
+    private function getModelConditions()
+    {
+        $modelConditions = [
+            'is_subclass_of' => Model::class,
+        ];
+
+        $methods = ltrim($this->option('classes'), '=');
+        $methods && $modelConditions['in_array'] = explode(',', $methods);
+
+        return $modelConditions;
+    }
+
+    private function allMethods()
     {
         return [
+            'has',
             'where',
             'whereIn',
-            'whereNotIn',
             'whereNull',
+            'whereNotIn',
             'whereNotNull',
             'whereHas',
             'whereRaw',
@@ -64,22 +93,22 @@ class EnforceQuery extends Command
             'find',
             'findOr',
             'firstOr',
-            'firstOrCreate',
             'findOrFail',
             'firstOrFail',
-            'paginate',
-            'findOrNew',
-            'first',
-            'pluck',
+            'firstOrCreate',
             'firstOrNew',
-            'select',
             'selectRaw',
+            'findOrNew',
+            'paginate',
+            'first',
+            'get',
+            'pluck',
+            'select',
             'create',
             'insert',
             'limit',
             'orderBy',
             'findMany',
-            'get',
         ];
     }
 }
