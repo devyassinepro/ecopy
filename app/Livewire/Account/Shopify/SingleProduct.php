@@ -91,6 +91,7 @@ class SingleProduct extends Component
 
 
         try {
+
             $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($store, $publish, $productData) . '}) { 
                 product {
                     id
@@ -110,7 +111,6 @@ class SingleProduct extends Component
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
             
             $endpoint = getShopifyURLForStore('graphql.json', $store);
-            // Log::info('Shopify endpoint affiche:'.$endpoint);
 
             $headers = getShopifyHeadersForStore($store);
             $payload = ['query' => $mutation];
@@ -141,65 +141,65 @@ class SingleProduct extends Component
 }
 
 
-private function getGraphQLPayloadForProduct($productData, $publishproduct) {
+// private function getGraphQLPayloadForProduct($productData, $publishproduct) {
   
-    $publishproduct = $publishproduct ? 'true' : 'false';
+//     $publishproduct = $publishproduct ? 'true' : 'false';
 
-    $temp = [];
-    $temp[] = 
-        ' title: "' . $productData['title'] . '",
-          published: ' . $publishproduct . ',
-          vendor: "Scraped Vendor" ';
+//     $temp = [];
+//     $temp[] = 
+//         ' title: "' . $productData['title'] . '",
+//           published: ' . $publishproduct . ',
+//           vendor: "Scraped Vendor" ';
     
-    $escapedDescriptionHtml = json_encode($productData['description']);
-    $temp[] = ' descriptionHtml: ' . $escapedDescriptionHtml . '';
+//     $escapedDescriptionHtml = json_encode($productData['description']);
+//     $temp[] = ' descriptionHtml: ' . $escapedDescriptionHtml . '';
 
-    if (isset($productData['variants']) && is_array($productData['variants'])) {
-        $temp[] = 'variants: [' . $this->getVariantsGraphQLConfig($productData['variants'],$productData['price']) . ']';
-    }
-    Log::info("temp[] variants  ".$temp);
+//     if (isset($productData['variants']) && is_array($productData['variants'])) {
+//         $temp[] = 'variants: [' . $this->getVariantsGraphQLConfig($productData['variants'],$productData['price']) . ']';
+//     }
+//     Log::info("temp[] variants  ".$temp);
 
-    if (isset($productData['images']) && is_array($productData['images'])) {
-        $temp[] = 'images: [' . $this->getImagesGraphQLConfig($productData['images']) . ']';
-    }
-    Log::info("temp[] images  ".$temp);
+//     if (isset($productData['images']) && is_array($productData['images'])) {
+//         $temp[] = 'images: [' . $this->getImagesGraphQLConfig($productData['images']) . ']';
+//     }
+//     Log::info("temp[] images  ".$temp);
 
-    Log::info("getGraphQLPayloadForProduct END ");
-    Log::info("getGraphQLPayloadForProduct END aff ".$temp);
+//     Log::info("getGraphQLPayloadForProduct END ");
+//     Log::info("getGraphQLPayloadForProduct END aff ".$temp);
 
-    return implode(',', $temp);
-}
+//     return implode(',', $temp);
+// }
 
-private function getVariantsGraphQLConfig($variants,$price) {
-    $str = [];
-    foreach ($variants as $variant) {
-        Log::info("getGraphQLPayloadForProduct variant variant: " . json_encode($variant));
+// private function getVariantsGraphQLConfig($variants,$price) {
+//     $str = [];
+//     foreach ($variants as $variant) {
+//         Log::info("getGraphQLPayloadForProduct variant variant: " . json_encode($variant));
 
-      $formattedOptionValues = implode('", "', $variant['info']);
-      Log::info(" variant variant: " . $variant['info']);
-      Log::info(" variant variant formattedOptionValues: " . $formattedOptionValues);
+//       $formattedOptionValues = implode('", "', $variant['info']);
+//       Log::info(" variant variant: " . $variant['info']);
+//       Log::info(" variant variant formattedOptionValues: " . $formattedOptionValues);
 
 
-        $str[] = '{
-            taxable: false,
-            title: "' . $variant['info'] . '",
-            price: ' . $price . ',
-            inventoryManagement: null,
-            inventoryPolicy: DENY
-        }';
-    }
-    return implode(',', $str); 
-}
+//         $str[] = '{
+//             taxable: false,
+//             title: "' . $variant['info'] . '",
+//             price: ' . $price . ',
+//             inventoryManagement: null,
+//             inventoryPolicy: DENY
+//         }';
+//     }
+//     return implode(',', $str); 
+// }
 
-private function getImagesGraphQLConfig($images) {
-    $str = [];
-    foreach ($images as $image) {
-        $str[] = '{
-            src: "' . $image . '",
-        }';
-    }
-    return implode(',', $str); 
-}
+// private function getImagesGraphQLConfig($images) {
+//     $str = [];
+//     foreach ($images as $image) {
+//         $str[] = '{
+//             src: "' . $image . '",
+//         }';
+//     }
+//     return implode(',', $str); 
+// }
 
 private function isAmazonUrl($url)
 {
@@ -233,8 +233,6 @@ private function isEtsyUrl($url)
     }
     $title = $titleNode->text();
  
-    Log::info("title aff ".$title);
-
     // Scrape description
     $descriptionNode = $crawler->filter('.wt-text-body-01.wt-break-word');
     $description = $descriptionNode->each(function (Crawler $node) {
@@ -257,7 +255,6 @@ private function isEtsyUrl($url)
         return preg_replace('/(_AC_US\d+_\.jpg)$/', '.jpg', $src);
     }, $filteredImages);
 
-    // Scrape price
     // Scrape price
     $priceNode = $crawler->filter('.wt-text-title-larger.wt-mr-xs-1.wt-text-slime, .wt-text-title-larger.wt-mr-xs-1');
     if ($priceNode->count() > 0) {
@@ -301,7 +298,7 @@ private function isEtsyUrl($url)
     ];
 
     // Log the product data
-    Log::info($productData);
+    // Log::info($productData);
 
     return response()->json($productData);
     }
@@ -327,7 +324,6 @@ private function isEtsyUrl($url)
                 throw new \Exception("Product title not found");
             }
             $title = $titleNode->text();
-            Log::info('title product'.$title);
 
             $descriptionNode = $crawler->filter('#feature-bullets ul li span');
             $description = $descriptionNode->each(function (Crawler $node) {
@@ -486,7 +482,7 @@ private function isEtsyUrl($url)
         // Prepare options array to match expected format in `getGraphQLPayloadForProductPublishUrl`
         $options = [['name' => 'Color', 'values' => $optionValues]];
     
-        return [
+        $productData = [
             'product' => [
                 'title' => $amazonProductData['title'],
                 'body_html' => $descriptionHtml,
@@ -495,11 +491,132 @@ private function isEtsyUrl($url)
                 'tags' => '', // Set empty tags or set relevant tags
                 'options' => $options, // Set the formatted options array
                 'variants' => $variants,
-                'images' => $images
+                'images' => $images,
+                'price' => $price
+
             ],
             'optionsString' => $optionsString
         ];
+
+
+    // Log final product data
+    Log::info("Final Product Data amazon: " . json_encode($productData));
+
+    return $productData;
     }
+    
+
+    private function transformEtsyProductData($etsyProductData) {
+        // Decode JSON response if needed
+        if ($etsyProductData instanceof \Illuminate\Http\JsonResponse) {
+            $etsyProductData = json_decode($etsyProductData->getContent(), true);
+        }
+    
+        // Convert description array to string
+        $descriptionHtml = '';
+        if (isset($etsyProductData['description'])) {
+            if (is_array($etsyProductData['description'])) {
+                $descriptionHtml = nl2br(implode("\n", $etsyProductData['description']));
+            } else {
+                $descriptionHtml = nl2br($etsyProductData['description']);
+            }
+        }
+    
+        // Log description
+        Log::info("Description HTML: " . $descriptionHtml);
+    
+        // Transform images array into the required format
+        $images = [];
+        if (isset($etsyProductData['images']) && is_array($etsyProductData['images'])) {
+            $images = array_map(function($url) {
+                return ['src' => $url];
+            }, $etsyProductData['images']);
+        }
+    
+        // Log images
+        Log::info("Images: " . json_encode($images));
+    
+        // Ensure the price is in the correct format
+        $price = str_replace(',', '.', $etsyProductData['price'] ?? '0.00');
+    
+        // Log price
+        Log::info("Price: " . $price);
+    
+    // Initialize variants array
+    $variants = [];
+    $optionsList = []; // Initialize the options list
+
+    // Extract unique option values and names
+    if (isset($etsyProductData['variants']) && is_array($etsyProductData['variants'])) {
+        foreach ($etsyProductData['variants'] as $index => $variantGroup) {
+            Log::info("Processing variant group: " . json_encode($variantGroup));
+
+            if (isset($variantGroup['label']) && isset($variantGroup['options']) && is_array($variantGroup['options'])) {
+                foreach ($variantGroup['options'] as $option) {
+                    // Extract value with price
+                    preg_match('/^(.*?)(\s*\(\s*€[\d,]+\s*\))?$/', $option, $matches);
+                    $optionLabel = isset($matches[1]) ? trim($matches[1]) : $option;
+                    $optionPrice = isset($matches[2]) ? trim($matches[2]) : '';
+
+                    // Combine option label and price
+                    $combinedOption = $optionLabel . $optionPrice;
+
+                    // Add to option list
+                    if (!in_array($combinedOption, $optionsList)) {
+                        $optionsList[] = $combinedOption;
+                    }
+
+                    // Extract price from option if available
+                    preg_match('/\(\s*€([\d,]+)\s*\)/', $option, $priceMatches);
+                    $variantPrice = isset($priceMatches[1]) ? str_replace(',', '.', $priceMatches[1]) : $price;
+
+                    // Create the variant entry with additional attributes
+                    $variants[] = [
+                        'title' => $etsyProductData['title'] . ' - ' . $combinedOption,
+                        'price' => (float) $variantPrice, // Ensure the price is correctly formatted
+                        'compare_at_price' => null,
+                        'sku' => $variantGroup['asin'] ?? '',
+                        'option1' => $combinedOption,
+                        'option2' => '',
+                        'option3' => '',
+                        'position' => $index + 1 // Position based on index
+                    ];
+                }
+            } else {
+                Log::info("Variant group missing label or options: " . json_encode($variantGroup));
+            }
+        }
+    }
+
+    // Build the options string from the list
+    $optionsString = implode(',', $optionsList);
+
+    // Log final variants and options string
+    Log::info("Options String: " . $optionsString);
+    Log::info("Transformed Variants: " . json_encode($variants));
+
+    // Prepare the final product data array
+    $productData = [
+        'product' => [
+            'title' => $etsyProductData['title'] ?? 'Untitled',
+            'descriptionHtml' => $descriptionHtml,
+            'vendor' => 'Etsy Vendor', // Set a default vendor
+            'productType' => 'Crafts', // Set a default product type
+            'tags' => '', // Set empty tags or set relevant tags
+            'options' => [['name' => 'Size', 'values' => $optionsList]], // Set the formatted options array
+            'variants' => $variants, // Set the formatted variants array
+            'images' => $images,
+            'price' => $price
+        ]
+    ];
+
+    // Log final product data
+    Log::info("Final Product Data: " . json_encode($productData));
+
+    return $productData;
+    }
+    
+    
 
     public function testEvent()
     {
@@ -527,20 +644,33 @@ private function isEtsyUrl($url)
     
         if (isset($productData['product']['tags']))
             $temp[] = ' tags: ["' . implode('", "', explode(',', $productData['product']['tags'])) . '"]';
-    
-        if (isset($productData['product']['options']) && is_array($productData['product']['options'])) {
+        
+        if (isset($productData['product']['options']) && is_array($productData['product']['options']) && !empty($productData['product']['options'])) {
             $optionValues = array_reduce($productData['product']['options'], function($carry, $option) {
-                return $carry . implode(',', $option['values']) . ',';
+                return $carry . implode(',', array_filter($option['values'])) . ',';
             }, '');
             $optionValues = rtrim($optionValues, ',');
-            $formattedOptions = '"' . $optionValues . '"';
-            $temp[] = 'options: [' . $formattedOptions . ']';
+            if (!empty($optionValues)) {
+                $formattedOptions = '"' . $optionValues . '"';
+                $temp[] = 'options: [' . $formattedOptions . ']';
+            }
         }
         
-    
-        if (isset($productData['product']['variants']) && is_array($productData['product']['variants'])) {
+        if (isset($productData['product']['variants']) && is_array($productData['product']['variants']) && !empty($productData['product']['variants'])) {
             $temp[] = 'variants: [' . $this->getVariantsGraphQLConfigUrl($productData) . ']';
+        }else{
+            $temp[] = 'variants: [{
+                taxable: false,
+                title: "",
+                price: '.$productData['product']['price'].',
+                sku: "",
+                position: 1,
+                inventoryItem: {cost: 67, tracked: false},
+                inventoryManagement: null,
+                inventoryPolicy: DENY
+            }]';
         }
+ 
     
         if (isset($productData['product']['images']) && is_array($productData['product']['images'])) {
             $temp[] = 'images: [' . $this->getImagesGraphQLConfigUrl($productData) . ']';
@@ -604,5 +734,4 @@ private function isEtsyUrl($url)
         }
     }
     
-
 }
