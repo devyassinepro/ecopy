@@ -82,6 +82,18 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+    Route::get('/fr', function () {
+        return view('welcomefr');
+    })->name('homefr');
+    Route::get('/nl', function () {
+        return view('welcomenl');
+    })->name('homenl');
+    Route::get('/pt', function () {
+        return view('welcomept');
+    })->name('homept');
+    Route::get('/es', function () {
+        return view('welcomees');
+    })->name('homees');
 
     Route::get('/contact', function () {
         return view('pages.contact');

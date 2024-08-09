@@ -164,6 +164,54 @@
                 
                           </div>
                     @guest
+
+                <ul class="nav col-12 col-md-auto justify-content-center main-menu">
+                        <li class="nav-item dropdown">
+                        @if(Request::is('/'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ENGLISH</a>
+                            @endif
+                            @if(Request::is('es'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SPANISH</a>
+                            @endif
+                            @if(Request::is('nl'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">DUTCH</a>
+                            @endif
+                            @if(Request::is('fr'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">FRENCH</a>
+                            @endif
+                            @if(Request::is('pt'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">PORTUGUESE</a>
+                            @endif
+                            <div class="dropdown-menu border-0 shadow py-0 bg-white">
+                                <div class="dropdown-grid">
+                                    <div class="dropdown-grid-item bg-white radius-left-side">                    
+                                        <a href="/" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">ENGLISH</div>
+                                        </a>
+                                        <a href="/nl" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">DUTCH</div>
+                                        </a>
+                                        <a href="/fr" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">FRENCH</div>
+                                        </a>
+                                        <a href="/pt" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">PORTUGUESE</div>
+                                        </a>
+                                        <a href="/es" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">SPANISH</div>
+                                        </a>
+
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </li>
+                </ul>
                     <div class="action-btns text-end me-5 me-lg-0 d-none d-md-block d-lg-block">
                         <a href="javascript:void(0)" class="btn btn-link p-1 tt-theme-toggle">
                             <div class="tt-theme-light" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Light"><i class="flaticon-sun-1 fs-lg"></i></div>
