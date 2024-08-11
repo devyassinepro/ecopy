@@ -44,7 +44,6 @@
                                     </p>
                                 </blockquote>
                             </div>
-                            <img src="assets/img/tab-feature-img-4.png" class="img-fluid mt-4 rounded-custom" alt="apply">
                             <div class="job-details-info mt-5">
                                 <h3 class="h5">Focus on increasing customer retention first</h3>
                                 <p>Appropriately fashion ubiquitous information without future-proof growth strategies. Interactively morph cutting-edge e-business before functional potentialities. Compellingly syndicate empowered communities via multimedia based schemas. Objectively productize granular materials whereas quality solutions. Collaboratively reinvent innovative paradigms and low-risk high-yield action items.</p>
@@ -66,12 +65,10 @@
                                 </ul>
                             </div>
 
-                            <img src="assets/img/tab-feature-img-2.png" class="img-fluid mt-5 rounded-custom" alt="apply">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="author-wrap text-center bg-light-subtle p-5 sticky-sidebar rounded-custom mt-5 mt-lg-0">
-                            <img src="assets/img/team/team-2.jpg" alt="author" width="120" class="img-fluid shadow-sm rounded-circle">
                             <div class="author-info my-4">
                                 <h5 class="mb-0">Elena Mou</h5>
                                 <span class="small">Head of Designer</span>
@@ -142,7 +139,6 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-article rounded-custom mb-4 mb-lg-0">
                             <a href="blog-single.html" class="article-img">
-                                <img src="assets/img/blog/blog-1.jpg" alt="article" class="img-fluid">
                             </a>
                             <div class="article-content p-4">
                                 <div class="article-category mb-4 d-block">
@@ -156,7 +152,6 @@
                                 <a href="javascript:;">
                                     <div class="d-flex align-items-center pt-4">
                                         <div class="avatar">
-                                            <img src="assets/img/testimonial/6.jpg" alt="avatar" width="40" class="img-fluid rounded-circle me-3">
                                         </div>
                                         <div class="avatar-info">
                                             <h6 class="mb-0 avatar-name">Jane Martin</h6>
@@ -171,7 +166,6 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-article rounded-custom mb-4 mb-lg-0">
                             <a href="blog-single.html" class="article-img">
-                                <img src="assets/img/blog/blog-2.jpg" alt="article" class="img-fluid">
                             </a>
                             <div class="article-content p-4">
                                 <div class="article-category mb-4 d-block">
@@ -185,7 +179,6 @@
                                 <a href="javascript:;">
                                     <div class="d-flex align-items-center pt-4">
                                         <div class="avatar">
-                                            <img src="assets/img/testimonial/1.jpg" alt="avatar" width="40" class="img-fluid rounded-circle me-3">
                                         </div>
                                         <div class="avatar-info">
                                             <h6 class="mb-0 avatar-name">Veronica P. Byrd</h6>
@@ -200,7 +193,6 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-article rounded-custom mb-4 mb-lg-0 mb-md-0">
                             <a href="blog-single.html" class="article-img">
-                                <img src="assets/img/blog/blog-3.jpg" alt="article" class="img-fluid">
                             </a>
                             <div class="article-content p-4">
                                 <div class="article-category mb-4 d-block">
@@ -214,7 +206,6 @@
                                 <a href="javascript:;">
                                     <div class="d-flex align-items-center pt-4">
                                         <div class="avatar">
-                                            <img src="assets/img/testimonial/3.jpg" alt="avatar" width="40" class="img-fluid rounded-circle me-3">
                                         </div>
                                         <div class="avatar-info">
                                             <h6 class="mb-0 avatar-name">Touzani Yassine</h6>
