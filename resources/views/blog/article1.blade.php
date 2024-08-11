@@ -218,7 +218,7 @@
                                         </div>
                                         <div class="avatar-info">
                                             <h6 class="mb-0 avatar-name">Touzani Yassine</h6>
-                                            <span class="small fw-medium text-muted">April 24, 2021</span>
+                                            <span class="small fw-medium text-muted">April 24, 2024</span>
                                         </div>
                                     </div>
                                 </a>
