@@ -1,52 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
 <head>
-    <!--required meta tags-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
 
-    <!--meta-->
-    <meta name="description" content="">
-    <meta name="author" content="ThemeTags">
-
-    <!--favicon icon-->
-    <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="16x16">
-
-    <!--title-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="author" content="Touzani Yassine" />
     <title>{{ config('app.name') }} - Blog</title>
+    <meta name="description" content="Ecopy.app - Copy Products from shopify , amazon , etsy to your shopify store in one click" />
+    <meta name="keywords" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
+    <meta property="og:description" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
+    <meta property="og:url" content="https://ecopy.app/" />
+    <meta property="og:site_name" content="Copy Products to Shopify, WooCommerce and Wix stores , Product Importer shopify" />
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap" rel="stylesheet">
-    <!-- Font -->
+        <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" title="Favicon" sizes="16x16" />
+    <!-- bootstrap 5 -->
+    <link rel="stylesheet" href="{{ asset('assets/css/lib/bootstrap.min.css') }}">
+    <!-- ====== font family ====== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"rel="stylesheet">
     <!--build:css-->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <!-- endbuild -->
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
+    <!-- endbuild -->
     <!--custom css start-->
-    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <!--custom css end-->
+    @livewireStyles
+    @stack('styles')
+    <style>
+        .card-body{
+            border-top:none;
+        }
+        .navbar-fixed-top .navbar-nav .current a{
+            color: #5f6468 !important;
+        }
+    </style>
 
 </head>
 
 <body>
+
     <!--main content wrapper start-->
     <div class="main-wrapper">
 
         <!--header section start-->
-
-        <script> configObj = {"text":"\nLaunch Your Store on Shopify for Only $1 !","bannerURL":"https://weenify.io/shopify","selectedBackgroundColor":"#0037b8","selectedTextColor":"#ffffff","bannerHeight":"48px","fontSize":"16px"};function createBanner(obj, pageSimulator) {        var swBannerLink = obj.bannerURL;        var swBannerTarget = "_blank";        var swBannerText = obj.text;        var body = document.body;        var swBanner = document.createElement('a');        var centerDiv = document.createElement('div');        var text = document.createElement('span');        swBanner.href = swBannerLink;        swBanner.target = swBannerTarget;        swBanner.style.display = "flex";        swBanner.style.justifyContent = "center";        swBanner.style.alignItems = "center";        swBanner.style.width = "100%";        swBanner.style.minHeight = "48px";        swBanner.style.maxHeight = "72px";        swBanner.style.paddingTop = "8px";        swBanner.style.paddingBottom = "8px";        swBanner.style.lineHeight = "18px";        swBanner.style.textAlign = "center";        swBanner.style.textDecoration = "none";        swBanner.style.height = obj.bannerHeight;        swBanner.style.fontSize = obj.fontSize;        text.innerHTML = swBannerText;        swBanner.style.backgroundColor = obj.selectedBackgroundColor;        swBanner.style.color = obj.selectedTextColor;        swBanner.id = 'sw-banner';        swBanner.classList.add('sw-banner');        centerDiv.classList.add('center');        centerDiv.append(text);        swBanner.append(centerDiv);        if(!pageSimulator) {          body.insertBefore(swBanner, body.firstChild);        } else {          pageSimulator.insertBefore(swBanner, pageSimulator.firstChild);        }    };document.addEventListener("DOMContentLoaded", function() { createBanner(configObj, null); });</script>      
+        <!--header start-->
+        <script> configObj = {"text":"\nLaunch Your Store on Shopify for Only $1 !","bannerURL":"https://ecopy.app/shopify","selectedBackgroundColor":"#0037b8","selectedTextColor":"#ffffff","bannerHeight":"48px","fontSize":"16px"};function createBanner(obj, pageSimulator) {        var swBannerLink = obj.bannerURL;        var swBannerTarget = "_blank";        var swBannerText = obj.text;        var body = document.body;        var swBanner = document.createElement('a');        var centerDiv = document.createElement('div');        var text = document.createElement('span');        swBanner.href = swBannerLink;        swBanner.target = swBannerTarget;        swBanner.style.display = "flex";        swBanner.style.justifyContent = "center";        swBanner.style.alignItems = "center";        swBanner.style.width = "100%";        swBanner.style.minHeight = "48px";        swBanner.style.maxHeight = "72px";        swBanner.style.paddingTop = "8px";        swBanner.style.paddingBottom = "8px";        swBanner.style.lineHeight = "18px";        swBanner.style.textAlign = "center";        swBanner.style.textDecoration = "none";        swBanner.style.height = obj.bannerHeight;        swBanner.style.fontSize = obj.fontSize;        text.innerHTML = swBannerText;        swBanner.style.backgroundColor = obj.selectedBackgroundColor;        swBanner.style.color = obj.selectedTextColor;        swBanner.id = 'sw-banner';        swBanner.classList.add('sw-banner');        centerDiv.classList.add('center');        centerDiv.append(text);        swBanner.append(centerDiv);        if(!pageSimulator) {          body.insertBefore(swBanner, body.firstChild);        } else {          pageSimulator.insertBefore(swBanner, pageSimulator.firstChild);        }    };document.addEventListener("DOMContentLoaded", function() { createBanner(configObj, null); });</script>      
         <header class="main-header position-absolute w-100">
             <nav class="navbar navbar-expand-xl navbar-dark z-10">
                 <div class="container d-flex align-items-center justify-content-lg-between position-relative">
                     <a href="/" class="navbar-brand d-flex align-items-center mb-md-0 text-decoration-none">
-                        <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-white" />
-                        <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-color" />
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="img-fluid logo-white" />
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="img-fluid logo-color" />
                     </a>
-                   
                     <a class="navbar-toggler position-absolute right-0 border-0" href="#offcanvasWithBackdrop">
                         <i class="flaticon-menu" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"
                      data-bs-toggle="offcanvas" role="button"></i>
@@ -54,18 +65,16 @@
                     <div class="clearfix"></div>
                     <div class="collapse navbar-collapse justify-content-center">
                         <ul class="nav col-12 col-md-auto justify-content-center main-menu">
-                        @if(Request::is('/'))
+                       
                             <li><a href="/" class="nav-link">{{ __('Home') }}</a></li>
-                            <li><a href="#faq" class="nav-link">{{ __('FAQ') }}</a></li>
-                            <li><a href="#pricing" class="nav-link">{{ __('Pricing') }}</a></li>
+                            <li><a href="/#faq" class="nav-link">{{ __('FAQ') }}</a></li>
+                            <li><a href="/#pricing" class="nav-link">{{ __('Pricing') }}</a></li>
                             <li><a href="/contact" class="nav-link">{{ __('Contact') }}</a></li>
-
-                        @endif
-   
                 </ul>
                 </div>
                 @guest
-           @else
+
+            @else
             <div class="collapse navbar-collapse justify-content-center">
                         <ul class="nav col-12 col-md-auto justify-content-center main-menu">
                             <li class="nav-item dropdown">
@@ -107,12 +116,8 @@
                                                 <form method="POST" id="logout-form" action="{{ route('logout') }}">
                                                     @csrf
                                                 </form>
-                            
-                                          
                                         </div>
-                                       
-
-
+                      
                                     </div>
                                 </div>
                             </li>
@@ -124,6 +129,54 @@
                 
                           </div>
                     @guest
+
+                <ul class="nav col-12 col-md-auto justify-content-center main-menu">
+                        <li class="nav-item dropdown">
+                        @if(Request::is('/'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ENGLISH</a>
+                            @endif
+                            @if(Request::is('es'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">SPANISH</a>
+                            @endif
+                            @if(Request::is('nl'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">DUTCH</a>
+                            @endif
+                            @if(Request::is('fr'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">FRENCH</a>
+                            @endif
+                            @if(Request::is('pt'))
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">PORTUGUESE</a>
+                            @endif
+                            <div class="dropdown-menu border-0 shadow py-0 bg-white">
+                                <div class="dropdown-grid">
+                                    <div class="dropdown-grid-item bg-white radius-left-side">                    
+                                        <a href="/" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">ENGLISH</div>
+                                        </a>
+                                        <a href="/nl" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">DUTCH</div>
+                                        </a>
+                                        <a href="/fr" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">FRENCH</div>
+                                        </a>
+                                        <a href="/pt" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">PORTUGUESE</div>
+                                        </a>
+                                        <a href="/es" class="dropdown-link px-0">
+                                            <!-- <span class="me-2"><i class="flaticon-shopping-list"></i> </span> -->
+                                            <div class="drop-title">SPANISH</div>
+                                        </a>
+
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </li>
+                </ul>
                     <div class="action-btns text-end me-5 me-lg-0 d-none d-md-block d-lg-block">
                         <a href="javascript:void(0)" class="btn btn-link p-1 tt-theme-toggle">
                             <div class="tt-theme-light" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Light"><i class="flaticon-sun-1 fs-lg"></i></div>
@@ -191,16 +244,14 @@
             </div>
             <!--offcanvas menu end-->
         </header>
-
+        <!--begin header -->
         <!--blog section start-->
 
         @yield('content')
 
         <!--blog section end-->
 
-
-        <!--footer section start-->
-        <!--footer section start-->
+        @unless(Request::is('register') || Request::is('login') || Request::is('email/verify'))
         <footer class="footer-section">
             <!--footer top start-->
             <!--for light footer add .footer-light class and for dark footer add .bg-dark .text-white class-->
@@ -210,8 +261,8 @@
                         <div class="col-md-8 col-lg-4 mb-md-4 mb-lg-0">
                             <div class="footer-single-col">
                                 <div class="footer-single-col mb-4">
-                                    <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-white">
-                                    <img src="assets/img/logo.png" alt="logo" class="img-fluid logo-color">
+                                    <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="img-fluid logo-white">
+                                    <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="img-fluid logo-color">
                                 </div>
                                 <p>Get every single promotional & business update.</p>
 
@@ -220,7 +271,7 @@
                                     <input type="submit" value="Subscribe" data-wait="Please wait..." class="btn btn-primary mt-3 mt-lg-0 mt-md-0">
                                 </form>
                                 <div class="ratting-wrap mt-4">
-                                    <h6 class="mb-0">10/10 Overall rating</h6>
+                                    <h6 class="mb-0">9/10 Overall rating</h6>
                                     <ul class="list-unstyled rating-list list-inline mb-0">
                                         <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
                                         <li class="list-inline-item"><i class="fas fa-star text-warning"></i></li>
@@ -241,7 +292,7 @@
                                             <li><a href="/contact" class="text-decoration-none">Contact</a></li>
                                             <li><a href="/TermsandConditions" class="text-decoration-none">Terms and Conditions</a></li>
                                             <li><a href="/privacypolicy" class="text-decoration-none">Privacy Policy</a></li>
-                                            <li><a href="https://weenify.firstpromoter.com/" class="text-decoration-none">Affiliate Program</a></li>
+                                            <!-- <li><a href="https://weenify.firstpromoter.com/" class="text-decoration-none">Affiliate Program</a></li> -->
                                             <li><a href="/RefundPolicy" class="text-decoration-none">Refund Policy</a></li>
                                             <li><a href="/#pricing" class="text-decoration-none">Pricing</a></li>
 
@@ -258,6 +309,8 @@
                 </div>
             </div>
             <!--footer top end-->
+
+            <!--footer bottom start-->
             <div class="footer-bottom  bg-gradient text-white py-4">
                 <div class="container">
                     <div class="row justify-content-between align-items-center">
@@ -269,11 +322,15 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="footer-single-col text-start text-lg-end text-md-end">
                                 <ul class="list-unstyled list-inline footer-social-list mb-0">
-                                    <li class="list-inline-item"><a href="" target=”_blank”><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.instagram.com/weenifyio" target=”_blank”><i class="fab fa-instagram"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.tiktok.com/@weenify" target=”_blank”><i class="fab fa-tiktok"></i></a></li>
-                                    <li class="list-inline-item"><a href="https://www.youtube.com/channel/UCBuzUBYeBY1NemZE5DFXuaw" target=”_blank”><i class="fab fa-youtube"></i></a></li>
-                                   
+                                <li class="list-inline-item"><a href="https://www.facebook.com/ecopyapp" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.instagram.com/ecopy.app" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.tiktok.com/@ecopyapp" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.youtube.com/@ecopyapp" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://fr.quora.com/profile/Ecopy-App" target="_blank"><i class="fab fa-quora"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.reddit.com/user/ecopy-app/" target="_blank"><i class="fab fa-reddit"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://x.com/EcopyApp" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                        <li class="list-inline-item"><a href="https://www.pinterest.fr/ecopyapp/" target="_blank"><i class="fab fa-pinterest"></i></a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -282,20 +339,18 @@
             </div>
             <!--footer bottom end-->
         </footer>
-        <!--footer section end--> <!--footer section end-->
+        @endunless
+    
+    <script src="{{ asset('assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/parallax.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/aos.js') }}"></script>
+    <script src="{{ asset('assets/js/vendors/massonry.min.js') }}"></script>
+    <script src="https://codepen.io/steveg3003/pen/zBVakw.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
 
-    </div>
-
-    <!--build:js-->
-    <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/vendors/swiper-bundle.min.js"></script>
-    <script src="assets/js/vendors/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/vendors/parallax.min.js"></script>
-    <script src="assets/js/vendors/aos.js"></script>
-    <script src="assets/js/vendors/massonry.min.js"></script>
-    <script src="assets/js/app.js"></script>
-    <!--endbuild-->
 </body>
-
 </html>
