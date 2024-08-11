@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /_debugbar/
+Disallow: /telescope/
+Disallow: /forgot-password
