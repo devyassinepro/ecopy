@@ -21,7 +21,6 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.8",
         "hisorange/browser-detect": "^4.4",
-        "jamesmills/laravel-timezone": "^1.9",
         "jantinnerezo/livewire-alert": "^3.0",
         "joedixon/laravel-translation": "^1.1",
         "joelbutcher/socialstream": "^1.1",
