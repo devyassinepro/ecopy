@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="author" content="Touzani Yassine" />
     <title>{{ config('app.name') }} - Copy Products to Shopify | Product Importer</title>
-    <meta name="description" content="Ecopy.app - Copy Products from shopify , amazon , etsy to your shopify store in one click" />
+    <meta name="description" content="Ecopy.app - Copy Products from shopify , Amazon , etsy to your shopify store in one click" />
     <meta name="keywords" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
     <meta property="og:description" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
     <meta property="og:url" content="https://ecopy.app/" />
