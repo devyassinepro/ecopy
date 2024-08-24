@@ -19,14 +19,12 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png" title="Favicon" sizes="16x16" />
     <!-- bootstrap 5 -->
-    <link rel="stylesheet" href="assets/css/lib/bootstrap.min.css">
     <!-- ====== font family ====== -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"rel="stylesheet">
     <!--build:css-->
     <link rel="stylesheet" href="assets/css/main.css">
     <!-- endbuild -->
     <!--custom css start-->
-    <link rel="stylesheet" href="assets/css/custom.css">
     @if(Request::is('email/verify'))
     <link rel="stylesheet" href="{{ asset('assets/css/dashlite.css?ver=3.2.0') }}" type="text/css">
     @endif
@@ -393,7 +391,7 @@ src="https://www.facebook.com/tr?id=1331014271011060&ev=PageView&noscript=1"
     
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <!-- <script src="assets/js/vendors/bootstrap.bundle.min.js"></script> -->
     <script src="assets/js/vendors/swiper-bundle.min.js"></script>
     <script src="assets/js/vendors/parallax.min.js"></script>
     <script src="assets/js/vendors/jquery.magnific-popup.min.js"></script>
