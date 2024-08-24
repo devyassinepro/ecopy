@@ -246,7 +246,7 @@ src="https://www.facebook.com/tr?id=1331014271011060&ev=PageView&noscript=1"
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasWithBackdrop">
                 <div class="offcanvas-header d-flex align-items-center mt-4">
                     <a href="/" class="d-flex align-items-center mb-md-0 text-decoration-none">
-                        <img src="saas/img/logo.png" alt="logo" class="img-fluid ps-2" />
+                        <img src="assets/img/logo-dark.png" alt="logo" class="img-fluid ps-2" />
                     </a>
                     <button type="button" class="close-btn text-danger" data-bs-dismiss="offcanvas" aria-label="Close">
                         <i class="flaticon-cancel"></i>

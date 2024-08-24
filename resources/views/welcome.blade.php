@@ -188,7 +188,7 @@
                     <div class="col-xl-7 col-lg-8 align-self-end">
                         <div class="hd-faq-wrapper">
                             <div class="hd-title">
-                                <h2>Got Questions? <br> We've Got <mark class="bg-transparent p-0 position-relative">Answers <img src="assets/img/shape/line-shape.png" alt="line shape" class="position-absolute line-shape"></mark></h2>
+                                <h2>Got Questions? <br> We've Got <mark class="bg-transparent p-0 position-relative">Answers <img src="assets/img/line-shape.png" alt="line shape" class="position-absolute line-shape"></mark></h2>
                             </div>
                             <div class="accordion hd-accordion hd-accordion2 mt-60" id="hd_accordion2">
                                 <!-- <div class="accordion-item ">
@@ -405,7 +405,7 @@ Simply insert the URL of the desired product, collection, or store, and save a s
                                 </div>
                                 <ul class="nav justify-content-center subscribe-feature-list mt-4">
                                     <li class="nav-item">
-                                        <span><i class="far fa-check-circle text-primary me-2"></i>Free 7-day trial</span>
+                                        <span><i class="far fa-check-circle text-primary me-2"></i>Free 2-day trial</span>
                                     </li>
                                     <li class="nav-item">
                                         <span><i

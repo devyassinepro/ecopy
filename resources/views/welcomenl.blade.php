@@ -508,7 +508,7 @@
                         </div>
                         <ul class="nav justify-content-center subscribe-feature-list mt-4">
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>Gratis proefperiode van 7 dagen</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>Gratis proefperiode van 2 dagen</span>
                             </li>
                             <li class="nav-item">
                                 <span><i class="far fa-check-circle text-primary me-2"></i>Geen creditcard vereist</span>

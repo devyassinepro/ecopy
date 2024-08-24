@@ -507,7 +507,7 @@
                         </div>
                         <ul class="nav justify-content-center subscribe-feature-list mt-4">
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>Essai gratuit de 7 jours</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>Essai gratuit de 2 jours</span>
                             </li>
                             <li class="nav-item">
                                 <span><i class="far fa-check-circle text-primary me-2"></i>Aucune carte de crédit requise</span>

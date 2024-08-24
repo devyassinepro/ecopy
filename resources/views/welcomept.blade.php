@@ -509,7 +509,7 @@
                         </div>
                         <ul class="nav justify-content-center subscribe-feature-list mt-4">
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>Teste gratuito de 7 dias</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>Teste gratuito de 2 dias</span>
                             </li>
                             <li class="nav-item">
                                 <span><i class="far fa-check-circle text-primary me-2"></i>Nenhum cartão de crédito necessário</span>
