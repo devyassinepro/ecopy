@@ -115,7 +115,7 @@ Route::group(['middleware' => 'language'], function () {
         return view('blog.blog');
     })->name('blog');
 
-    Route::get('blog/article1', function () {
+    Route::get('blog/How-to-Quickly-Import-Products-from-Amazon-to-Your-Shopify-Store', function () {
         return view('blog.article1');
     })->name('article1');
 

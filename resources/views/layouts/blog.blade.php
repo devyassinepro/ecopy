@@ -27,8 +27,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
     <!-- endbuild -->
-    <!--custom css start-->
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <!--custom css end-->
     @livewireStyles
     @stack('styles')
