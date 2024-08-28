@@ -23,7 +23,7 @@
             <div class="col-lg-8 pe-lg-5">
                 <div class="blog-details-wrap">
                     <div class="table-responsive">
-                    <img width="800" height="415" src="assets/img/ecopy.png" title="Amazon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></img>   </div>
+                    <img width="800" height="415" src="assets/min/amazonproduct.png" title="Amazon" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></img>   </div>
                     <div>
                     <p>In the fast-paced world of e-commerce, efficiency is key. As a Shopify store owner, you understand the importance of adding new products quickly and easily. But what if you could streamline the process even further, saving time and reducing manual effort? That’s where <a href="https://ecopy.app" target="_blank">Ecopy</a> comes in—a powerful tool that allows you to import products from platforms like Amazon to your Shopify store with just one click.</p>
                     <p>In this guide, we’ll walk you through the simple steps to use Ecopy for importing products from Amazon to your Shopify store. Whether you're a seasoned entrepreneur or just starting out, this tutorial will help you optimize your product management and keep your store stocked with the latest items.</p>
