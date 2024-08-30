@@ -119,6 +119,15 @@ Route::group(['middleware' => 'language'], function () {
         return view('blog.article1');
     })->name('article1');
 
+    Route::get('blog/The-Best-Shopify-Apps-for-Easy-Product-Management', function () {return view('blog.article2');
+    })->name('article2');
+
+    Route::get('blog/article2', function () {return view('blog.article2');
+    })->name('article2');
+
+    Route::get('blog/article2', function () {return view('blog.article2');
+    })->name('article2');
+    
     Route::get('blog/article2', function () {return view('blog.article2');
     })->name('article2');
     
