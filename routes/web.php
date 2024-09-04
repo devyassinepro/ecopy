@@ -24,13 +24,6 @@ use App\Http\Controllers\Admin\DownloadBackupController;
 use App\Http\Controllers\Admin\PlanController as StripePlan;
 use JoelButcher\Socialstream\Http\Controllers\OAuthController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionController;
-// use App\Http\Controllers\Account\NicheController as AccountNicheController;
-// use App\Http\Controllers\Account\ProductController as AccountProductController;
-// use App\Http\Controllers\Account\TutoController as AccountTutoController;
-// use App\Http\Controllers\Account\TopstoresController as AccountopstoresController;
-// use App\Http\Controllers\Account\StoresController as AccountStoresController;
-// use App\Http\Controllers\Account\ProductResearchController as AccountResearchController;
-// use App\Http\Controllers\Account\TrendsController as AccountTrendsController;
 use App\Http\Controllers\Account\DashboardController as AccountDashboardController;
 use JoelButcher\Socialstream\Http\Controllers\Inertia\PasswordController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionCardController;
@@ -111,25 +104,34 @@ Route::group(['middleware' => 'language'], function () {
         return view('pages.TermsandConditions');
     })->name('TermsandConditions');
 
-    Route::get('/blog', function () {
-        return view('blog.blog');
-    })->name('blog');
 
-    Route::get('blog/How-to-Quickly-Import-Products-from-Amazon-to-Your-Shopify-Store', function () {
-        return view('blog.article1');
-    })->name('article1');
-
-    Route::get('blog/The-Best-Shopify-Apps-for-Easy-Product-Management', function () {return view('blog.article2');
-    })->name('article2');
-
-    Route::get('blog/article2', function () {return view('blog.article2');
-    })->name('article2');
-
-    Route::get('blog/article2', function () {return view('blog.article2');
-    })->name('article2');
+    Route::prefix('blog')->group(function () {
+        // Blog index route
+        Route::get('/', function () {
+            return view('blog.blog');
+        })->name('blog');
     
-    Route::get('blog/article2', function () {return view('blog.article2');
-    })->name('article2');
+        // Article routes
+        Route::get('{slug}', function ($slug) {
+            // Map slugs to views
+            $articles = [
+                'How-to-Quickly-Import-Products-from-Amazon-to-Your-Shopify-Store' => 'blog.article1',
+                'The-Best-Shopify-Apps-for-Easy-Product-Management' => 'blog.article2',
+                'How-to-Import-Products-from-Etsy-to-Shopify-in-One-Click' => 'blog.article3',
+                'Why-Multi-Platform-Product-Sourcing-is-the-Future-of-E-commerce-2024' => 'blog.article4',
+                'Maximize-Your-Shopify-Stores-Potential-with-One-Click-Product-Imports' => 'blog.article5',
+                'The-Ultimate-Guide-to-Starting-a-Dropshipping-Business-on-Shopify' => 'blog.article6',
+            ];
+    
+            if (array_key_exists($slug, $articles)) {
+                return view($articles[$slug]);
+            } else {
+                abort(404);
+            }
+        })->name('blog.article');
+    });
+    
+
     
 // redirect link
     Route::get('/shopify', function () {
@@ -155,14 +157,6 @@ Route::group(['middleware' => 'language'], function () {
             return view('account.plan', ['team' => $team]);
         })->name('plan');
 
-        // controllers
-        // Route::resource('/product', AccountProductController::class);
-        // Route::resource('/stores', AccountStoresController::class);
-        // Route::resource('/niches', AccountNicheController::class);
-        // Route::resource('/tuto', AccountTutoController::class);
-        // Route::resource('/topstores', AccountopstoresController::class);
-        // Route::resource('/researchproduct', AccountResearchController::class);
-        // Route::resource('/trends', AccountTrendsController::class);
 
         // Livewires 3
         Route::get('/Dashboard', Dashboard::class)->name('Dashboard.index');
@@ -182,14 +176,12 @@ Route::group(['middleware' => 'language'], function () {
         // export product in csv
         // Route::get('/product/importproduct/{url}', [AccountProductController::class, 'importproduct'])->name('product.importproduct');
 
-        // Route::get('/stores/importstore/{url}', [AccountStoresController::class, 'importstore'])->name('stores.importstore');
 
 
         // track store from product research
 
-        Route::post('/stores/trackstore/{id}', [AccountStoresController::class, 'trackstore'])->name('stores.trackstore');
+      //  Route::post('/stores/trackstore/{id}', [AccountStoresController::class, 'trackstore'])->name('stores.trackstore');
 
-        // Route::get('/stores/storeproducts/{id}', [AccountStoresController::class, 'storeproducts'])->name('stores.storeproducts');
 
     });
 
