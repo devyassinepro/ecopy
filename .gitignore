@@ -3,7 +3,6 @@
 
 # Laravel specific
 /public/hot
-/public/storage
 /storage/*.key
 /vendor
 /.phpunit.result.cache
