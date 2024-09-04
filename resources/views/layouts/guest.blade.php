@@ -342,6 +342,7 @@ src="https://www.facebook.com/tr?id=1331014271011060&ev=PageView&noscript=1"
                                             <!-- <li><a href="https://weenify.firstpromoter.com/" class="text-decoration-none">Affiliate Program</a></li> -->
                                             <li><a href="/RefundPolicy" class="text-decoration-none">Refund Policy</a></li>
                                             <li><a href="/#pricing" class="text-decoration-none">Pricing</a></li>
+                                            <li><a href="/blog-home" class="text-decoration-none">Blog</a></li>
 
                                             </li>
                                             <li>

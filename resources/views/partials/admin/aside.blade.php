@@ -70,6 +70,13 @@
                 </li>
 
                 <li class="u-sidebar-nav-menu__item">
+                    <a class="u-sidebar-nav-menu__link {{ return_if(on_page('admin.blog.index') OR on_page('admin.blog.create') OR on_page('admin.blog.edit'), ' active') }}" href="{{ route('admin.blog.index') }}">
+                        <i class="fas fa-chart-bar u-sidebar-nav-menu__item-icon"></i>
+                        <span class="u-sidebar-nav-menu__item-title">{{ __('Blog') }}</span>
+                    </a>
+                </li>
+
+                <li class="u-sidebar-nav-menu__item">
                     <a class="u-sidebar-nav-menu__link {{ return_if(on_page('admin.notifications'), ' active') }}" href="{{ route('admin.notifications') }}">
                         <i class="fas fa-envelope u-sidebar-nav-menu__item-icon"></i>
                         <span class="u-sidebar-nav-menu__item-title">{{ __('Send Notifications') }}</span>

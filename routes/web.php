@@ -33,16 +33,15 @@ use App\Http\Controllers\Account\Subscriptions\SubscriptionCouponController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionResumeController;
 use App\Http\Controllers\Account\Subscriptions\SubscriptionInvoiceController;
 use Carbon\Carbon;
-
 use App\Livewire\Account\Dashboard;
 use App\Livewire\Account\Tuto\Tuto;
+use App\Livewire\Account\Blog\Blog;
 use App\Livewire\Account\Shopify\Home;
 use App\Livewire\Account\Shopify\SingleProduct;
 use App\Livewire\Account\Shopify\MultipleProducts;
 use App\Livewire\Account\Shopify\Wizard;
-
-
-
+use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\BlogController;
 
 
 
@@ -104,34 +103,11 @@ Route::group(['middleware' => 'language'], function () {
         return view('pages.TermsandConditions');
     })->name('TermsandConditions');
 
+    // Route to list all blog posts
+    Route::get('/blog-home', [BlogController::class, 'index'])->name('blog.index');
 
-    Route::prefix('blog')->group(function () {
-        // Blog index route
-        Route::get('/', function () {
-            return view('blog.blog');
-        })->name('blog');
-    
-        // Article routes
-        Route::get('{slug}', function ($slug) {
-            // Map slugs to views
-            $articles = [
-                'How-to-Quickly-Import-Products-from-Amazon-to-Your-Shopify-Store' => 'blog.article1',
-                'The-Best-Shopify-Apps-for-Easy-Product-Management' => 'blog.article2',
-                'How-to-Import-Products-from-Etsy-to-Shopify-in-One-Click' => 'blog.article3',
-                'Why-Multi-Platform-Product-Sourcing-is-the-Future-of-E-commerce-2024' => 'blog.article4',
-                'Maximize-Your-Shopify-Stores-Potential-with-One-Click-Product-Imports' => 'blog.article5',
-                'The-Ultimate-Guide-to-Starting-a-Dropshipping-Business-on-Shopify' => 'blog.article6',
-            ];
-    
-            if (array_key_exists($slug, $articles)) {
-                return view($articles[$slug]);
-            } else {
-                abort(404);
-            }
-        })->name('blog.article');
-    });
-    
-
+    // Route to show a single blog post
+    Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
     
 // redirect link
     Route::get('/shopify', function () {
@@ -282,6 +258,15 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/stripe/balance', [StripeBalanceController::class , 'index']);
 
         Route::view('notifications', 'admin.notifications')->name('notifications');
+
+
+        Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
+        Route::get('/blog/create', [BlogPostController::class, 'create'])->name('blog.create');
+        Route::post('/blog', [BlogPostController::class, 'store'])->name('blog.store');
+        Route::get('/blog/edit/{post}', [BlogPostController::class, 'edit'])->name('blog.edit');
+        Route::put('/blog/{post}', [BlogPostController::class, 'update'])->name('blog.update');
+        Route::delete('/blog/{post}', [BlogPostController::class, 'destroy'])->name('blog.destroy');
+    
 
         // Route::resource('/product', ProductController::class);
         // Route::resource('/stores', StoresController::class);

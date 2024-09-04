@@ -293,6 +293,8 @@
                                             <!-- <li><a href="https://weenify.firstpromoter.com/" class="text-decoration-none">Affiliate Program</a></li> -->
                                             <li><a href="/RefundPolicy" class="text-decoration-none">Refund Policy</a></li>
                                             <li><a href="/#pricing" class="text-decoration-none">Pricing</a></li>
+                                            <li><a href="/blog-home" class="text-decoration-none">Blog</a></li>
+
 
                                             </li>
                                             <li>
