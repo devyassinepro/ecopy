@@ -42,6 +42,7 @@ use App\Livewire\Account\Shopify\MultipleProducts;
 use App\Livewire\Account\Shopify\Wizard;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SitemapController;
 
 
 
@@ -113,6 +114,9 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('/shopify', function () {
         return redirect('https://shopify.pxf.io/MmW3NY');
     });
+
+    //sitemap
+    Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 
     Route::get('/thankyou', function () {
