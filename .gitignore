@@ -12,6 +12,10 @@
 /storage/framework/testing/*
 /storage/framework/views/*
 
+# Ignore everything in public/storage except feature_images
+/public/storage/*
+!/public/storage/feature_images/
+
 # IDE and editor specific
 /.vscode
 /.idea
