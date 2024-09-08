@@ -171,7 +171,57 @@ src="https://www.facebook.com/tr?id=691407819506168&ev=PageView&noscript=1"
 
 		@livewireScripts
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<x-livewire-alert::scripts />
+<x-livewire-alert::scripts />
+
+<!-- In your blade view file -->
+<script src="https://cdn.tiny.cloud/1/0ze2ehtwmvo6bsuw9rbfm6y7okruk4tpeuo91ubylnyzc1p5/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: 'textarea#content',
+        plugins: 'image link media table code',
+        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
+        images_upload_url: '{{ route('admin.blog.upload') }}', // Laravel route for uploading images
+        automatic_uploads: true,
+        file_picker_types: 'image',
+        images_upload_handler: function (blobInfo, success, failure) {
+            let formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+            // Use traditional XMLHttpRequest for better error handling
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '{{ route('admin.blog.upload') }}');
+            xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+            xhr.onload = function() {
+                if (xhr.status !== 200) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                }
+
+                var json = JSON.parse(xhr.responseText);
+
+                if (!json || typeof json.location !== 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+
+                success(json.location); // Return the uploaded image URL
+            };
+
+            xhr.onerror = function() {
+                failure('Image upload failed due to a network error.');
+            };
+
+            xhr.send(formData);
+        },
+        relative_urls: false,
+        remove_script_host: false,
+        convert_urls: true,
+    });
+</script>
+
 
 	<script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('assets/vendor/js-cookie/js.cookie.js') }}"></script>

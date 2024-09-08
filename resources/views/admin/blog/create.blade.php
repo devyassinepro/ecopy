@@ -27,6 +27,8 @@
         <div class="mb-4">
             <label class="block text-gray-700">Content</label>
             <textarea name="content" class="w-full border rounded px-3 py-2" rows="10" required></textarea>
+            <!-- <textarea name="content" class="w-full border rounded px-3 py-2" id="content" rows="10" required></textarea> -->
+
             @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
@@ -49,11 +51,12 @@
         </div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Post</button>
-    </form>
+         </form>
           </div>
           <div>
         </div>
         </main>
       </div>
     </div>
+
     @endsection

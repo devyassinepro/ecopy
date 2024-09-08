@@ -6,13 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="author" content="Touzani Yassine" />
-    <title>{{ config('app.name') }} - Blog</title>
-    <meta name="description" content="Ecopy.app - Copy Products from shopify , amazon , etsy to your shopify store in one click" />
-    <meta name="keywords" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
-    <meta property="og:description" content="Ecopy,ecopy.app,poky,Copy Products to Shopify,Product Importer shopify" />
-    <meta property="og:url" content="https://ecopy.app/" />
-    <meta property="og:site_name" content="Copy Products to Shopify, WooCommerce and Wix stores , Product Importer shopify" />
-
+    <title>{{ $pageTitle ?? 'Blog - Ecopy' }}</title>
+    <meta name="description" content="{{ $pageDescription ?? 'Blog Ecopy' }}" />
+    <meta name="keywords" content="dropshipping blog, blog dropship,dropship" />
+    <!-- Other meta tags -->
+    <meta name="robots" content="index, follow">
         <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

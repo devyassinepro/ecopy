@@ -18,6 +18,16 @@ class BlogController extends Controller
     public function show($slug)
     {
         $post = BlogPost::where('slug', $slug)->whereNotNull('published_at')->firstOrFail();
-        return view('blog.show', compact('post'));
+         // Set dynamic title and meta description
+         $pageTitle = $post->title . ' | Ecopy';
+         $pageDescription = substr(strip_tags($post->content), 0, 160); // Get the first 160 characters for the meta description
+ 
+        // return view('blog.show', compact('post'));
+
+        return view('blog.show', [
+            'post' => $post,
+            'pageTitle' => $pageTitle,
+            'pageDescription' => $pageDescription,
+        ]);
     }
 }

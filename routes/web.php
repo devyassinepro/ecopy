@@ -270,7 +270,8 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/blog/edit/{post}', [BlogPostController::class, 'edit'])->name('blog.edit');
         Route::put('/blog/{post}', [BlogPostController::class, 'update'])->name('blog.update');
         Route::delete('/blog/{post}', [BlogPostController::class, 'destroy'])->name('blog.destroy');
-    
+        Route::post('/blog/upload', [BlogPostController::class, 'upload'])->name('blog.upload');
+
 
         // Route::resource('/product', ProductController::class);
         // Route::resource('/stores', StoresController::class);
