@@ -251,7 +251,7 @@ Simply insert the URL of the desired product, collection, or store, and save a s
                                     </div>
                                     <div class="accordion-collapse collapse" id="hd2_acc3" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
-                                            <p class="mb-0">Yes</p>
+                                            <p class="mb-0">Yes,..</p>
                                         </div>
                                     </div>
                                 </div>
