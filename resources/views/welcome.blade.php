@@ -251,7 +251,7 @@ Simply insert the URL of the desired product, collection, or store, and save a s
                                     </div>
                                     <div class="accordion-collapse collapse" id="hd2_acc3" data-bs-parent="#hd_accordion2">
                                         <div class="accordion-body pt-0">
-                                            <p class="mb-0">Yes,..</p>
+                                            <p class="mb-0">Yes</p>
                                         </div>
                                     </div>
                                 </div>
@@ -407,10 +407,10 @@ Simply insert the URL of the desired product, collection, or store, and save a s
                                     <li class="nav-item">
                                         <span><i class="far fa-check-circle text-primary me-2"></i>Free 2-day trial</span>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <span><i
                                             class="far fa-check-circle text-primary me-2"></i>No credit card required</span>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
                                         <span><i class="far fa-check-circle text-primary me-2"></i>Support 24/7</span>
                                     </li>
