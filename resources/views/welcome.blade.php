@@ -407,10 +407,10 @@ Simply insert the URL of the desired product, collection, or store, and save a s
                                     <li class="nav-item">
                                         <span><i class="far fa-check-circle text-primary me-2"></i>Free 2-day trial</span>
                                     </li>
-                                    <!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <span><i
                                             class="far fa-check-circle text-primary me-2"></i>No credit card required</span>
-                                    </li> -->
+                                    </li>
                                     <li class="nav-item">
                                         <span><i class="far fa-check-circle text-primary me-2"></i>Support 24/7</span>
                                     </li>
