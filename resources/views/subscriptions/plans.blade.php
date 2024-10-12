@@ -3,7 +3,7 @@
 @section('content')
 <nav class="navbar navbar-expand-md">
   <div class="container-fluid">
-    <a class="navbar-brand d-md-none" href="#">
+    <a class="navbar-brand d-md-none" href="/">
     <img  src="{{ asset('images/logo-dark.png') }}" >
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
-        <a class="navbar-brand d-none d-md-block" href="#">
+        <a class="navbar-brand d-none d-md-block" href="/">
         <img  src="{{ asset('images/logo-dark.png') }}" >
         </a>
       </ul>

@@ -18,13 +18,13 @@
                         <!-- <h2 class="h6">Try Weenify.io For Free</h2> -->
 
                         <p class="text-muted">Try Ecopy.app For Free - Get started - it's quick</p>
-<!-- 
+
                         <div class="action-btns">
-                            <a href="#" class="btn google-btn bg-white shadow-sm mt-4 d-block d-flex align-items-center text-decoration-none justify-content-center">
+                            <a href="/auth/google/redirect" class="btn google-btn bg-white shadow-sm mt-4 d-block d-flex align-items-center text-decoration-none justify-content-center">
                                 <img src="assets/img/google-icon.svg" alt="google" class="me-3">
-                                <span>Connect with Google</span>
+                                <span>Register with Google</span>
                             </a>
-                        </div> -->
+                        </div>
                         <div class="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
                             <span class="divider-bar"></span>
                             <h6 class="position-absolute text-center divider-text bg-light-subtle mb-0">Or</h6>

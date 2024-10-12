@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Plan;
+use App\Models\User;
+use App\Models\Team;
 use GuzzleHttp\Middleware;
 use Laravel\Cashier\Cashier;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +19,7 @@ use App\Http\Controllers\Admin\DashboardController;
 // use App\Http\Controllers\Admin\DnsController;
 use App\Http\Controllers\Team\TeamMemberController;
 use App\Http\Controllers\Ticket\CommentsController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Subscriptions\PlanController;
 use App\Http\Controllers\Admin\StripeBalanceController;
@@ -44,6 +47,8 @@ use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SitemapController;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 
 
@@ -63,6 +68,10 @@ Route::get('resetdb', function () {
     \Artisan::call('migrate:refresh --seed');
     dd("Data base has been reset");
 });
+
+
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirectToGoogle']);
+Route::get('/auth/callback/google', [GoogleAuthController::class, 'handleGoogleCallback']);
 
 
 Route::fallback(function() {
@@ -174,16 +183,6 @@ Route::group(['middleware' => 'language'], function () {
     });
 
 
-
-    Route::get('/auth/google/redirect', function (Request $request) {
-
-          return Socialite::driver("google")->redirect();
-
-    });
-    Route::get('/auth/google/callback', function (Request $request) {
-        dd($request->all());
-      
-    });
     Route::get('/test', function () {
         $beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
         $beautymail->send('emails.welcome', [], function ($message) {
