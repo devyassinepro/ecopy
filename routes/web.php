@@ -43,6 +43,7 @@ use App\Livewire\Account\Shopify\Wizard;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SitemapController;
+use Laravel\Socialite\Facades\Socialite;
 
 
 
@@ -173,6 +174,16 @@ Route::group(['middleware' => 'language'], function () {
     });
 
 
+
+    Route::get('/auth/google/redirect', function (Request $request) {
+
+          return Socialite::driver("google")->redirect();
+
+    });
+    Route::get('/auth/google/callback', function (Request $request) {
+        dd($request->all());
+      
+    });
     Route::get('/test', function () {
         $beautymail = app()->make(Snowfire\Beautymail\Beautymail::class);
         $beautymail->send('emails.welcome', [], function ($message) {

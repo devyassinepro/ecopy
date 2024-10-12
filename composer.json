@@ -30,6 +30,7 @@
         "laravel/horizon": "^5.25",
         "laravel/jetstream": "^2.3",
         "laravel/sanctum": "^2.14.1",
+        "laravel/socialite": "^5.16",
         "laravel/telescope": "^4.0",
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "^6.2",
