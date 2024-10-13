@@ -22,7 +22,7 @@ class SingleProduct extends Component
     private $client;
 
     public $urlsingle = ''; 
-    public $publish = true;
+    public $publish = false;
 
     public function render()
     {
@@ -626,11 +626,11 @@ private function isEtsyUrl($url)
 
     private function getGraphQLPayloadForProductPublishUrl($store, $publishproduct, $productData) {
 
-        $publishproduct = $publishproduct ? 'true' : 'false';
+        $publishproduct = $publishproduct ? "ACTIVE" : "DRAFT";
         $temp = [];
         $temp[] = 
             ' title: "' . $productData['product']['title'] . '",
-              published: ' . $publishproduct . ',
+              status: ' . $publishproduct . ',
               vendor: "' . $productData['product']['vendor'] . '" ';
               
 

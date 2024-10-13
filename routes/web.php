@@ -47,8 +47,7 @@ use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SitemapController;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+
 
 
 
