@@ -140,6 +140,23 @@ if (! function_exists('check_store_limit')) {
     }
 }
 
+if (! function_exists('check_product_limit')) {
+    /**
+     * get user's store limit
+     *
+     * @return array
+     */
+    function check_product_limit()
+    {
+        $currentTeam = currentTeam();
+        if(!empty($currentTeam) && !empty($currentTeam->plan) && !empty($currentTeam->plan->product_access_count))
+            return $currentTeam->plan->product_access_count;
+
+        return 0;
+    }
+}
+
+
 function getDockerURL($path, $port) {
     return 'http://localhost:'.$port.'/'.$path;
 }
@@ -157,7 +174,7 @@ function getDockerHeaders() {
 function getShopifyURLForStore($endpoint, $store)
 {
     // Directly use the store's URL and endpoint without additional checks
-    return 'https://' . $store['myshopify_domain'] . '/admin/api/2022-07/' . $endpoint;
+    return 'https://' . $store['myshopify_domain'] . '/admin/api/2024-10/' . $endpoint;
 }
 
 function getShopifyHeadersForStore($store, $method = 'GET')

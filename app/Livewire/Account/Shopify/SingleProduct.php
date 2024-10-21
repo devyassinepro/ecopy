@@ -35,9 +35,8 @@ class SingleProduct extends Component
     }
 
     public function importsingleproduct() {
-      
- 
-        try {
+
+         try {
             $validated = $this->validate([
                 'urlsingle' => 'required'
             ]);
@@ -52,10 +51,12 @@ class SingleProduct extends Component
             return redirect()->back()->withErrors($e->validator);
         }
        
-        $url = $this->urlsingle;
+        $url = strtok($this->urlsingle, '?');
         $productData = null;
 
         if ($this->isAmazonUrl($url)) {
+            // import Amazon Product
+
             Log::info("Detected Amazon URL, starting scrape.");
             try {
                 $amazonProductData = $this->scrapeAmazonProduct($url);
@@ -66,6 +67,7 @@ class SingleProduct extends Component
                 return back()->with('error', 'Failed to scrape Amazon product: ' . $e->getMessage());
             }
         } elseif ($this->isEtsyUrl($url)) {
+            // import Etsy Product
             Log::info("Detected Etsy URL, starting scrape.");
             try {
                 $etsyProductData = $this->scrapeEtsyProduct($url);
@@ -75,10 +77,13 @@ class SingleProduct extends Component
                 return back()->with('error', 'Failed to scrape Etsy product: ' . $e->getMessage());
             }
         }else{
-            $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
-            $context = stream_context_create($opts);
-            $html = file_get_contents($url . '.json', false, $context);
-            $productData = json_decode($html, true);
+
+            // import Etsy Product
+
+        $opts = array('http' => array('header' => "User-Agent:MyAgent/1.0\r\n"));
+        $context = stream_context_create($opts);
+        $html = file_get_contents($url . '.json', false, $context);
+        $productData = json_decode($html, true);
         }
         $user_id = Auth::user()->id;
         $store = Shopifystores::where('user_id', $user_id)
@@ -92,31 +97,57 @@ class SingleProduct extends Component
 
         try {
 
-            $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($store, $publish, $productData) . '}) { 
+            // working create product with images
+            $productCreateMutation = 'productCreate (input: {' . $this->getGraphQLPayloadForProductPublishUrl($publish, $productData) . '},' . $this->getGraphQLPayloadForProductMedia($productData) . ') { 
                 product {
                     id
-                    variants(first: 100) {
+                    title
+                    options {
+                        id
+                        name
+                        position
+                        optionValues {
+                          id
+                          name
+                          hasVariants
+                        }
+                      }
+                      variants(first: 250) {
                         edges {
-                            node {
-                                id
-                                title
-                                position
+                          node {
+                            id
+                            title
+                            price
+                            sku
+                          }
+                        }
+                      }
+                        media(first: 10) {
+                            nodes {
+                            alt
+                            mediaContentType
+                            preview {
+                                status
+                            }
                             }
                         }
-                    }
-                }
-                userErrors { field message }
+                  }
+                  userErrors {
+                    field
+                    message
+                  }
             }';
-            Log::info("Json file " . $productCreateMutation);
+
+            // Log::info("Json file " . $productCreateMutation);
             $mutation = 'mutation { ' . $productCreateMutation . ' }';
-            
             $endpoint = getShopifyURLForStore('graphql.json', $store);
+            // Log::info("Json endpoint " . $endpoint);
 
             $headers = getShopifyHeadersForStore($store);
             $payload = ['query' => $mutation];
             
             $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
-            Log::info('Shopify API Response:', ['response' => $response]);
+            // Log::info('Shopify API Response:', ['response' => $response]);
             
             // Check the response
             if (isset($response['statusCode']) && $response['statusCode'] == 200) {
@@ -129,6 +160,65 @@ class SingleProduct extends Component
                     return back()->with('error', 'Product creation failed: ' . implode(', ', $errorMessages));
                 }
 
+                  // Extract product ID
+                  if (isset($response['body']['data']['productCreate']['product']['id'])) {
+                    $productId = $response['body']['data']['productCreate']['product']['id'];
+                    // You can use $productId for further processing
+                    // Log::info('Product created successfully. Product ID: ' . $productId);
+
+                }
+
+                            // product variantes creation 
+                        $productCreateVariantsBulkMutation = 'productVariantsBulkCreate (variants :[' . $this->getGraphQLPayloadForProductVariantsBulkCreate($productData, $productId) . '],productId :"'.$productId.'",strategy: REMOVE_STANDALONE_VARIANT,) { 
+                            userErrors {
+                            field
+                            message
+                            }
+                            product {
+                            id
+                            options {
+                                id
+                                name
+                                values
+                                position
+                                optionValues {
+                                id
+                                name
+                                hasVariants
+                                }
+                            }
+                            }
+                            productVariants {
+                            id
+                            title
+                            selectedOptions {
+                                name
+                                value
+                            }
+                            }
+                    }';
+
+                // Log::info("Json file " . $productCreateVariantsBulkMutation);
+
+                $mutationVariants = 'mutation { ' . $productCreateVariantsBulkMutation . ' }';
+                
+                $endpoint = getShopifyURLForStore('graphql.json', $store);
+                $headers = getShopifyHeadersForStore($store);
+                $payload = ['query' => $mutationVariants];
+                
+                $response = $this->makeAnAPICallToShopify('POST', $endpoint, null, $headers, $payload);
+                Log::info('Shopify API Response Variants:', ['response' => $response]);
+
+
+                $user = Auth::user();
+                // Incrémenter la valeur de 'importedproducts'
+
+                if (is_null($user->importedproducts) || $user->importedproducts === '') {
+                    $user->importedproducts = 0;
+                    $user->save();
+                }                
+                $user->increment('importedproducts');
+                $user->save();
                 $this->dispatch('reload-page');
                 $this->alert('success', __('Product Imported successfully'));
 
@@ -505,7 +595,6 @@ private function isEtsyUrl($url)
     return $productData;
     }
     
-
     private function transformEtsyProductData($etsyProductData) {
         // Decode JSON response if needed
         if ($etsyProductData instanceof \Illuminate\Http\JsonResponse) {
@@ -616,7 +705,6 @@ private function isEtsyUrl($url)
     return $productData;
     }
     
-    
 
     public function testEvent()
     {
@@ -624,114 +712,152 @@ private function isEtsyUrl($url)
     }
 
 
-    private function getGraphQLPayloadForProductPublishUrl($store, $publishproduct, $productData) {
+// Create Product with options
+private function getGraphQLPayloadForProductPublishUrl($publishproduct, $productData) {
 
-        $publishproduct = $publishproduct ? "ACTIVE" : "DRAFT";
-        $temp = [];
-        $temp[] = 
-            ' title: "' . $productData['product']['title'] . '",
-              status: ' . $publishproduct . ',
-              vendor: "' . $productData['product']['vendor'] . '" ';
-              
+    $publishproduct = $publishproduct ? "ACTIVE" : "DRAFT";
+    $temp = [];
+    $temp[] = 
+        ' title: "' . $productData['product']['title'] . '",
+          status: ' . $publishproduct . ',
+          vendor: "' . $productData['product']['vendor'] . '" ';
+          
+    if (isset($productData['product']['body_html']) && $productData['product']['body_html'] !== null) {
+        $escapedDescriptionHtml = json_encode($productData['product']['body_html']);
+        $temp[] = ' descriptionHtml: ' . $escapedDescriptionHtml . '';
+    }
 
-      if (isset($productData['product']['body_html']) && $productData['product']['body_html'] !== null) {
-            $escapedDescriptionHtml = json_encode($productData['product']['body_html']);
-            $temp[] = ' descriptionHtml: ' . $escapedDescriptionHtml . '';
-        }
+    if (isset($productData['product']['product_type']))
+        $temp[] = ' productType: "' . $productData['product']['product_type'] . '"';
 
-        if (isset($productData['product']['product_type']))
-            $temp[] = ' productType: "' . $productData['product']['product_type'] . '"';
+    if (isset($productData['product']['tags']))
+        $temp[] = ' tags: ["' . implode('", "', explode(',', $productData['product']['tags'])) . '"]';
+
+    // Options
+    if (isset($productData['product']['options']) && is_array($productData['product']['options']) && !empty($productData['product']['options'])) {
+        $formattedOptions = array_map(function ($option) {
+            return '{
+                name: "' . $option['name'] . '",
+                values: [' . implode(', ', array_map(function($value) {
+                    return '{name: "' . $value . '"}';
+                }, $option['values'])) . ']
+            }';
+        }, $productData['product']['options']);
+        $temp[] = 'productOptions: [' . implode(', ', $formattedOptions) . ']';
+    }
+
+    return implode(',', $temp);
+}
+
+
+// Create Variants to product
+private function getGraphQLPayloadForProductVariantsBulkCreate($productData,$productId) {
+
+    $temp = [];
     
-        if (isset($productData['product']['tags']))
-            $temp[] = ' tags: ["' . implode('", "', explode(',', $productData['product']['tags'])) . '"]';
-        
-        if (isset($productData['product']['options']) && is_array($productData['product']['options']) && !empty($productData['product']['options'])) {
-            $optionValues = array_reduce($productData['product']['options'], function($carry, $option) {
-                return $carry . implode(',', array_filter($option['values'])) . ',';
-            }, '');
-            $optionValues = rtrim($optionValues, ',');
-            if (!empty($optionValues)) {
-                $formattedOptions = '"' . $optionValues . '"';
-                $temp[] = 'options: [' . $formattedOptions . ']';
+        // Variants
+    // $temp[] = ' productId: "' . $productId . '"';
+
+    if (isset($productData['product']['variants']) && is_array($productData['product']['variants']) && !empty($productData['product']['variants'])) {
+        $temp[] = '' . $this->getVariantsGraphQLConfigUrl($productData) . '';
+    }else{
+        $temp[] = 'variants: [{
+            taxable: false,
+            title: "",
+            price: '.$productData['product']['price'].',
+            sku: "",
+            position: 1,
+            inventoryItem: {cost: 67, tracked: false},
+            inventoryManagement: null,
+            inventoryPolicy: DENY
+        }]';
+    }
+
+
+    return implode(',', $temp);
+}
+
+private function getVariantsGraphQLConfigUrl($productData) {
+    try {
+        $str = [];
+        // Extract option names
+        $optionname1 = $productData['product']['options'][0]['name'] ?? null;
+        $optionname2 = $productData['product']['options'][1]['name'] ?? null;
+        $optionname3 = $productData['product']['options'][2]['name'] ?? null;
+
+        foreach ($productData['product']['variants'] as $key => $variant) {
+            $compareAtPrice = !empty($variant['compare_at_price']) ? $variant['compare_at_price'] : 'null';
+            $compareAtPriceField = $compareAtPrice !== 'null' ? 'compareAtPrice: ' . $compareAtPrice . ',' : '';
+
+             // Format option values
+             $mediasrc = "";
+             $optionValues = [];
+             if (isset($variant['option1']) && $variant['option1'] !== null) {
+                 $optionValues[] = '{name: "' . $variant['option1'] . '", optionName: "' . $optionname1 . '"}';
+             }
+             if (isset($variant['option2']) && $variant['option2'] !== null) {
+                 $optionValues[] = '{name: "' . $variant['option2'] . '", optionName: "' . $optionname2 . '"}';
+             }
+             if (isset($variant['option3']) && $variant['option3'] !== null) {
+                 $optionValues[] = '{name: "' . $variant['option3'] . '", optionName: "' . $optionname3 . '"}';
+             }
+             $formattedOptionValues = implode(', ', $optionValues);
+
+             foreach ($productData['product']['images'] as $image) {
+                if ($variant['image_id'] === $image['id']) {
+                    $mediasrc = $image['src'];
+                    break; // Stop checking after a match
+                }
             }
-        }
-        
-        if (isset($productData['product']['variants']) && is_array($productData['product']['variants']) && !empty($productData['product']['variants'])) {
-            $temp[] = 'variants: [' . $this->getVariantsGraphQLConfigUrl($productData) . ']';
-        }else{
-            $temp[] = 'variants: [{
-                taxable: false,
-                title: "",
-                price: '.$productData['product']['price'].',
-                sku: "",
-                position: 1,
-                inventoryItem: {cost: 67, tracked: false},
-                inventoryManagement: null,
-                inventoryPolicy: DENY
-            }]';
-        }
+            // Log::info("Variant mediasrc " . $mediasrc);
+            $cleanedUrl = strtok($mediasrc, '?');
  
-    
-        if (isset($productData['product']['images']) && is_array($productData['product']['images'])) {
-            $temp[] = 'images: [' . $this->getImagesGraphQLConfigUrl($productData) . ']';
+            $str[] = '{
+                taxable: false,
+                price: ' . $variant['price'] . ',
+                ' . $compareAtPriceField . '
+                optionValues: [' . $formattedOptionValues . '],
+                inventoryItem: {cost: ' . $variant['price'] . ', tracked: false},
+                mediaSrc:"' . $cleanedUrl . '",
+                inventoryPolicy: DENY
+            }';
         }
+        return implode(',', $str);
+    } catch (Exception $e) {
+        dd($e->getMessage() . ' ' . $e->getLine());
+        return null;
+    }
+}
 
-        return implode(',', $temp);
-    }
-    
-    private function getVariantsGraphQLConfigUrl($productData) {
-        try {
-            $str = [];
-            foreach ($productData['product']['variants'] as $key => $variant) {
+//  Add media to product
+private function getGraphQLPayloadForProductMedia($productData) {
 
-                $compareAtPrice = !empty($variant['compare_at_price']) ? $variant['compare_at_price'] : 'null';
-                $compareAtPriceField = $compareAtPrice !== 'null' ? 'compareAtPrice: ' . $compareAtPrice . ',' : '';
+    $temp = [];
     
-                $optionValues = [];
-                if (isset($variant['option1']) && $variant['option1'] !== null) {
-                    $optionValues[] = $variant['option1'];
-                }
-                if (isset($variant['option2']) && $variant['option2'] !== null) {
-                    $optionValues[] = $variant['option2'];
-                }
-                if (isset($variant['option3']) && $variant['option3'] !== null) {
-                    $optionValues[] = $variant['option3'];
-                }
-                $formattedOptionValues = implode('", "', $optionValues);
-    
-                $str[] = '{
-                    taxable: false,
-                    title: "' . $variant['title'] . '",
-                    price: ' . $variant['price'] . ',
-                    ' . $compareAtPriceField . '
-                    sku: "' . $variant['sku'] . '",
-                    options: [" ' . $formattedOptionValues . ' "],
-                    position: ' . $variant['position'] . ',
-                    inventoryItem: {cost: ' . $variant['price'] . ', tracked: false},
-                    inventoryManagement: null,
-                    inventoryPolicy: DENY
-                }';
-            }
-            return implode(',', $str);
-        } catch (Exception $e) {
-            dd($e->getMessage() . ' ' . $e->getLine());
-            return null;
-        }
+    if (isset($productData['product']['images']) && is_array($productData['product']['images'])) {
+        $temp[] = 'media: [' . $this->getMediaGraphQLConfigUrl($productData) . ']';
     }
-    
-    private function getImagesGraphQLConfigUrl($productData) {
-        try {
-            $str = [];
-            foreach ($productData['product']['images'] as $key => $image) {
-                $str[] = '{
-                    src: "' . $image['src'] . '",
-                }';
-            }
-            return implode(',', $str);
-        } catch (Exception $e) {
-            dd($e->getMessage() . ' ' . $e->getLine());
-            return null;
+
+    return implode(',', $temp);
+}
+
+private function getMediaGraphQLConfigUrl($productData) {
+    try {
+        $str = [];
+        foreach ($productData['product']['images'] as $key => $image) {
+            $str[] = '{
+                mediaContentType: IMAGE,
+                alt: "Image of ' . $productData['product']['title'] . '",
+                originalSource: "' . $image['src'] . '"
+            }';
         }
+        return implode(',', $str);
+    } catch (Exception $e) {
+        dd($e->getMessage() . ' ' . $e->getLine());
+        return null;
     }
+}
+    
+ 
     
 }
