@@ -80,6 +80,8 @@ class PlanController extends Controller
             // 'quota' => 'required',
             'teams_limit' => 'required',
             'store_access_count' => 'required',
+            'product_access_count' => 'required',
+
         ]);
 
         $gateway_id = str_replace(' ', '_', $request->input('name'). Str::random(6));
@@ -105,7 +107,8 @@ class PlanController extends Controller
             'teams_limit' => $request->input('teams_limit'),
             'active' => 1,
             'trial_period_days' => $request->input('trial'),
-            'store_access_count' => $request->input('store_access_count')
+            'store_access_count' => $request->input('store_access_count'),
+            'product_access_count' => $request->input('store_access_count')
             // 'max_domain' => $request->input('max_domain'),
             // 'mailboxes' => $request->input('mailboxes'),
             // 'quota' => $request->input('quota'),
@@ -184,6 +187,7 @@ class PlanController extends Controller
             'interval' => 'required',
             'teams_limit' => 'required',
             'store_access_count' => 'required',
+            'product_access_count' => 'required'
         ]);
 
         $plan = Plan::findOrFail($id);
@@ -217,6 +221,7 @@ class PlanController extends Controller
         $plan->active = 1;
         $plan->slug = $slug;
         $plan->store_access_count = $request->input('store_access_count');
+        $plan->product_access_count = $request->input('product_access_count');
 
         $plan->save();
 

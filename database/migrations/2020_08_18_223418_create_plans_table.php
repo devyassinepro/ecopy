@@ -24,6 +24,7 @@ class CreatePlansTable extends Migration
             $table->integer('teams_limit')->nullable();
             $table->integer('trial_period_days')->nullable();
             $table->integer('store_access_count')->nullable();
+            $table->integer('product_access_count')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
         });

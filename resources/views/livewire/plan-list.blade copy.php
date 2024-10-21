@@ -37,7 +37,9 @@
                         <!-- <li class="price-text"><i class="fas fa-check blue"></i>Track Stores</li> -->
 
                         <li class="price-text"><i class="fas fa-check blue"></i><b>Track {{$plan->store_access_count}} Stores</b></li>
-
+                        @if ($plan->price = 0)
+                          <li class="price-text"><i class="fas fa-check blue"></i><b>Track {{$plan->product_access_count}} Products</b></li>
+                        @endif
                         <li class="price-text"><i class="fas fa-check blue"></i><b> Change Store Any Time</b></li>
 
                         <li class="price-text"><i class="fas fa-check blue"></i><b> Track Products</b></li>
@@ -123,6 +125,7 @@
                             <div class="pricing-info mb-4">
                                 <ul class="pricing-feature-list list-unstyled">
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Track {{$plan->store_access_count}} Stores</li>
+
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Change Store Any Time</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Track Products</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> 1000 Products Per 1 Store</li>

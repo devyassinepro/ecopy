@@ -57,6 +57,9 @@
                             <div class="pricing-info mb-4">
                                 <ul class="pricing-feature-list list-unstyled">
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i>{{$plan->store_access_count}} linked Stores</li>
+                                    @if ($plan->price = 0)
+                                    <li class="price-text"><i class="fas fa-check blue"></i><b>Track {{$plan->product_access_count}} Products</b></li>
+                                    @endif
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Import Products in 1-Click</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Edit Products before Importing</li>
                                     <li><i class="fas fa-circle fa-2xs text-warning me-2"></i> Easy to use </li>

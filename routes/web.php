@@ -68,7 +68,7 @@ Route::get('resetdb', function () {
     dd("Data base has been reset");
 });
 
-
+// Google Authentification
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirectToGoogle']);
 Route::get('/auth/callback/google', [GoogleAuthController::class, 'handleGoogleCallback']);
 
@@ -119,7 +119,7 @@ Route::group(['middleware' => 'language'], function () {
     // Route to show a single blog post
     Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
     
-// redirect link
+    // redirect link shopify affilate
     Route::get('/shopify', function () {
         return redirect('https://shopify.pxf.io/MmW3NY');
     });
@@ -134,8 +134,6 @@ Route::group(['middleware' => 'language'], function () {
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', Dashboard::class)->name('dashboard.index');
-
-
     Route::group(['prefix' => '', 'as' => 'account.', 'middleware' => ['auth:sanctum', 'verified']], function () {
        
         Route::view('security', 'account.security')->name('security');
@@ -146,11 +144,9 @@ Route::group(['middleware' => 'language'], function () {
             return view('account.plan', ['team' => $team]);
         })->name('plan');
 
-
         // Livewires 3
         Route::get('/Dashboard', Dashboard::class)->name('Dashboard.index');
-        //
-      
+        //      
         Route::get('/Shopify', Home::class)->name('homeshopify.index');
         Route::get('/Singleproduct', SingleProduct::class)->name('singleproduct.index');
         Route::get('/multipleproduct', MultipleProducts::class)->name('multipleproduct.index');

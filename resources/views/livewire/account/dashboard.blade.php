@@ -7,7 +7,7 @@
                         @if(!currentTeam()->subscribed())                  
                         <div class="alert alert-icon alert-warning" role="alert">
                             <em class="icon ni ni-alert-circle"></em> 
-                            <strong>Welcome to Ecopy.</strong> Visit the <a href="{{ route('subscription.plans') }}">billing page</a> to activate a Trial plan.
+                            <strong>Welcome to Ecopy - Free Plan.</strong>
                         </div>
                         @endif
 
@@ -36,10 +36,17 @@
                             <div class="nk-content-body">
                                 <div class="nk-block-head nk-block-head-sm">
                                     <div class="nk-block-between">
+                                    @if(!currentTeam()->subscribed())  
+                                        <div class="nk-block-head-content">
+                                            <h4 class="nk-block-title page-title">Stores : {{ $totalstores }} / 1 - Products : {{ $countimportedproducts }} / 50 per Month</h4> 
+                                        </div><!-- .nk-block-head-content -->
+                                        @else
                                         <div class="nk-block-head-content">
                                             <h4 class="nk-block-title page-title">Stores : {{ $totalstores }} / {{ $storelimit }}</h4>
                                         </div><!-- .nk-block-head-content -->
 
+                                    @endif
+                                       
                                         <a href="{{ route('account.wizard.index') }}" wire:navigate class="toggle btn btn-primary"><em class="icon ni ni-plus"></em><span>Connect Shopify Store</span></a>
 
                                     </div><!-- .nk-block-between -->

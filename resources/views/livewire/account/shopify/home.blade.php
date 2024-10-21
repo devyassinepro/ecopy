@@ -6,7 +6,12 @@
                                     </div><!-- .nk-block-head -->
                                 <div>
                             </div> 
-
+                            @if(!currentTeam()->subscribed())                  
+                        <div class="alert alert-icon alert-warning" role="alert">
+                            <em class="icon ni ni-alert-circle"></em> 
+                            <strong>Welcome to Ecopy - Free Plan.</strong>
+                        </div>
+                        @endif
                             <div class="nk-content-body">
                                     <div class="nk-block-head nk-block-head-sm">
                                     <div class="nk-block-between">
@@ -142,9 +147,16 @@
             <li class="nav-item active">
                 <a class="nav-link" data-toggle="tab" href="#tabItem9"><em class="icon ni ni-grid-fill"></em><span>Import Product</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabItem6"><em class="icon ni ni-crosshair"></em><span>Import Store</span></a>
-            </li>
+                @if(!currentTeam()->subscribed())         
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#tabItem3"><em class="icon ni ni-crosshair"></em><span>Import Stores(Paid)</span></a>
+                    </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabItem6"><em class="icon ni ni-crosshair"></em><span>Import Stores</span></a>
+                </li>
+                @endif
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabItem7"><em class="icon ni ni-setting"></em><span>Settings</span></a>
             </li>
@@ -156,8 +168,31 @@
             <form> </form>
                     <livewire:account.shopify.single-product/>
             </div>
+            <div class="tab-pane" id="tabItem3">
+            <div class="col-xxl-12 col-lg-6 col-sm-12">
+                                            <div class="card card-bordered product-card">
+
+                                            <div class="card-inner text-center">
+                                                    <!-- <ul class="product-tags">
+                                                        <li><a href="#">Smart Watch</a></li>
+                                                    </ul> -->
+                                                    
+                                               
+                                                    <!-- <span class="badge bg-success">Locked</span> -->
+                                                    <span class="badge"> <img src="{{ asset('assets/img/locked.png') }}" alt="" width="200" height="100"></span>
+                                            </li>
+                                                    <div class="product-price text-primary h5"><a href="{{ route('account.subscriptions') }}">Upgrade to unlock Bulk Import Store</a>
+                                                   
+                                                    </div>
+                                                   
+                                                </div>
+                                                
+                                            </div>
+                                        </div><!-- .col -->
+
+            </div>
             <div class="tab-pane" id="tabItem6">
-                    <livewire:account.shopify.multiple-products/>
+                      <livewire:account.shopify.multiple-products/>
             </div>
             <div class="tab-pane" id="tabItem7">
                

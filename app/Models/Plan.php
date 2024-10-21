@@ -15,6 +15,8 @@ class Plan extends Model
         'teams_limit',
         'trial_period_days',
         'interval',
-        'store_access_count'
+        'store_access_count',
+        'product_access_count',
+
     ];
 }

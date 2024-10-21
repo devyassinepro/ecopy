@@ -19,6 +19,7 @@
                             <th>{{ __('Team Limit') }}</th>
                             <th>{{ __('Date') }}</th>
                             <th>{{ __('Number of Store Access') }}</th>
+                            <th>{{ __('Number of Products Access') }}</th>
                             <th>{{ __('Status') }}</th>
                             <th class="float-right">{{ __('Action') }}</th>
                         </tr>
@@ -32,6 +33,7 @@
                             <td>{{ $plan->teams_limit }}</td>
                             <td>{{ $plan->created_at->diffForHumans() }}</td>
                             <td>{{ $plan->store_access_count }}</td>
+                            <td>{{ $plan->product_access_count }}</td>
                             
                             <td>
                                 @if ($plan->active === 1)

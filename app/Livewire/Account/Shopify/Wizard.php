@@ -19,6 +19,7 @@ class Wizard extends Component
     public $urltoken = ''; 
     public $apikey = ''; 
     public $apisecret = ''; 
+   
     public function render()
     {
         return view('livewire.account.shopify.wizard');
@@ -29,8 +30,9 @@ class Wizard extends Component
         $user_id = Auth::user()->id;
         $urlshopify = $this->urlshopify;
         $urltoken = $this->urltoken ;
+        
         $storeuser = Shopifystores::where('user_id', $user_id)->count();
-        if(currentTeam()->onTrial()){
+        if(!(currentTeam()->Subscribed('default') || currentTeam()->onTrial())){
 
             if($storeuser >=1 ){
                 $this->alert('warning', __('You can not add more stores on trial!'));
@@ -86,32 +88,47 @@ class Wizard extends Component
             $shop_body = $response['body']['shop'];
             // Log::info('$this->urlshopify:'.$shop_body['email']);
 
-            // Check if the store already exists
-            $existingStore = Shopifystores::where('store_id', $shop_body['id'])->first();
+            Shopifystores::create(array_merge($store_arr, [
+                'store_id' => $shop_body['id'],
+                'email' => $shop_body['email'],
+                'name' => $shop_body['name'],
+                'phone' => $shop_body['phone'],
+                'address1' => $shop_body['address1'],
+                'address2' => $shop_body['address2'],
+                'zip' => $shop_body['zip'],
+                'user_id' => $user_id,
+                'status' => 'active',
+            ]));
+
+            return redirect()->route('account.homeshopify.index');
+            $this->alert('success', __('Infos added successfully'));
+
+            // // Check if the store already exists // make it for later 
+            // $existingStore = Shopifystores::where('store_id', $shop_body['id'])->first();
             
-            if ($existingStore) {
-                // Store already exists, log a message or alert the user
-                // Log::info('Store already exists with store_id: '.$shop_body['id']);
-                $this->alert('warning', __('Store already exists!'));
-            } else {
-                // Store does not exist, create a new record
-                Shopifystores::create(array_merge($store_arr, [
-                    'store_id' => $shop_body['id'],
-                    'email' => $shop_body['email'],
-                    'name' => $shop_body['name'],
-                    'phone' => $shop_body['phone'],
-                    'address1' => $shop_body['address1'],
-                    'address2' => $shop_body['address2'],
-                    'zip' => $shop_body['zip'],
-                    'user_id' => $user_id,
-                    'status' => '',
-                ]));
+            // if ($existingStore) {
+            //     // Store already exists, log a message or alert the user
+            //     // Log::info('Store already exists with store_id: '.$shop_body['id']);
+            //     $this->alert('warning', __('Store already exists!'));
+            // } else {
+            //     // Store does not exist, create a new record
+            //     Shopifystores::create(array_merge($store_arr, [
+            //         'store_id' => $shop_body['id'],
+            //         'email' => $shop_body['email'],
+            //         'name' => $shop_body['name'],
+            //         'phone' => $shop_body['phone'],
+            //         'address1' => $shop_body['address1'],
+            //         'address2' => $shop_body['address2'],
+            //         'zip' => $shop_body['zip'],
+            //         'user_id' => $user_id,
+            //         'status' => 'active',
+            //     ]));
     
-                return redirect()->route('account.homeshopify.index');
-                $this->alert('success', __('Infos added successfully'));
+            //     return redirect()->route('account.homeshopify.index');
+            //     $this->alert('success', __('Infos added successfully'));
 
 
-            }
+            // }
             
         }else{
            

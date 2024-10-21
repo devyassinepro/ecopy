@@ -90,6 +90,17 @@
                         @endif
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label" for="hf-name">{{ __('Number of Product Access') }}</label>
+                    <div class="col-md-9">
+                        <input type="number" id="store_access_count" name="product_access_count" class="form-control"
+                        placeholder="Number of Store Access for this Plan"
+                        value="{{ old('product_access_count') }}">
+                        @if ($errors->has('product_access_count'))
+                            <span class="text-danger">{{ $errors->first('product_access_count') }}</span>
+                        @endif
+                    </div>
+                </div>
                 
                 <hr>
                 <button type="submit" class="btn btn-secondary"><i class="fa fa-dot-circle-o"></i> {{ __('Create plan') }}</button>
